@@ -1,4 +1,4 @@
-// Service Worker: Trắc Nghiệm Vật Lí THPT - Thầy Trần Mạnh Tùng (Offline-First PWA)
+// Service Worker: Trắc Nghiệm Vật Lí THPT (Offline-First PWA)
 const CACHE_NAME = 'vatli-thpt-cache-v2';
 
 // 1. Core Shell URLs to cache immediately on install
