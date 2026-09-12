@@ -1,5 +1,5 @@
 // Service Worker: Trắc Nghiệm Vật Lí THPT (Offline-First PWA)
-const CACHE_NAME = 'vatli-thpt-cache-v2';
+const CACHE_NAME = 'vatli-thpt-cache-v4';
 
 // 1. Core Shell URLs to cache immediately on install
 const CORE_ASSETS = [
@@ -98,20 +98,19 @@ const ALL_LESSON_ASSETS = [
   "./lop12/Bai_10_Dinh_Luat_Charles.html",
   "./lop12/Bai_11_Phuong_Trinh_Trang_Thai_Khi_Li_Tuong.html",
   "./lop12/Bai_12_Ap_Suat_Khi_Dong_Nang_Phan_Tu.html",
-  "./lop12/Bai_13_Bai_Tap_Khi_Li_Tuong.html",
+  "./lop12/Bai_13_Noi_Nang_Khi_Li_Tuong.html",
   "./lop12/Bai_14_Tu_Truong.html",
   "./lop12/Bai_15_Luc_Tu_Cam_Ung_Tu.html",
   "./lop12/Bai_16_Tu_Thong_Cam_Ung_Dien_Tu.html",
-  "./lop12/Bai_17_May_Phat_Dien_Xoay_Chieu.html",
-  "./lop12/Bai_18_Ung_Dung_Cam_Ung_Dien_Tu.html",
-  "./lop12/Bai_19_Dien_Tu_Truong_Mo_Hinh_Song_Dien_Tu.html",
-  "./lop12/Bai_20_Bai_Tap_Ve_Tu_Truong.html",
+  "./lop12/Bai_17_Dinh_Luat_Faraday_Lenz.html",
+  "./lop12/Bai_18_Tu_Cam.html",
+  "./lop12/Bai_19_Dong_Dien_Xoay_Chieu.html",
+  "./lop12/Bai_20_Thuc_Hanh_Dong_Dien_Xoay_Chieu.html",
   "./lop12/Bai_21_Cau_Truc_Hat_Nhan.html",
-  "./lop12/Bai_22_Phan_Ung_Hat_Nhan_Nang_Luong_Lien_Ket.html",
-  "./lop12/Bai_23_Hien_Tuong_Phong_Xa.html",
-  "./lop12/Bai_24_Cong_Nghiep_Hat_Nhan.html",
-  "./lop12/Bai_25_Bai_Tap_Vat_Li_Hat_Nhan.html",
-  "./lop12/He_Thong_Trac_Nghiem_Vat_Li_12 (1).html",
+  "./lop12/Bai_22_Nang_Luong_Lien_Ket.html",
+  "./lop12/Bai_23_Phong_Xa.html",
+  "./lop12/Bai_24_Phan_Ung_Hat_Nhan.html",
+  "./lop12/Bai_25_Ung_Dung_Vat_Li_Hat_Nhan.html",
   "./lop12/He_Thong_Trac_Nghiem_Vat_Li_12.html",
   "./lop12/He_Thong_Trac_Nghiem_Vat_Li_12_ThayTung.html",
   "./lop12/index.html"
@@ -144,14 +143,14 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Cache-First strategy with Stale-While-Revalidate fallback
+// Network-First strategy for HTML navigation requests, Cache-First for static assets
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
 
-  event.respondWith(
-    caches.match(event.request, { ignoreSearch: true }).then(cachedResponse => {
-      // Background revalidation
-      const networkFetch = fetch(event.request).then(networkResponse => {
+  // 1. Navigation requests (HTML pages): Try network FIRST so updates show immediately
+  if (event.request.mode === 'navigate' || event.request.destination === 'document') {
+    event.respondWith(
+      fetch(event.request).then(networkResponse => {
         if (networkResponse && networkResponse.status === 200) {
           const resClone = networkResponse.clone();
           caches.open(CACHE_NAME).then(cache => {
@@ -160,28 +159,29 @@ self.addEventListener('fetch', event => {
         }
         return networkResponse;
       }).catch(() => {
-        // Network completely unavailable
-        return null;
-      });
-
-      // If in cache, return immediately for instant offline load
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-
-      // Otherwise wait for network fetch
-      return networkFetch.then(res => {
-        if (res) return res;
-        // Fallback to index if it's a navigation request
-        if (event.request.mode === 'navigate') {
-          return caches.match('./index.html');
-        }
-        return new Response('Ngoại tuyến - Không có kết nối mạng', {
-          status: 503,
-          statusText: 'Offline',
-          headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+        // If network completely offline, serve from cache!
+        return caches.match(event.request).then(cached => {
+          return cached || caches.match('./index.html');
         });
-      });
+      })
+    );
+    return;
+  }
+
+  // 2. Static assets (images, icons): Stale-while-revalidate
+  event.respondWith(
+    caches.match(event.request, { ignoreSearch: true }).then(cachedResponse => {
+      const networkFetch = fetch(event.request).then(networkResponse => {
+        if (networkResponse && networkResponse.status === 200) {
+          const resClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, resClone);
+          });
+        }
+        return networkResponse;
+      }).catch(() => null);
+
+      return cachedResponse || networkFetch;
     })
   );
 });
