@@ -194,6 +194,9 @@
 
     footer { margin-top: 30px; font-size: 0.82rem; color: #64748b; text-align: center; }
   </style>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="apple-touch-icon" href="./icon.svg">
 </head>
 <body>
   <div class="header-banner">
@@ -291,5 +294,14 @@
   <footer>
     Hệ thống biên soạn phục vụ giảng dạy môn Vật Lí THPT • Thầy Trần Mạnh Tùng (2026)
   </footer>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('./sw.js')
+          .then(function(reg) { console.log('SW Registered successfully:', reg.scope); })
+          .catch(function(err) { console.warn('SW Registration note:', err); });
+      });
+    }
+  </script>
 </body>
 </html>
