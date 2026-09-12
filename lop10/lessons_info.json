@@ -1,0 +1,240 @@
+[
+  {
+    "id": 1,
+    "chapter": "Chương I: Mở đầu",
+    "title": "Khái quát về môn Vật lí",
+    "desc": "Mục tiêu, đối tượng, phương pháp nghiên cứu và vai trò của Vật lí.",
+    "filename": "Bai_01_Khai_quat_ve_mon_Vat_li.html"
+  },
+  {
+    "id": 2,
+    "chapter": "Chương I: Mở đầu",
+    "title": "Vấn đề an toàn trong phòng thực hành Vật lí",
+    "desc": "Quy tắc an toàn điện, nhiệt, quang học và thiết bị đo trong phòng thí nghiệm.",
+    "filename": "Bai_02_Van_de_an_toan_trong_phong_thuc_hanh_Vat_li.html"
+  },
+  {
+    "id": 3,
+    "chapter": "Chương I: Mở đầu",
+    "title": "Thực hành tính sai số trong phép đo. Ghi kết quả đo",
+    "desc": "Sai số trực tiếp, gián tiếp, sai số tuyệt đối, tỉ đối và quy tắc làm tròn.",
+    "filename": "Bai_03_Thuc_hanh_tinh_sai_so_trong_phep_do_Ghi_ket_qua_do.html"
+  },
+  {
+    "id": 4,
+    "chapter": "Chương II: Động học",
+    "title": "Độ dịch chuyển và quãng đường đi được",
+    "desc": "Vectơ độ dịch chuyển, độ dịch chuyển tổng hợp và phân biệt với quãng đường.",
+    "filename": "Bai_04_Do_dich_chuyen_va_quang_duong_di_duoc.html"
+  },
+  {
+    "id": 5,
+    "chapter": "Chương II: Động học",
+    "title": "Tốc độ và vận tốc",
+    "desc": "Tốc độ trung bình, vận tốc trung bình, vận tốc tức thời và tính chất vectơ.",
+    "filename": "Bai_05_Toc_do_va_van_toc.html"
+  },
+  {
+    "id": 6,
+    "chapter": "Chương II: Động học",
+    "title": "Thực hành: Đo tốc độ của vật chuyển động",
+    "desc": "Đo tốc độ bằng đồng hồ bấm giây, cổng quang điện và đồng hồ đo thời gian hiện số.",
+    "filename": "Bai_06_Thuc_hanh_Do_toc_do_cua_vat_chuyen_dong.html"
+  },
+  {
+    "id": 7,
+    "chapter": "Chương II: Động học",
+    "title": "Đồ thị độ dịch chuyển – thời gian",
+    "desc": "Phân tích đồ thị d - t, tính vận tốc từ hệ số góc và mô tả trạng thái chuyển động.",
+    "filename": "Bai_07_Do_thi_do_dich_chuyen_thoi_gian.html"
+  },
+  {
+    "id": 8,
+    "chapter": "Chương II: Động học",
+    "title": "Chuyển động biến đổi. Gia tốc",
+    "desc": "Khái niệm gia tốc a = Δv/Δt, vectơ gia tốc và đơn vị m/s².",
+    "filename": "Bai_08_Chuyen_dong_bien_doi_Gia_toc.html"
+  },
+  {
+    "id": 9,
+    "chapter": "Chương II: Động học",
+    "title": "Chuyển động thẳng biến đổi đều",
+    "desc": "Các công thức v = v₀ + at, d = v₀t + ½at², v² - v₀² = 2ad và đồ thị v - t.",
+    "filename": "Bai_09_Chuyen_dong_thang_bien_doi_deu.html"
+  },
+  {
+    "id": 10,
+    "chapter": "Chương II: Động học",
+    "title": "Sự rơi tự do",
+    "desc": "Đặc điểm chuyển động rơi tự do, gia tốc trọng trường g và công thức v = gt, h = ½gt².",
+    "filename": "Bai_10_Su_roi_tu_do.html"
+  },
+  {
+    "id": 11,
+    "chapter": "Chương II: Động học",
+    "title": "Thực hành: Đo gia tốc rơi tự do",
+    "desc": "Bố trí thí nghiệm thả rơi tự do dùng cổng quang điện và xử lí bảng số liệu đo.",
+    "filename": "Bai_11_Thuc_hanh_Do_gia_toc_roi_tu_do.html"
+  },
+  {
+    "id": 12,
+    "chapter": "Chương II: Động học",
+    "title": "Chuyển động ném",
+    "desc": "Chuyển động ném ngang, ném xiên, phân tích quỹ đạo parabol, tầm xa và độ cao cực đại.",
+    "filename": "Bai_12_Chuyen_dong_nem.html"
+  },
+  {
+    "id": 13,
+    "chapter": "Chương III: Động lực học",
+    "title": "Tổng hợp và phân tích lực. Cân bằng lực",
+    "desc": "Quy tắc hình bình hành lực, điều kiện cân bằng tổng vectơ F = 0.",
+    "filename": "Bai_13_Tong_hop_va_phan_tich_luc_Can_bang_luc.html"
+  },
+  {
+    "id": 14,
+    "chapter": "Chương III: Động lực học",
+    "title": "Định luật I Newton",
+    "desc": "Định luật quán tính, hệ quy chiếu quán tính và ý nghĩa của khối lượng.",
+    "filename": "Bai_14_Dinh_luat_I_Newton.html"
+  },
+  {
+    "id": 15,
+    "chapter": "Chương III: Động lực học",
+    "title": "Định luật II Newton",
+    "desc": "Mối liên hệ F = ma, đơn vị Newton và phân tích lực tổng hợp.",
+    "filename": "Bai_15_Dinh_luat_II_Newton.html"
+  },
+  {
+    "id": 16,
+    "chapter": "Chương III: Động lực học",
+    "title": "Định luật III Newton",
+    "desc": "Cặp lực và phản lực trực đối, cùng bản chất, không triệt tiêu nhau.",
+    "filename": "Bai_16_Dinh_luat_III_Newton.html"
+  },
+  {
+    "id": 17,
+    "chapter": "Chương III: Động lực học",
+    "title": "Trọng lực và lực căng",
+    "desc": "Khái niệm trọng lực P = mg, trọng lượng và đặc tính của lực căng dây.",
+    "filename": "Bai_17_Trong_luc_va_luc_cang.html"
+  },
+  {
+    "id": 18,
+    "chapter": "Chương III: Động lực học",
+    "title": "Lực ma sát",
+    "desc": "Ma sát nghỉ, ma sát trượt F_mst = μ·N, ma sát lăn và vai trò trong đời sống.",
+    "filename": "Bai_18_Luc_ma_sat.html"
+  },
+  {
+    "id": 19,
+    "chapter": "Chương III: Động lực học",
+    "title": "Lực cản và lực nâng",
+    "desc": "Lực cản của môi trường khí và lỏng, vận tốc giới hạn và định luật lực đẩy Archimedes.",
+    "filename": "Bai_19_Luc_can_va_luc_nang.html"
+  },
+  {
+    "id": 20,
+    "chapter": "Chương III: Động lực học",
+    "title": "Một số ví dụ về cách giải bài toán thuộc phần động lực học",
+    "desc": "Phương pháp động lực học: phân tích lực tác dụng và áp dụng định luật II Newton.",
+    "filename": "Bai_20_Mot_so_vi_du_ve_cach_giai_bai_toan_thuoc_phan_dong_luc_hoc.html"
+  },
+  {
+    "id": 21,
+    "chapter": "Chương III: Động lực học",
+    "title": "Moment lực. Cân bằng của vật rắn",
+    "desc": "Moment lực M = F·d, quy tắc moment lực và điều kiện cân bằng tổng quát.",
+    "filename": "Bai_21_Moment_luc_Can_bang_cua_vat_ran.html"
+  },
+  {
+    "id": 22,
+    "chapter": "Chương III: Động lực học",
+    "title": "Thực hành: Tổng hợp hai lực song song. Khảo sát cân bằng",
+    "desc": "Quy tắc hợp lực song song cùng chiều F = F₁ + F₂ và F₁/F₂ = d₂/d₁.",
+    "filename": "Bai_22_Thuc_hanh_Tong_hop_hai_luc_song_song_Khao_sat_can_bang.html"
+  },
+  {
+    "id": 23,
+    "chapter": "Chương IV: Năng lượng, công, công suất",
+    "title": "Năng lượng. Công cơ học",
+    "desc": "Định nghĩa công cơ học A = F·s·cos(α), công phát động, công cản và đơn vị Joule.",
+    "filename": "Bai_23_Nang_luong_Cong_co_hoc.html"
+  },
+  {
+    "id": 24,
+    "chapter": "Chương IV: Năng lượng, công, công suất",
+    "title": "Công suất",
+    "desc": "Định nghĩa công suất P = A/t, đơn vị Watt, liên hệ P = F·v và ý nghĩa kĩ thuật.",
+    "filename": "Bai_24_Cong_suat.html"
+  },
+  {
+    "id": 25,
+    "chapter": "Chương IV: Năng lượng, công, công suất",
+    "title": "Động năng, thế năng",
+    "desc": "Biểu thức động năng W_đ = ½mv², thế năng trọng trường W_t = mgz và mốc tính thế năng.",
+    "filename": "Bai_25_Dong_nang_the_nang.html"
+  },
+  {
+    "id": 26,
+    "chapter": "Chương IV: Năng lượng, công, công suất",
+    "title": "Cơ năng và định luật bảo toàn cơ năng",
+    "desc": "Định luật bảo toàn cơ năng W = W_đ + W_t = hằng số và biến đổi cơ năng khi có ma sát.",
+    "filename": "Bai_26_Co_nang_va_dinh_luat_bao_toan_co_nang.html"
+  },
+  {
+    "id": 27,
+    "chapter": "Chương IV: Năng lượng, công, công suất",
+    "title": "Hiệu suất",
+    "desc": "Công thức hiệu suất H = (A_ci / A_tp) · 100% và giảm hao phí năng lượng trong công nghệ.",
+    "filename": "Bai_27_Hieu_suat.html"
+  },
+  {
+    "id": 28,
+    "chapter": "Chương V: Động lượng",
+    "title": "Động lượng",
+    "desc": "Vectơ động lượng p = mv, xung lượng của lực F·Δt = Δp và đơn vị kg·m/s.",
+    "filename": "Bai_28_Dong_luong.html"
+  },
+  {
+    "id": 29,
+    "chapter": "Chương V: Động lượng",
+    "title": "Định luật bảo toàn động lượng",
+    "desc": "Bảo toàn động lượng của hệ kín, chuyển động bằng phản lực và nguyên lí phóng tên lửa.",
+    "filename": "Bai_29_Dinh_luat_bao_toan_dong_luong.html"
+  },
+  {
+    "id": 30,
+    "chapter": "Chương V: Động lượng",
+    "title": "Thực hành: Xác định động lượng trong va chạm",
+    "desc": "Khảo sát va chạm đàn hồi và mềm trên đệm khí, kiểm chứng bảo toàn động lượng.",
+    "filename": "Bai_30_Thuc_hanh_Xac_dinh_dong_luong_trong_va_cham.html"
+  },
+  {
+    "id": 31,
+    "chapter": "Chương VI: Chuyển động tròn",
+    "title": "Động học của chuyển động tròn đều",
+    "desc": "Tốc độ góc ω, chu kì T, tần số f, tốc độ dài v = ω·r và hướng tiếp tuyến của vectơ vận tốc.",
+    "filename": "Bai_31_Dong_hoc_cua_chuyen_dong_tron_deu.html"
+  },
+  {
+    "id": 32,
+    "chapter": "Chương VI: Chuyển động tròn",
+    "title": "Lực hướng tâm và gia tốc hướng tâm",
+    "desc": "Gia tốc hướng tâm a_ht = v²/r = ω²r, lực hướng tâm F_ht = m·a_ht và hiện tượng ôm cua.",
+    "filename": "Bai_32_Luc_huong_tam_va_gia_toc_huong_tam.html"
+  },
+  {
+    "id": 33,
+    "chapter": "Chương VII: Biến dạng của vật rắn. Áp suất chất lỏng",
+    "title": "Biến dạng của vật rắn",
+    "desc": "Biến dạng đàn hồi, biến dạng dẻo, định luật Hooke F_đh = k·|Δl| và độ cứng lò xo.",
+    "filename": "Bai_33_Bien_dang_cua_vat_ran.html"
+  },
+  {
+    "id": 34,
+    "chapter": "Chương VII: Biến dạng của vật rắn. Áp suất chất lỏng",
+    "title": "Khối lượng riêng. Áp suất chất lỏng",
+    "desc": "Khối lượng riêng ρ = m/V, áp suất thủy tĩnh p = p₀ + ρgh, nguyên lí Pascal và máy ép thuỷ lực.",
+    "filename": "Bai_34_Khoi_luong_rieng_Ap_suat_chat_long.html"
+  }
+]
