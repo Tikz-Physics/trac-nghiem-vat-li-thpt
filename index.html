@@ -152,6 +152,75 @@
     .card-12 .btn-enter { background: linear-gradient(135deg, #e11d48, #f43f5e); color: #ffffff; }
     .btn-enter:hover { filter: brightness(1.15); transform: translateY(-1px); }
 
+    /* Arena Feature Card */
+    .arena-feature-card {
+      width: 100%;
+      max-width: 1060px;
+      background: radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.15) 0%, rgba(15, 23, 42, 0.85) 60%), #0f172a;
+      border: 1.5px solid rgba(245, 158, 11, 0.4);
+      border-radius: 20px;
+      padding: 22px 28px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(245, 158, 11, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 800px) {
+      .arena-feature-card { flex-direction: column; align-items: stretch; text-align: center; }
+    }
+    .arena-badge {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.2);
+      color: #fbbf24;
+      border: 1px solid #f59e0b;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .arena-title {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #f8fafc;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #f59e0b, #ef4444, #f43f5e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .arena-desc {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.5;
+      max-width: 680px;
+    }
+    .btn-enter-arena {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000000;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 1rem;
+      padding: 14px 24px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-enter-arena:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(245, 158, 11, 0.6);
+      filter: brightness(1.1);
+    }
+
     /* Features section */
     .features-card {
       width: 100%;
@@ -325,7 +394,15 @@
       <div class="offline-status-badge" id="offlineBadge">
         <span>⚡</span> Đang chạy chế độ Ngoại Tuyến (Offline)
       </div>
+  <div class="arena-feature-card">
+    <div class="arena-info">
+      <div class="arena-badge">🔥 TÍNH NĂNG MỚI • HOẠT ĐỘNG NHÓM TRÊN LỚP</div>
+      <h2 class="arena-title">⚔️ ĐẤU TRƯỜNG VẬT LÍ LIÊN NHÓM (THI ĐẤU 4 TỔ)</h2>
+      <p class="arena-desc">Mô hình Gameshow tương tác chuyên dụng cho Máy chiếu & Bảng tương tác thông minh. Học sinh dùng điện thoại quét mã QR để bấm chuông không dây siêu tốc, tích hợp 85 bài học chuẩn SGK mới.</p>
     </div>
+    <a href="./dau-truong-vat-li.html" class="btn-enter-arena">
+      <span>⚡</span> Vào Đấu Trường Ngay ➔
+    </a>
   </div>
 
   <div class="grades-grid">

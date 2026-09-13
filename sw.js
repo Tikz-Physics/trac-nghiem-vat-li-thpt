@@ -1,10 +1,12 @@
 // Service Worker: Trắc Nghiệm Vật Lí THPT (Offline-First PWA)
-const CACHE_NAME = 'vatli-thpt-cache-v4';
+const CACHE_NAME = 'vatli-thpt-cache-v5';
 
 // 1. Core Shell URLs to cache immediately on install
 const CORE_ASSETS = [
   "./",
   "./index.html",
+  "./dau-truong-vat-li.html",
+  "./arena_questions_data.js",
   "./manifest.webmanifest",
   "./icon-192.png",
   "./icon-512.png",
