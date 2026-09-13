@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Đấu Trường Vật Lí Liên Nhóm • Wireless QR Buzzer Arena</title>
+  <!-- Google Fonts: Plus Jakarta Sans for crisp Vietnamese typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Load Consolidated 85 Lessons Question Bank -->
   <script src="./arena_questions_data.js"></script>
   <!-- MQTT Library for real-time wireless websocket buzzer -->
@@ -21,7 +25,7 @@
       --pink: #ec4899;
       --text-main: #f8fafc;
       --text-sub: #94a3b8;
-      --font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+      --font-family: 'Plus Jakarta Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
@@ -956,17 +960,15 @@
           </div>
 
           <div class="setup-section-title"><span>2️⃣</span> BƯỚC 2: CHỌN BÀI HỌC CỤ THỂ</div>
-          <select class="lesson-dropdown-select" id="setupLessonSelect">
+          <select class="lesson-dropdown-select" id="setupLessonSelect" onchange="onSetupLessonChange()">
             <!-- Dynamically populated -->
           </select>
 
           <div class="setup-section-title"><span>3️⃣</span> BƯỚC 3: SỐ LƯỢNG CÂU HỎI</div>
-          <div class="count-pills-row">
-            <div class="btn-count-pill" onclick="selectQuestionCount(5, this)">5 Câu (Nhanh)</div>
-            <div class="btn-count-pill active" onclick="selectQuestionCount(10, this)">10 Câu (Chuẩn)</div>
-            <div class="btn-count-pill" onclick="selectQuestionCount(15, this)">15 Câu</div>
-            <div class="btn-count-pill" onclick="selectQuestionCount(20, this)">20 Câu</div>
+          <div class="count-pills-row" id="countPillsContainer">
+            <!-- Dynamically rendered based on selected lesson -->
           </div>
+          <div id="countInfoBadge" style="font-size: 0.84rem; color: #38bdf8; margin-top: -14px; margin-bottom: 22px; font-weight: 600; line-height: 1.5;"></div>
         </div>
 
         <div>
@@ -1637,6 +1639,7 @@
       if (grade === 'all') {
         select.innerHTML = '<option value="all">🌟 Toàn Bộ Chương Trình (Tổng hợp cả 3 khối 10 - 11 - 12)</option>';
         selectedLessonId = 'all';
+        updateQuestionCountPills();
         return;
       }
 
@@ -1659,12 +1662,55 @@
         select.appendChild(grp);
       }
       selectedLessonId = 'all';
+      updateQuestionCountPills();
+    }
+
+    function onSetupLessonChange() {
+      selectedLessonId = document.getElementById('setupLessonSelect').value;
+      updateQuestionCountPills();
+    }
+
+    function updateQuestionCountPills() {
+      const container = document.getElementById('countPillsContainer');
+      const badge = document.getElementById('countInfoBadge');
+      if (!container) return;
+
+      if (selectedLessonId !== 'all') {
+        // Single lesson selected: exactly 10 questions SGK!
+        if (selectedQCount > 10) selectedQCount = 10;
+        if (selectedQCount !== 5 && selectedQCount !== 10) selectedQCount = 10;
+
+        container.innerHTML = `
+          <div class="btn-count-pill ${selectedQCount === 5 ? 'active' : ''}" onclick="selectQuestionCount(5, this)">5 Câu (Nhanh ⚡)</div>
+          <div class="btn-count-pill ${selectedQCount === 10 ? 'active' : ''}" onclick="selectQuestionCount(10, this)">10 Câu (Toàn Bộ Bài Học 🎯)</div>
+        `;
+        if (badge) {
+          badge.innerHTML = `💡 <span>Bài học này có <b>10 câu hỏi</b> chuẩn SGK. Đã tự động giới hạn số câu để không bị chọn nhầm vượt quá.</span>`;
+        }
+      } else {
+        // Multiple lessons / whole grade / all 3 grades
+        if (![5, 10, 15, 20, 30].includes(selectedQCount)) selectedQCount = 10;
+
+        const totalAvail = selectedGrade === 'all' ? 850 : (selectedGrade === 10 ? 340 : (selectedGrade === 11 ? 260 : 250));
+        const scopeText = selectedGrade === 'all' ? 'cả 3 khối 10 - 11 - 12 (85 bài)' : `toàn bộ các chương Khối ${selectedGrade}`;
+
+        container.innerHTML = `
+          <div class="btn-count-pill ${selectedQCount === 5 ? 'active' : ''}" onclick="selectQuestionCount(5, this)">5 Câu (Nhanh)</div>
+          <div class="btn-count-pill ${selectedQCount === 10 ? 'active' : ''}" onclick="selectQuestionCount(10, this)">10 Câu (Chuẩn)</div>
+          <div class="btn-count-pill ${selectedQCount === 15 ? 'active' : ''}" onclick="selectQuestionCount(15, this)">15 Câu</div>
+          <div class="btn-count-pill ${selectedQCount === 20 ? 'active' : ''}" onclick="selectQuestionCount(20, this)">20 Câu</div>
+          <div class="btn-count-pill ${selectedQCount === 30 ? 'active' : ''}" onclick="selectQuestionCount(30, this)">30 Câu (Đại Chiến)</div>
+        `;
+        if (badge) {
+          badge.innerHTML = `🌟 <span>Đã nạp <b>${totalAvail} câu hỏi</b> từ ${scopeText}. Thầy Cô có thể chọn số câu tuỳ ý.</span>`;
+        }
+      }
     }
 
     function selectQuestionCount(cnt, el) {
       selectedQCount = cnt;
       document.querySelectorAll('.btn-count-pill').forEach(b => b.classList.remove('active'));
-      el.classList.add('active');
+      if (el) el.classList.add('active');
     }
 
     function launchBattleFromSetup() {
@@ -1747,7 +1793,9 @@
         ];
       }
 
-      battleQuestions = shuffleArray(battleQuestions).slice(0, count);
+      const maxAvail = battleQuestions.length;
+      const finalCount = Math.min(count, maxAvail);
+      battleQuestions = shuffleArray(battleQuestions).slice(0, finalCount);
     }
 
     function shuffleArray(arr) {
