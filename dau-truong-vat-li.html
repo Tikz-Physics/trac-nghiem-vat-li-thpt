@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đấu Trường Vật Lí Liên Nhóm • Physics Group Arena</title>
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: rgba(17, 24, 39, 0.85);
+      --border-glow: rgba(56, 189, 248, 0.25);
+      --primary: #38bdf8;
+      --accent: #f59e0b;
+      --success: #10b981;
+      --danger: #ef4444;
+      --purple: #a855f7;
+      --text-main: #f8fafc;
+      --text-sub: #94a3b8;
+      --font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    
+    body {
+      font-family: var(--font-family);
+      background: radial-gradient(circle at top, #1e1b4b 0%, #090d16 60%, #030712 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-badge {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      -webkit-text-fill-color: initial;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-header {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #f1f5f9;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .btn-header:hover {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: #38bdf8;
+      transform: translateY(-1px);
+    }
+
+    /* Main Battle Arena Layout */
+    .arena-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px 20px;
+      gap: 16px;
+    }
+
+    /* Question & Stage Card */
+    .battle-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glow);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .round-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .round-tag {
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .round-1 { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid #38bdf8; }
+    .round-2 { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid #f59e0b; }
+    .round-3 { background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid #ef4444; }
+
+    .q-point-pill {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: #fff;
+      font-weight: 900;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    /* Timer Widget */
+    .timer-widget {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 6px 14px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .timer-val {
+      font-size: 1.35rem;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      color: #38bdf8;
+      min-width: 32px;
+      text-align: center;
+    }
+    .timer-val.warning { color: #f59e0b; }
+    .timer-val.danger { color: #ef4444; animation: pulse 0.8s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.1); }
+    }
+
+    /* Question Display */
+    .question-box {
+      margin-bottom: 24px;
+    }
+    .question-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      line-height: 1.5;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    .question-img-wrap {
+      max-height: 260px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 12px 0;
+    }
+    .question-img-wrap svg {
+      max-height: 240px;
+      max-width: 100%;
+      border-radius: 12px;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+    }
+
+    /* 4 Options Grid */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 768px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
+
+    .option-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      padding: 16px 18px;
+      color: #f1f5f9;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .option-btn:hover:not(.disabled) {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+    }
+    .option-prefix {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #38bdf8;
+      flex-shrink: 0;
+    }
+
+    .option-btn.correct {
+      background: rgba(16, 185, 129, 0.2) !important;
+      border-color: #10b981 !important;
+      color: #a7f3d0 !important;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+    .option-btn.correct .option-prefix {
+      background: #10b981;
+      color: #ffffff;
+    }
+
+    .option-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      border-color: #ef4444 !important;
+      color: #fecaca !important;
+      opacity: 0.6;
+    }
+    .option-btn.wrong .option-prefix {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    /* Buzzer Notification Banner */
+    .buzzer-alert {
+      display: none;
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.2), rgba(245, 158, 11, 0.2));
+      border: 2px solid #f59e0b;
+      padding: 12px 20px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      align-items: center;
+      justify-content: space-between;
+      animation: slideDown 0.3s ease-out;
+    }
+    .buzzer-alert.show { display: flex; }
+    .buzzer-team-text {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-15px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Answer Explanation Box */
+    .explanation-box {
+      display: none;
+      background: rgba(15, 23, 42, 0.8);
+      border-left: 4px solid #38bdf8;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+    .explanation-box.show { display: block; }
+    .explanation-title {
+      font-weight: 800;
+      color: #38bdf8;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Teacher Action Bar */
+    .control-toolbar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 16px;
+    }
+
+    .btn-action {
+      background: linear-gradient(135deg, #1e293b, #334155);
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-action:hover {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+    }
+    .btn-action.primary {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      border-color: #38bdf8;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+    }
+    .btn-action.warning {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      border-color: #fbbf24;
+    }
+    .btn-action.danger {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      border-color: #f87171;
+    }
+
+    /* Scoreboard Grid (Bottom) */
+    .teams-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px) {
+      .teams-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .team-card {
+      background: var(--bg-card);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 16px;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .team-card.team-1 { border-color: rgba(56, 189, 248, 0.4); }
+    .team-card.team-2 { border-color: rgba(245, 158, 11, 0.4); }
+    .team-card.team-3 { border-color: rgba(16, 185, 129, 0.4); }
+    .team-card.team-4 { border-color: rgba(236, 72, 153, 0.4); }
+
+    .team-card.buzzed {
+      animation: buzzedGlow 0.8s infinite alternate;
+      transform: translateY(-4px);
+    }
+    @keyframes buzzedGlow {
+      from { box-shadow: 0 0 15px currentColor; }
+      to { box-shadow: 0 0 35px currentColor; }
+    }
+
+    .team-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .team-avatar {
+      font-size: 1.8rem;
+    }
+    .team-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #f8fafc;
+    }
+    .team-rank-badge {
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 12px;
+      color: #94a3b8;
+    }
+
+    .team-score {
+      font-size: 2.2rem;
+      font-weight: 900;
+      text-align: center;
+      margin: 10px 0;
+      color: #ffffff;
+      text-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
+    }
+
+    .team-badges-row {
+      display: flex;
+      gap: 6px;
+      min-height: 24px;
+      margin-bottom: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .power-badge {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+    .badge-star { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; }
+    .badge-shield { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid #38bdf8; }
+    .badge-frozen { background: rgba(147, 197, 253, 0.2); color: #93c5fd; border: 1px solid #60a5fa; }
+
+    .team-controls {
+      display: flex;
+      gap: 6px;
+    }
+    .btn-team-score {
+      flex: 1;
+      padding: 8px 4px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .btn-team-score:active { transform: scale(0.92); }
+    .btn-plus { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .btn-plus:hover { background: #10b981; color: #fff; }
+    .btn-minus { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+    .btn-minus:hover { background: #ef4444; color: #fff; }
+    .btn-buzzer-team {
+      width: 100%;
+      margin-top: 8px;
+      padding: 8px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid #f59e0b;
+      color: #fbbf24;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-buzzer-team:hover {
+      background: #f59e0b;
+      color: #000;
+    }
+
+    /* Mystery Box Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: #111827;
+      border: 2px solid #f59e0b;
+      border-radius: 24px;
+      max-width: 680px;
+      width: 100%;
+      padding: 30px;
+      box-shadow: 0 25px 60px rgba(245, 158, 11, 0.2);
+      text-align: center;
+      animation: zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .boxes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .mystery-box-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px dashed rgba(245, 158, 11, 0.5);
+      border-radius: 16px;
+      padding: 24px 10px;
+      font-size: 3rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mystery-box-item:hover:not(.opened) {
+      background: rgba(245, 158, 11, 0.2);
+      transform: translateY(-8px) scale(1.05);
+      border-color: #f59e0b;
+      box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+    }
+    .mystery-box-item.opened {
+      transform: scale(0.95);
+      opacity: 0.5;
+      cursor: not-allowed;
+      border-style: solid;
+    }
+
+    .mystery-result-box {
+      display: none;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid #f59e0b;
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 16px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fde68a;
+    }
+
+    /* Podium Victory Modal */
+    .podium-box {
+      background: #0f172a;
+      border: 2px solid #38bdf8;
+      border-radius: 28px;
+      max-width: 800px;
+      width: 100%;
+      padding: 36px 24px;
+      text-align: center;
+      box-shadow: 0 25px 70px rgba(56, 189, 248, 0.3);
+      position: relative;
+    }
+    .podium-stage {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 16px;
+      margin: 36px 0 24px;
+      height: 280px;
+    }
+    .podium-pillar {
+      border-radius: 16px 16px 0 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 20px;
+      width: 180px;
+      position: relative;
+      transition: height 1s ease-out;
+    }
+    .pillar-1 {
+      height: 240px;
+      background: linear-gradient(180deg, #f59e0b, #b45309);
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+    }
+    .pillar-2 {
+      height: 180px;
+      background: linear-gradient(180deg, #94a3b8, #475569);
+      box-shadow: 0 0 20px rgba(148, 163, 184, 0.3);
+    }
+    .pillar-3 {
+      height: 140px;
+      background: linear-gradient(180deg, #d97706, #78350f);
+      box-shadow: 0 0 20px rgba(217, 119, 6, 0.3);
+    }
+
+    .podium-crown { font-size: 3rem; position: absolute; top: -50px; animation: float 2s infinite ease-in-out; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    #confettiCanvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Header -->
+  <header>
+    <div class="brand-title">
+      <span>⚔️</span> ĐẤU TRƯỜNG VẬT LÍ LIÊN NHÓM
+      <span class="brand-badge">BẢNG TƯƠNG TÁC & MÁY CHIẾU</span>
+    </div>
+    <div class="header-actions">
+      <button class="btn-header" onclick="openTopicModal()">
+        <span>📚</span> Chọn Khối Lớp (<span id="currentTopicLabel">Vật Lí 12</span>)
+      </button>
+      <button class="btn-header" onclick="toggleFullscreen()">
+        <span>⛶</span> Toàn Màn Hình
+      </button>
+      <button class="btn-header" onclick="resetBattle()">
+        <span>🔄</span> Trận Mới
+      </button>
+    </div>
+  </header>
+
+  <!-- Arena Container -->
+  <div class="arena-container">
+
+    <!-- Battle Card -->
+    <div class="battle-card">
+      <div class="round-meta-bar">
+        <div class="round-tag round-1" id="roundTag">
+          <span>⚡</span> VÒNG 1: KHỞI ĐỘNG
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <div class="q-point-pill" id="qPointBadge">+20 ĐIỂM</div>
+          <div class="timer-widget">
+            <span>⏱️</span>
+            <span class="timer-val" id="timerVal">20</span>s
+          </div>
+        </div>
+      </div>
+
+      <!-- Buzzer Alert Notification -->
+      <div class="buzzer-alert" id="buzzerAlert">
+        <div class="buzzer-team-text">
+          <span>🔔</span> <span id="buzzerTeamName">TỔ 1 (EINSTEIN)</span> ĐÃ BẤM CHUÔNG GIÀNH QUYỀN TRẢ LỜI!
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-action primary" style="padding: 6px 14px;" onclick="judgeBuzzedTeam(true)">
+            ✓ Đúng (+Điểm)
+          </button>
+          <button class="btn-action danger" style="padding: 6px 14px;" onclick="judgeBuzzedTeam(false)">
+            ✗ Sai (-Điểm & Nhường Chuông)
+          </button>
+        </div>
+      </div>
+
+      <!-- Question Title & Image -->
+      <div class="question-box">
+        <div class="question-title" id="qTitle">
+          Đang tải câu hỏi...
+        </div>
+        <div class="question-img-wrap" id="qImgWrap" style="display: none;"></div>
+      </div>
+
+      <!-- 4 Options Grid -->
+      <div class="options-grid" id="optionsGrid">
+        <!-- JS rendered -->
+      </div>
+
+      <!-- Explanation Box -->
+      <div class="explanation-box" id="explanationBox">
+        <div class="explanation-title">
+          <span>💡</span> GIẢI THÍCH BẢN CHẤT VẬT LÍ:
+        </div>
+        <div id="explanationContent"></div>
+      </div>
+
+      <!-- Control Toolbar for Teacher -->
+      <div class="control-toolbar">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn-action primary" id="btnTimer" onclick="toggleTimer()">
+            <span>▶️</span> Bắt Đầu Tính Giờ (Space)
+          </button>
+          <button class="btn-action warning" onclick="activateBuzzer()">
+            <span>🔔</span> Mở Chuông Giành Quyền (B)
+          </button>
+          <button class="btn-action" onclick="revealAnswer()">
+            <span>👁️</span> Hiện Đáp Án (Enter)
+          </button>
+          <button class="btn-action" onclick="openMysteryBoxModal()">
+            <span>🎁</span> Hộp Quà Bí Mật
+          </button>
+        </div>
+        <div>
+          <button class="btn-action primary" onclick="nextQuestion()">
+            <span>➡️</span> Câu Tiếp Theo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Teams Scoreboard (Bottom Grid) -->
+    <div class="teams-grid" id="teamsGrid">
+      <!-- 4 Teams JS rendered -->
+    </div>
+
+  </div>
+
+  <!-- Modal Mystery Box -->
+  <div class="modal-overlay" id="mysteryModal">
+    <div class="modal-box">
+      <h2 style="color: #f59e0b; margin-bottom: 8px;">🎁 HỘP QUÀ BÍ MẬT DÀNH CHO ĐỘI CHIẾN THẮNG</h2>
+      <p style="color: #94a3b8; font-size: 0.95rem;">Chọn 1 trong 4 hộp quà may mắn để nhận đặc quyền hoặc điểm thưởng!</p>
+      
+      <div class="boxes-grid">
+        <div class="mystery-box-item" onclick="openBox(0, this)">📦</div>
+        <div class="mystery-box-item" onclick="openBox(1, this)">🎁</div>
+        <div class="mystery-box-item" onclick="openBox(2, this)">💎</div>
+        <div class="mystery-box-item" onclick="openBox(3, this)">🏆</div>
+      </div>
+
+      <div class="mystery-result-box" id="mysteryResult"></div>
+
+      <div style="margin-top: 20px;">
+        <button class="btn-action primary" style="margin: 0 auto;" onclick="closeModal('mysteryModal')">
+          Đóng Hộp Quà
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Topic Selection -->
+  <div class="modal-overlay" id="topicModal">
+    <div class="modal-box" style="max-width: 500px;">
+      <h2 style="color: #38bdf8; margin-bottom: 16px;">📚 Chọn Khối Lớp Thi Đấu</h2>
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+        <button class="btn-action" style="justify-content: center;" onclick="setTopic('lop10')">⚛️ Vật Lí 10 (Cơ học & Năng lượng)</button>
+        <button class="btn-action" style="justify-content: center;" onclick="setTopic('lop11')">🌊 Vật Lí 11 (Dao động, Sóng & Điện trường)</button>
+        <button class="btn-action primary" style="justify-content: center;" onclick="setTopic('lop12')">🔥 Vật Lí 12 (Nhiệt, Khí, Từ trường & Hạt nhân)</button>
+        <button class="btn-action" style="justify-content: center;" onclick="setTopic('all')">🌟 Tổng Hợp Toàn Diện (10 - 11 - 12)</button>
+      </div>
+      <button class="btn-action" style="margin: 0 auto;" onclick="closeModal('topicModal')">Hủy</button>
+    </div>
+  </div>
+
+  <!-- Modal Victory Podium -->
+  <div class="modal-overlay" id="victoryModal">
+    <div class="podium-box">
+      <h1 style="font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, #f59e0b, #ef4444); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        🎉 CHÚC MỪNG ĐỘI VÔ ĐỊCH ĐẤU TRƯỜNG VẬT LÍ! 🎉
+      </h1>
+      <p style="color: #94a3b8; margin-top: 8px;">Vinh quang thuộc về đội có chiến thuật xuất sắc và bản lĩnh khoa học đỉnh cao!</p>
+
+      <div class="podium-stage">
+        <!-- 2nd Place -->
+        <div class="podium-pillar pillar-2" id="pillar2">
+          <div style="font-size: 2rem;">🥈</div>
+          <div style="font-weight: 800; color: #fff; font-size: 1.1rem;" id="pName2">Tổ 2</div>
+          <div style="font-weight: 900; color: #cbd5e1; font-size: 1.4rem;" id="pScore2">0 đ</div>
+        </div>
+
+        <!-- 1st Place -->
+        <div class="podium-pillar pillar-1" id="pillar1">
+          <div class="podium-crown">👑</div>
+          <div style="font-size: 2.5rem;">🥇</div>
+          <div style="font-weight: 800; color: #fff; font-size: 1.25rem;" id="pName1">Tổ 1</div>
+          <div style="font-weight: 900; color: #fde68a; font-size: 1.8rem;" id="pScore1">0 đ</div>
+        </div>
+
+        <!-- 3rd Place -->
+        <div class="podium-pillar pillar-3" id="pillar3">
+          <div style="font-size: 2rem;">🥉</div>
+          <div style="font-weight: 800; color: #fff; font-size: 1rem;" id="pName3">Tổ 3</div>
+          <div style="font-weight: 900; color: #fdba74; font-size: 1.2rem;" id="pScore3">0 đ</div>
+        </div>
+      </div>
+
+      <button class="btn-action primary" style="margin: 0 auto; padding: 12px 32px; font-size: 1.1rem;" onclick="closeModal('victoryModal')">
+        Tiếp Tục Ôn Luyện
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       1. WEB AUDIO API SOUND SYNTHESIZER (100% OFFLINE)
+       ========================================================================== */
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playTone(freq, duration, type = 'sine', gainVal = 0.2) {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
+
+    function soundBuzzer() {
+      playTone(520, 0.4, 'sawtooth', 0.3);
+      setTimeout(() => playTone(780, 0.6, 'triangle', 0.4), 80);
+    }
+
+    function soundTick() {
+      playTone(800, 0.04, 'square', 0.05);
+    }
+
+    function soundCorrect() {
+      const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+      notes.forEach((freq, idx) => {
+        setTimeout(() => playTone(freq, 0.35, 'triangle', 0.25), idx * 80);
+      });
+    }
+
+    function soundWrong() {
+      playTone(320, 0.25, 'sawtooth', 0.2);
+      setTimeout(() => playTone(240, 0.4, 'sawtooth', 0.2), 150);
+    }
+
+    function soundFanfare() {
+      const fanfare = [
+        { f: 523, d: 0.2, t: 0 },
+        { f: 523, d: 0.2, t: 150 },
+        { f: 523, d: 0.2, t: 300 },
+        { f: 659, d: 0.4, t: 450 },
+        { f: 587, d: 0.2, t: 650 },
+        { f: 783, d: 0.8, t: 850 }
+      ];
+      fanfare.forEach(n => setTimeout(() => playTone(n.f, n.d, 'triangle', 0.35), n.t));
+    }
+
+    /* ==========================================================================
+       2. QUESTION BANK (PHYSICS 10, 11, 12)
+       ========================================================================== */
+    const QUESTION_BANK = {
+      lop12: [
+        {
+          round: 1,
+          points: 20,
+          title: "Đơn vị chuẩn của nhiệt nóng chảy riêng λ trong hệ đơn vị quốc tế (SI) là gì?",
+          options: ["J/kg", "J/(kg·K)", "J", "cal/g"],
+          correct: 0,
+          exp: "Nhiệt nóng chảy riêng λ được xác định theo công thức Q = λ·m ➔ λ = Q/m, có đơn vị là Jun trên kilôgam (J/kg)."
+        },
+        {
+          round: 1,
+          points: 20,
+          title: "Trong quá trình đẳng nhiệt của một lượng khí lí tưởng xác định, khi thể tích giảm đi 3 lần thì áp suất của khí sẽ:",
+          options: ["Tăng 3 lần", "Giảm 3 lần", "Không đổi", "Tăng 9 lần"],
+          correct: 0,
+          exp: "Theo định luật Boyle (p·V = const): Áp suất tỉ lệ nghịch với thể tích. Khi thể tích giảm 3 lần thì áp suất phải tăng 3 lần."
+        },
+        {
+          round: 2,
+          points: 30,
+          title: "Khi cho một nam châm thẳng rơi tự do xuyên qua một ống dây bằng đồng kín, nam châm sẽ rơi với gia tốc như thế nào so với gia tốc rơi tự do g?",
+          options: ["Nhỏ hơn g (rơi chậm lại)", "Lớn hơn g (rơi nhanh hơn)", "Bằng đúng g", "Lúc đầu lớn hơn g, sau nhỏ hơn g"],
+          correct: 0,
+          exp: "Theo định luật Lenz, dòng điện cảm ứng Fu-cô sinh ra trong ống đồng có từ trường chống lại sự dịch chuyển của nam châm (lực từ cản trở hướng lên) ➔ Gia tốc a < g."
+        },
+        {
+          round: 2,
+          points: 30,
+          title: "Trong phản ứng phân rã hạt nhân: ²³⁸₉₂U ➔ ²³⁴₉₀Th + X. Hạt X sinh ra trong phản ứng này là hạt gì?",
+          options: ["Hạt alpha (⁴₂He)", "Hạt beta trừ (⁰₋₁e)", "Hạt proton (¹₁p)", "Hạt neutron (¹₀n)"],
+          correct: 0,
+          exp: "Bảo toàn số khối A: 238 = 234 + A_X ➔ A_X = 4. Bảo toàn điện tích Z: 92 = 90 + Z_X ➔ Z_X = 2. Vậy X là hạt nhân Hêli ⁴₂He (tia alpha)."
+        },
+        {
+          round: 3,
+          points: 40,
+          title: "Một lượng khí lí tưởng thực hiện một chu trình biến đổi khép kín, sinh công A' = 400 J ra môi trường và tỏa nhiệt Q₂ = 600 J cho nguồn lạnh. Hiệu suất nhiệt của chu trình này là:",
+          options: ["40%", "60%", "66,7%", "25%"],
+          correct: 0,
+          exp: "Nhiệt lượng nhận từ nguồn nóng: Q₁ = A' + |Q₂| = 400 + 600 = 1000 J. Hiệu suất nhiệt: H = A' / Q₁ = 400 / 1000 = 40%."
+        }
+      ],
+      lop11: [
+        {
+          round: 1,
+          points: 20,
+          title: "Một vật dao động điều hòa theo phương trình x = A·cos(ωt + φ). Vận tốc của vật có pha dao động như thế nào so với li độ?",
+          options: ["Sớm pha hơn một góc π/2", "Trễ pha hơn một góc π/2", "Cùng pha với li độ", "Ngược pha với li độ (lệch π)"],
+          correct: 0,
+          exp: "Vận tốc v = x' = -ωA·sin(ωt + φ) = ωA·cos(ωt + φ + π/2). Do đó vận tốc luôn sớm pha hơn li độ góc π/2 (vuông pha)."
+        },
+        {
+          round: 2,
+          points: 30,
+          title: "Khoảng cách ngắn nhất giữa hai điểm dao động cùng pha trên cùng một phương truyền sóng cơ học là:",
+          options: ["Một bước sóng (λ)", "Nửa bước sóng (λ/2)", "Một phần tư bước sóng (λ/4)", "Hai bước sóng (2λ)"],
+          correct: 0,
+          exp: "Bước sóng λ chính là khoảng cách giữa hai điểm gần nhau nhất trên cùng một phương truyền sóng mà dao động tại hai điểm đó cùng pha."
+        },
+        {
+          round: 3,
+          points: 40,
+          title: "Khi hai điện tích điểm đặt cách nhau một khoảng r trong chân không thì lực tương tác giữa chúng là F. Nếu tăng khoảng cách giữa chúng lên 2 lần thì lực tương tác sẽ:",
+          options: ["Giảm 4 lần", "Tăng 4 lần", "Giảm 2 lần", "Không thay đổi"],
+          correct: 0,
+          exp: "Theo định luật Coulomb: F = k·|q₁q₂| / r². Lực tương tác tỉ lệ nghịch với bình phương khoảng cách. Khi r tăng 2 lần thì r² tăng 4 lần ➔ F giảm 4 lần."
+        }
+      ],
+      lop10: [
+        {
+          round: 1,
+          points: 20,
+          title: "Đồ thị vận tốc - thời gian (v - t) của một vật chuyển động thẳng biến đổi đều có dạng là một:",
+          options: ["Đường thẳng xiên góc", "Đường cong parabol", "Đường tròn", "Đường hypebol"],
+          correct: 0,
+          exp: "Phương trình vận tốc là hàm bậc nhất theo thời gian v = v₀ + a·t nên đồ thị v - t là một đường thẳng xiên góc."
+        },
+        {
+          round: 2,
+          points: 30,
+          title: "Trong chuyển động ném ngang từ độ cao h với vận tốc ban đầu v₀ (bỏ qua sức cản không khí), thời gian chạm đất t phụ thuộc vào yếu tố nào?",
+          options: ["Chỉ phụ thuộc vào độ cao h và g", "Chỉ phụ thuộc vào vận tốc ném v₀", "Phụ thuộc vào cả h và v₀", "Phụ thuộc vào khối lượng của vật"],
+          correct: 0,
+          exp: "Theo phương thẳng đứng, vật rơi tự do: h = 0.5·g·t² ➔ t = √(2h/g). Thời gian rơi hoàn toàn không phụ thuộc vào vận tốc ném ngang v₀ hay khối lượng m."
+        },
+        {
+          round: 3,
+          points: 40,
+          title: "Một vật có khối lượng m = 2 kg đang chuyển động với vận tốc v = 3 m/s. Động lượng p của vật có độ lớn là:",
+          options: ["6 kg·m/s", "9 kg·m/s", "18 kg·m/s", "3 kg·m/s"],
+          correct: 0,
+          exp: "Độ lớn động lượng: p = m·v = 2 kg · 3 m/s = 6 kg·m/s."
+        }
+      ]
+    };
+
+    /* ==========================================================================
+       3. GAME STATE MANAGEMENT
+       ========================================================================== */
+    let currentTopic = 'lop12';
+    let currentQuestions = [...QUESTION_BANK.lop12];
+    let currentQIdx = 0;
+    let timerInterval = null;
+    let timeLeft = 20;
+    let isTimerRunning = false;
+    let isBuzzerActive = false;
+    let buzzedTeamId = null;
+
+    let teams = [
+      { id: 1, name: "TỔ 1 (EINSTEIN)", score: 100, avatar: "⚛️", color: "#38bdf8", hasShield: false, hasStar: false, isFrozen: false },
+      { id: 2, name: "TỔ 2 (NEWTON)", score: 100, avatar: "🍎", color: "#f59e0b", hasShield: false, hasStar: false, isFrozen: false },
+      { id: 3, name: "TỔ 3 (MAXWELL)", score: 100, avatar: "⚡", color: "#10b981", hasShield: false, hasStar: false, isFrozen: false },
+      { id: 4, name: "TỔ 4 (CURIE)", score: 100, avatar: "🧪", color: "#ec4899", hasShield: false, hasStar: false, isFrozen: false }
+    ];
+
+    const mysteryRewards = [
+      { text: "🌟 Ngôi Sao Hy Vọng: Nhân đôi số điểm câu tiếp theo!", effect: t => t.hasStar = true },
+      { text: "🛡️ Khiên Bảo Vệ: Miễn nhiễm bị trừ điểm nếu trả lời sai ở câu sau!", effect: t => t.hasShield = true },
+      { text: "⚡ Tia Sét Tri Thức: Nhận ngay +30 điểm thưởng trực tiếp!", effect: t => t.score += 30 },
+      { text: "🎁 Quà May Mắn: Nhận ngay +20 điểm thưởng!", effect: t => t.score += 20 }
+    ];
+
+    /* ==========================================================================
+       4. INITIALIZATION & RENDERING
+       ========================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      renderTeams();
+      loadQuestion(0);
+      setupKeyboardListeners();
+    });
+
+    function renderTeams() {
+      const grid = document.getElementById('teamsGrid');
+      grid.innerHTML = '';
+      
+      const sorted = [...teams].sort((a, b) => b.score - a.score);
+
+      teams.forEach(team => {
+        const rank = sorted.findIndex(t => t.id === team.id) + 1;
+        const card = document.createElement('div');
+        card.className = `team-card team-${team.id}`;
+        card.id = `teamCard_${team.id}`;
+        if (buzzedTeamId === team.id) card.classList.add('buzzed');
+
+        card.innerHTML = `
+          <div>
+            <div class="team-header">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="team-avatar">${team.avatar}</span>
+                <span class="team-name">${team.name}</span>
+              </div>
+              <span class="team-rank-badge">HẠNG #${rank}</span>
+            </div>
+            <div class="team-score" id="scoreVal_${team.id}">${team.score}</div>
+            <div class="team-badges-row">
+              ${team.hasStar ? '<span class="power-badge badge-star">⭐ x2 Điểm</span>' : ''}
+              ${team.hasShield ? '<span class="power-badge badge-shield">🛡️ Khiên</span>' : ''}
+              ${team.isFrozen ? '<span class="power-badge badge-frozen">❄️ Đóng Băng</span>' : ''}
+            </div>
+          </div>
+          <div>
+            <div class="team-controls">
+              <button class="btn-team-score btn-plus" onclick="adjustScore(${team.id}, 10)">+10</button>
+              <button class="btn-team-score btn-plus" onclick="adjustScore(${team.id}, 20)">+20</button>
+              <button class="btn-team-score btn-minus" onclick="adjustScore(${team.id}, -10)">-10</button>
+            </div>
+            <button class="btn-buzzer-team" onclick="triggerBuzzer(${team.id})">
+              🔔 Giành Chuông (Phím ${team.id})
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function loadQuestion(idx) {
+      if (idx >= currentQuestions.length) {
+        openVictoryPodium();
+        return;
+      }
+      currentQIdx = idx;
+      const q = currentQuestions[idx];
+
+      isBuzzerActive = false;
+      buzzedTeamId = null;
+      document.getElementById('buzzerAlert').classList.remove('show');
+      document.getElementById('explanationBox').classList.remove('show');
+      stopTimer();
+
+      const roundTag = document.getElementById('roundTag');
+      roundTag.className = `round-tag round-${q.round}`;
+      roundTag.innerHTML = `<span>⚡</span> VÒNG ${q.round}: ${q.round === 1 ? 'KHỞI ĐỘNG' : (q.round === 2 ? 'TĂNG TỐC' : 'VỀ ĐÍCH')}`;
+
+      document.getElementById('qPointBadge').innerText = `+${q.points} ĐIỂM`;
+      document.getElementById('qTitle').innerText = `Câu ${idx + 1}/${currentQuestions.length}: ${q.title}`;
+
+      const grid = document.getElementById('optionsGrid');
+      grid.innerHTML = '';
+      const prefixes = ['A', 'B', 'C', 'D'];
+      q.options.forEach((opt, oIdx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.id = `optBtn_${oIdx}`;
+        btn.innerHTML = `
+          <div class="option-prefix">${prefixes[oIdx]}</div>
+          <div style="flex: 1; line-height: 1.4;">${opt}</div>
+        `;
+        btn.onclick = () => selectOption(oIdx);
+        grid.appendChild(btn);
+      });
+
+      timeLeft = q.round === 1 ? 20 : (q.round === 2 ? 15 : 30);
+      updateTimerDisplay();
+      renderTeams();
+    }
+
+    function selectOption(oIdx) {
+      const q = currentQuestions[currentQIdx];
+      const optBtn = document.getElementById(`optBtn_${oIdx}`);
+      if (!optBtn) return;
+
+      if (oIdx === q.correct) {
+        optBtn.classList.add('correct');
+        soundCorrect();
+        triggerConfetti();
+        if (buzzedTeamId) {
+          const team = teams.find(t => t.id === buzzedTeamId);
+          let earned = q.points;
+          if (team.hasStar) { earned *= 2; team.hasStar = false; }
+          team.score += earned;
+          renderTeams();
+        }
+      } else {
+        optBtn.classList.add('wrong');
+        soundWrong();
+        if (buzzedTeamId) {
+          const team = teams.find(t => t.id === buzzedTeamId);
+          if (!team.hasShield) {
+            team.score = Math.max(0, team.score - Math.floor(q.points / 2));
+          } else {
+            team.hasShield = false;
+          }
+          renderTeams();
+        }
+      }
+      revealAnswer();
+    }
+
+    function revealAnswer() {
+      const q = currentQuestions[currentQIdx];
+      const correctBtn = document.getElementById(`optBtn_${q.correct}`);
+      if (correctBtn) correctBtn.classList.add('correct');
+
+      const expBox = document.getElementById('explanationBox');
+      document.getElementById('explanationContent').innerText = q.exp;
+      expBox.classList.add('show');
+      stopTimer();
+    }
+
+    /* ==========================================================================
+       5. TIMER & BUZZER SYSTEM
+       ========================================================================== */
+    function toggleTimer() {
+      if (isTimerRunning) {
+        stopTimer();
+      } else {
+        startTimer();
+      }
+    }
+
+    function startTimer() {
+      isTimerRunning = true;
+      document.getElementById('btnTimer').innerHTML = '<span>⏸️</span> Tạm Dừng (Space)';
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        soundTick();
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+          stopTimer();
+          soundWrong();
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      isTimerRunning = false;
+      clearInterval(timerInterval);
+      document.getElementById('btnTimer').innerHTML = '<span>▶️</span> Tiếp Tục (Space)';
+    }
+
+    function updateTimerDisplay() {
+      const timerEl = document.getElementById('timerVal');
+      timerEl.innerText = timeLeft;
+      timerEl.className = 'timer-val';
+      if (timeLeft <= 5) timerEl.classList.add('danger');
+      else if (timeLeft <= 10) timerEl.classList.add('warning');
+    }
+
+    function activateBuzzer() {
+      isBuzzerActive = true;
+      buzzedTeamId = null;
+      document.getElementById('buzzerAlert').classList.remove('show');
+      renderTeams();
+      startTimer();
+    }
+
+    function triggerBuzzer(teamId) {
+      if (buzzedTeamId !== null) return;
+      buzzedTeamId = teamId;
+      isBuzzerActive = false;
+      stopTimer();
+      soundBuzzer();
+
+      const team = teams.find(t => t.id === teamId);
+      document.getElementById('buzzerTeamName').innerText = team.name;
+      document.getElementById('buzzerAlert').classList.add('show');
+      renderTeams();
+    }
+
+    function judgeBuzzedTeam(isCorrect) {
+      const q = currentQuestions[currentQIdx];
+      if (buzzedTeamId) {
+        const team = teams.find(t => t.id === buzzedTeamId);
+        if (isCorrect) {
+          let pts = q.points;
+          if (team.hasStar) { pts *= 2; team.hasStar = false; }
+          team.score += pts;
+          soundCorrect();
+          triggerConfetti();
+          revealAnswer();
+        } else {
+          if (!team.hasShield) {
+            team.score = Math.max(0, team.score - Math.floor(q.points / 2));
+          } else {
+            team.hasShield = false;
+          }
+          soundWrong();
+          document.getElementById('buzzerAlert').classList.remove('show');
+          buzzedTeamId = null;
+          isBuzzerActive = true;
+          startTimer();
+        }
+        renderTeams();
+      }
+    }
+
+    function adjustScore(teamId, delta) {
+      const team = teams.find(t => t.id === teamId);
+      if (team) {
+        team.score += delta;
+        renderTeams();
+        if (delta > 0) soundCorrect();
+        else soundWrong();
+      }
+    }
+
+    function nextQuestion() {
+      loadQuestion(currentQIdx + 1);
+    }
+
+    /* ==========================================================================
+       6. MYSTERY BOX REWARDS
+       ========================================================================== */
+    function openMysteryBoxModal() {
+      const resBox = document.getElementById('mysteryResult');
+      resBox.style.display = 'none';
+      document.querySelectorAll('.mystery-box-item').forEach(b => b.classList.remove('opened'));
+      document.getElementById('mysteryModal').classList.add('open');
+    }
+
+    function openBox(boxIdx, el) {
+      if (el.classList.contains('opened')) return;
+      el.classList.add('opened');
+      soundCorrect();
+      triggerConfetti();
+
+      const reward = mysteryRewards[boxIdx % mysteryRewards.length];
+      if (buzzedTeamId) {
+        const team = teams.find(t => t.id === buzzedTeamId);
+        reward.effect(team);
+        renderTeams();
+      }
+
+      const resBox = document.getElementById('mysteryResult');
+      resBox.innerHTML = `🎉 ${reward.text}`;
+      resBox.style.display = 'block';
+    }
+
+    /* ==========================================================================
+       7. VICTORY PODIUM
+       ========================================================================== */
+    function openVictoryPodium() {
+      soundFanfare();
+      triggerConfetti(80);
+      const sorted = [...teams].sort((a, b) => b.score - a.score);
+
+      document.getElementById('pName1').innerText = sorted[0].name;
+      document.getElementById('pScore1').innerText = sorted[0].score + ' đ';
+
+      document.getElementById('pName2').innerText = sorted[1].name;
+      document.getElementById('pScore2').innerText = sorted[1].score + ' đ';
+
+      document.getElementById('pName3').innerText = sorted[2].name;
+      document.getElementById('pScore3').innerText = sorted[2].score + ' đ';
+
+      document.getElementById('victoryModal').classList.add('open');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    function openTopicModal() {
+      document.getElementById('topicModal').classList.add('open');
+    }
+
+    function setTopic(topicKey) {
+      currentTopic = topicKey;
+      if (topicKey === 'all') {
+        currentQuestions = [...QUESTION_BANK.lop10, ...QUESTION_BANK.lop11, ...QUESTION_BANK.lop12];
+        document.getElementById('currentTopicLabel').innerText = 'Toàn Diện (10-11-12)';
+      } else {
+        currentQuestions = [...QUESTION_BANK[topicKey]];
+        document.getElementById('currentTopicLabel').innerText = topicKey === 'lop10' ? 'Vật Lí 10' : (topicKey === 'lop11' ? 'Vật Lí 11' : 'Vật Lí 12');
+      }
+      closeModal('topicModal');
+      resetBattle();
+    }
+
+    function resetBattle() {
+      teams.forEach(t => {
+        t.score = 100;
+        t.hasStar = false;
+        t.hasShield = false;
+        t.isFrozen = false;
+      });
+      loadQuestion(0);
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    /* Keyboard Shortcuts */
+    function setupKeyboardListeners() {
+      window.addEventListener('keydown', e => {
+        if (e.key === ' ' || e.code === 'Space') {
+          e.preventDefault();
+          toggleTimer();
+        } else if (e.key === 'Enter') {
+          revealAnswer();
+        } else if (e.key === 'b' || e.key === 'B') {
+          activateBuzzer();
+        } else if (['1', '2', '3', '4'].includes(e.key)) {
+          triggerBuzzer(parseInt(e.key));
+        }
+      });
+    }
+
+    /* Canvas Confetti Engine */
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function triggerConfetti(count = 50) {
+      const colors = ['#38bdf8', '#f59e0b', '#10b981', '#ec4899', '#a855f7', '#fbbf24'];
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: canvas.width / 2 + (Math.random() - 0.5) * 200,
+          y: canvas.height * 0.4,
+          vx: (Math.random() - 0.5) * 12,
+          vy: (Math.random() - 0.8) * 14,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 10
+        });
+      }
+    }
+
+    function renderConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, idx) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.35;
+        p.rotation += p.rotSpeed;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+        ctx.restore();
+
+        if (p.y > canvas.height) particles.splice(idx, 1);
+      });
+      requestAnimationFrame(renderConfetti);
+    }
+    renderConfetti();
+  </script>
+</body>
+</html>
