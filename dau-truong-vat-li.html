@@ -28,7 +28,15 @@
       --font-family: 'Plus Jakarta Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
+    *, button, input, select, textarea {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      font-family: var(--font-family);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
     
     body {
       font-family: var(--font-family);
@@ -84,8 +92,9 @@
       margin-bottom: 8px;
     }
     .setup-title {
+      font-family: var(--font-family);
       font-size: 2.2rem;
-      font-weight: 900;
+      font-weight: 800;
       background: linear-gradient(135deg, #f59e0b, #ef4444, #38bdf8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -224,8 +233,9 @@
       background: linear-gradient(135deg, #f59e0b, #ef4444, #e11d48);
       color: #ffffff;
       border: none;
+      font-family: var(--font-family) !important;
       font-size: 1.25rem;
-      font-weight: 900;
+      font-weight: 800;
       letter-spacing: 0.5px;
       cursor: pointer;
       display: flex;
@@ -973,7 +983,7 @@
 
         <div>
           <button class="btn-launch-battle" onclick="launchBattleFromSetup()">
-            <span>🚀</span> BẮT ĐẦU ĐẤU TRƯỜNG NGAY ➔
+            <span>🚀</span> Bắt Đầu Đấu Trường Ngay ➔
           </button>
         </div>
       </div>
