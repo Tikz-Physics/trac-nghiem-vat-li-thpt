@@ -31,13 +31,14 @@
       --color-2: #eab308;
       --color-3: #14b8a6;
       --font-scale: 1.0;
+      --font-family: 'Plus Jakarta Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
     }
 
     sub, sup { font-size: 0.74em; line-height: 0; position: relative; vertical-align: baseline; color: inherit; }
     sup { top: -0.42em; }
     sub { bottom: -0.22em; }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
+    *, button, input, select, textarea { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-family); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-tap-highlight-color: transparent; }
 
     /* FONT SCALE CONTROLS */
     .font-scale-group {
@@ -430,25 +431,90 @@
       flex-shrink: 0;
     }
 
-    /* CSS Formula Engine */
+    /* CSS Formula & Notation Engine */
     .math-sym { font-family: 'Cambria Math', 'Times New Roman', serif; font-style: italic; color: inherit; font-weight: 600; }
-    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 3px; font-size: 0.92em; line-height: 1.1; margin: 0 2px; color: inherit; }
-    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; }
-    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; }
+    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 0.2em; font-size: 0.95em; line-height: 1.1; margin: 0 2px; color: inherit; }
+    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+
+    /* Pure Inline SVG Vector Engine (preserveAspectRatio="none") */
+    .vec {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      position: relative;
+      padding-top: 0.38em;
+      margin: 0 0.12em;
+      line-height: 1;
+      color: inherit;
+    }
+    .vec-arr {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0.42em;
+      overflow: visible;
+      color: inherit;
+    }
+    .vec-sym {
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1;
+      color: inherit;
+    }
+
+    /* Square Root Engine with Vinculum */
+    .sqrt {
+      display: inline-flex;
+      align-items: flex-end;
+      vertical-align: middle;
+      margin: 0 0.15em;
+      line-height: 1;
+      color: inherit;
+    }
+    .rad {
+      font-size: 1.15em;
+      margin-right: 1px;
+      font-family: 'Cambria Math', 'Times New Roman', serif;
+      line-height: 1;
+      color: inherit;
+    }
+    .radicand {
+      border-top: 1.6px solid currentColor;
+      padding-top: 1px;
+      padding-left: 2px;
+      padding-right: 2px;
+      line-height: 1.2;
+      color: inherit;
+    }
+
+    /* Pedagogical Formula Box */
     .formula-box {
-      background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(6, 182, 212, 0.3);
-      border-radius: 10px; padding: 6px 14px; margin: 6px 0; display: inline-flex;
-      align-items: center; gap: 8px; font-size: 1.05rem; font-weight: 700; color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin: 6px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #38bdf8;
     }
-    .nuclide {
+
+    /* Nuclear & Isotope Notations */
+    .nuclide, .isotope {
       display: inline-flex; align-items: center; vertical-align: middle;
-      font-style: normal; font-weight: 700; margin: 0 3px;
+      font-style: normal; font-weight: 700; margin: 0 3px; color: inherit;
     }
-    .nuclide .scripts {
+    .nuclide .scripts, .isotope .scripts {
       display: inline-flex; flex-direction: column; font-size: 0.72em; line-height: 1.05;
       text-align: right; margin-right: 2px; font-weight: 800; color: currentColor;
     }
-    .nuclide .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
+    .nuclide .sym, .isotope .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
 
     /* Graph container */
     /* Graph container: dynamic expansion based on available empty space */
@@ -1077,14 +1143,14 @@
     "type": "mcq",
     "q": "Mối quan hệ giữa giá trị hiệu dụng U và giá trị cực đại (biên độ) U₀ của điện áp xoay chiều hình sin là:",
     "opts": [
-      "U = <span class=\"fraction\"><span class=\"numerator\">U₀</span><span class=\"denominator\">√2</span></span>.",
-      "U = U₀ · √2.",
+      "U = <span class=\"fraction\"><span class=\"numerator\">U₀</span><span class=\"denominator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></span></span>.",
+      "U = U₀ · <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>.",
       "U = 2 · U₀.",
       "U = <span class=\"fraction\"><span class=\"numerator\">U₀</span><span class=\"denominator\">2</span></span>."
     ],
     "ans": 0,
     "correctText": "Đáp án A",
-    "exp": "• <b>Giá trị hiệu dụng:</b> <span class=\"math-sym\">U</span> = <span class=\"fraction\"><span class=\"numerator\">U₀</span><span class=\"denominator\">√2</span></span> ≈ 0,707 <span class=\"math-sym\">U</span><sub>0</sub>."
+    "exp": "• <b>Giá trị hiệu dụng:</b> <span class=\"math-sym\">U</span> = <span class=\"fraction\"><span class=\"numerator\">U₀</span><span class=\"denominator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></span></span> ≈ 0,707 <span class=\"math-sym\">U</span><sub>0</sub>."
   },
   {
     "type": "mcq",
@@ -1097,7 +1163,7 @@
     ],
     "ans": 0,
     "correctText": "Đáp án A",
-    "exp": "• <span class=\"math-sym\">U</span><sub>0</sub> = <span class=\"math-sym\">U · √2</span> = 220 × 1,414 ≈ <b>311 V</b>."
+    "exp": "• <span class=\"math-sym\">U</span><sub>0</sub> = <span class=\"math-sym\">U · <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></span> = 220 × 1,414 ≈ <b>311 V</b>."
   },
   {
     "type": "tf",
@@ -1189,7 +1255,7 @@
   },
   {
     "type": "tf",
-    "svgGraph": "<svg viewBox=\"0 0 540 280\" xmlns=\"http://www.w3.org/2000/svg\">\n  <defs>\n    <marker id=\"arr17\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">\n      <path d=\"M 0 1 L 10 5 L 0 9 z\" fill=\"#94a3b8\"/>\n    </marker>\n  </defs>\n  <rect width=\"540\" height=\"280\" rx=\"14\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.5\"/>\n  <text x=\"270\" y=\"26\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">ĐỒ THỊ DAO ĐỘNG HÌNH SIN CỦA ĐIỆN ÁP XOAY CHIỀU</text>\n\n  <!-- Hệ trục u(t) -->\n  <line x1=\"50\" y1=\"140\" x2=\"490\" y2=\"140\" stroke=\"#94a3b8\" stroke-width=\"1.8\" marker-end=\"url(#arr17)\"/>\n  <line x1=\"70\" y1=\"240\" x2=\"70\" y2=\"40\" stroke=\"#94a3b8\" stroke-width=\"1.8\" marker-end=\"url(#arr17)\"/>\n  <text x=\"475\" y=\"160\" fill=\"#94a3b8\" font-size=\"12\">Thời gian t (s)</text>\n  <text x=\"25\" y=\"45\" fill=\"#38bdf8\" font-size=\"13\">u (V)</text>\n  <text x=\"55\" y=\"155\" fill=\"#94a3b8\" font-size=\"12\">O</text>\n\n  <!-- Đường sóng sin u = U0 cos(wt) -->\n  <path d=\"M 70,70 C 120,70 120,210 170,210 C 220,210 220,70 270,70 C 320,70 320,210 370,210 C 420,210 420,70 470,70\" fill=\"none\" stroke=\"#38bdf8\" stroke-width=\"3\"/>\n\n  <!-- Gióng biên độ U0 và -U0 -->\n  <line x1=\"70\" y1=\"70\" x2=\"470\" y2=\"70\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"4,4\"/>\n  <line x1=\"70\" y1=\"210\" x2=\"470\" y2=\"210\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"4,4\"/>\n  <text x=\"35\" y=\"75\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\">+U₀</text>\n  <text x=\"35\" y=\"215\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\">-U₀</text>\n\n  <!-- Mức hiệu dụng U = U0 / sqrt(2) -->\n  <line x1=\"70\" y1=\"90\" x2=\"470\" y2=\"90\" stroke=\"#f59e0b\" stroke-width=\"1.2\" stroke-dasharray=\"3,3\"/>\n  <text x=\"20\" y=\"95\" fill=\"#f59e0b\" font-size=\"11\">U = U₀/√2</text>\n\n  <!-- Đánh dấu chu kỳ T -->\n  <line x1=\"270\" y1=\"70\" x2=\"270\" y2=\"140\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"3,3\"/>\n  <text x=\"265\" y=\"158\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"bold\">T</text>\n\n  <line x1=\"470\" y1=\"70\" x2=\"470\" y2=\"140\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"3,3\"/>\n  <text x=\"460\" y=\"158\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"bold\">2T</text>\n\n  <text x=\"270\" y=\"260\" fill=\"#facc15\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Điện áp tức thời: u = U₀·cos(ωt + φ) • Giá trị hiệu dụng: U = U₀ / √2</text>\n</svg>",
+    "svgGraph": "<svg viewBox=\"0 0 540 280\" xmlns=\"http://www.w3.org/2000/svg\">\n  <defs>\n    <marker id=\"arr17\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">\n      <path d=\"M 0 1 L 10 5 L 0 9 z\" fill=\"#94a3b8\"/>\n    </marker>\n  </defs>\n  <rect width=\"540\" height=\"280\" rx=\"14\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.5\"/>\n  <text x=\"270\" y=\"26\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">ĐỒ THỊ DAO ĐỘNG HÌNH SIN CỦA ĐIỆN ÁP XOAY CHIỀU</text>\n\n  <!-- Hệ trục u(t) -->\n  <line x1=\"50\" y1=\"140\" x2=\"490\" y2=\"140\" stroke=\"#94a3b8\" stroke-width=\"1.8\" marker-end=\"url(#arr17)\"/>\n  <line x1=\"70\" y1=\"240\" x2=\"70\" y2=\"40\" stroke=\"#94a3b8\" stroke-width=\"1.8\" marker-end=\"url(#arr17)\"/>\n  <text x=\"475\" y=\"160\" fill=\"#94a3b8\" font-size=\"12\">Thời gian t (s)</text>\n  <text x=\"25\" y=\"45\" fill=\"#38bdf8\" font-size=\"13\">u (V)</text>\n  <text x=\"55\" y=\"155\" fill=\"#94a3b8\" font-size=\"12\">O</text>\n\n  <!-- Đường sóng sin u = U0 cos(wt) -->\n  <path d=\"M 70,70 C 120,70 120,210 170,210 C 220,210 220,70 270,70 C 320,70 320,210 370,210 C 420,210 420,70 470,70\" fill=\"none\" stroke=\"#38bdf8\" stroke-width=\"3\"/>\n\n  <!-- Gióng biên độ U0 và -U0 -->\n  <line x1=\"70\" y1=\"70\" x2=\"470\" y2=\"70\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"4,4\"/>\n  <line x1=\"70\" y1=\"210\" x2=\"470\" y2=\"210\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"4,4\"/>\n  <text x=\"35\" y=\"75\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\">+U₀</text>\n  <text x=\"35\" y=\"215\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\">-U₀</text>\n\n  <!-- Mức hiệu dụng U = U0 / sqrt(2) -->\n  <line x1=\"70\" y1=\"90\" x2=\"470\" y2=\"90\" stroke=\"#f59e0b\" stroke-width=\"1.2\" stroke-dasharray=\"3,3\"/>\n  <text x=\"20\" y=\"95\" fill=\"#f59e0b\" font-size=\"11\">U = U₀/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></text>\n\n  <!-- Đánh dấu chu kỳ T -->\n  <line x1=\"270\" y1=\"70\" x2=\"270\" y2=\"140\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"3,3\"/>\n  <text x=\"265\" y=\"158\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"bold\">T</text>\n\n  <line x1=\"470\" y1=\"70\" x2=\"470\" y2=\"140\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"3,3\"/>\n  <text x=\"460\" y=\"158\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"bold\">2T</text>\n\n  <text x=\"270\" y=\"260\" fill=\"#facc15\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Điện áp tức thời: u = U₀·cos(ωt + φ) • Giá trị hiệu dụng: U = U₀ / <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></text>\n</svg>",
     "q": "Quan sát đồ thị biến thiên điều hòa của điện áp xoay chiều u(t) hình bên. Đánh giá tính Đúng/Sai của các mệnh đề sau:",
     "stmts": [
       "Tại thời điểm t = 0, điện áp đạt giá trị cực đại tức thời u = +U₀.",
@@ -1204,7 +1270,7 @@
       true
     ],
     "correctText": "a) ĐÚNG | b) ĐÚNG | c) SAI | d) ĐÚNG",
-    "exp": "• <b>Ý a: ĐÚNG.</b> Đồ thị bắt đầu từ đỉnh <span class=\"math-sym\">u(0) = +U₀</span>.<br>• <b>Ý b: ĐÚNG.</b> Định nghĩa chu kỳ T.<br>• <b>Ý c: SAI.</b> <span class=\"math-sym\">U = U₀ / √2 ≈ 0,707 U₀ < U₀</span>.<br>• <b>Ý d: ĐÚNG.</b> Đổi chiều tại các thời điểm qua vị trí cân bằng (u = 0)."
+    "exp": "• <b>Ý a: ĐÚNG.</b> Đồ thị bắt đầu từ đỉnh <span class=\"math-sym\">u(0) = +U₀</span>.<br>• <b>Ý b: ĐÚNG.</b> Định nghĩa chu kỳ T.<br>• <b>Ý c: SAI.</b> <span class=\"math-sym\">U = U₀ / <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> ≈ 0,707 U₀ < U₀</span>.<br>• <b>Ý d: ĐÚNG.</b> Đổi chiều tại các thời điểm qua vị trí cân bằng (u = 0)."
   },
   {
     "type": "mcq",
@@ -1220,6 +1286,10 @@
     "exp": "• <b>Ưu điểm vượt trội của dòng xoay chiều 3 pha:</b><br>1. <i>Tiết kiệm dây dẫn:</i> Truyền tải điện năng bằng dòng 3 pha tiết kiệm dây dẫn đáng kể so với dòng 1 pha có cùng công suất.<br>2. <i>Tạo từ trường quay:</i> Dòng điện xoay chiều 3 pha chạy vào ba cuộn dây đặt lệch nhau 120° trên stato sẽ tạo ra từ trường quay đồng bộ cực kì mạnh mẽ và ổn định, làm quay rôto của động cơ không đồng bộ 3 pha (loại động cơ chiếm trên 85% tổng công suất động cơ điện trong công nghiệp)."
   }
 ];
+    const PREV_LESSON_URL = "./Bai_16_Tu_Thong_Cam_Ung_Dien_Tu.html";
+    const NEXT_LESSON_URL = "./Bai_18_Ung_Dung_Cam_Ung_Dien_Tu.html";
+    window.PREV_LESSON_URL = PREV_LESSON_URL;
+    window.NEXT_LESSON_URL = NEXT_LESSON_URL;
 
     
 // SafeStorage Engine for Mobile & file:// compatibility (Fallback to memory if localStorage is restricted)
@@ -2119,15 +2189,15 @@
         const revContainer = document.getElementById('examReviewContainer');
         if (revContainer && revContainer.style.display === 'block') return;
 
-        // ArrowUp or ArrowLeft: Previous question
-        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        // ArrowLeft: Lùi về câu trước (prevQuestion)
+        if (e.key === 'ArrowLeft') {
           e.preventDefault();
           if (currentQ > 0) {
             prevQuestion();
           }
         }
-        // ArrowDown or ArrowRight: Next question
-        else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        // ArrowRight: Tiến tới câu sau (nextQuestion)
+        else if (e.key === 'ArrowRight') {
           e.preventDefault();
           if (currentQ < questions.length - 1) {
             nextQuestion();
@@ -2138,7 +2208,53 @@
             }
           }
         }
+        // ArrowUp: Lùi về bài trước (prevLesson)
+        else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          prevLesson();
+        }
+        // ArrowDown: Tiến tới bài sau (nextLesson)
+        else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          nextLesson();
+        }
       });
+    }
+
+    function prevLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển về bài học trước không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex > 0) {
+        select.selectedIndex--;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.PREV_LESSON_URL) {
+        window.location.href = window.PREV_LESSON_URL;
+      }
+    }
+
+    function nextLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển sang bài học tiếp theo không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex < select.options.length - 1) {
+        select.selectedIndex++;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.NEXT_LESSON_URL) {
+        window.location.href = window.NEXT_LESSON_URL;
+      }
     }
 
     function confirmSubmitExam() {

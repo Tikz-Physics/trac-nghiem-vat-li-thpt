@@ -430,25 +430,90 @@
       flex-shrink: 0;
     }
 
-    /* CSS Formula Engine */
+    /* CSS Formula & Notation Engine */
     .math-sym { font-family: 'Cambria Math', 'Times New Roman', serif; font-style: italic; color: inherit; font-weight: 600; }
-    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 3px; font-size: 0.92em; line-height: 1.1; margin: 0 2px; color: inherit; }
-    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; }
-    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; }
+    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 0.2em; font-size: 0.95em; line-height: 1.1; margin: 0 2px; color: inherit; }
+    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+
+    /* Pure Inline SVG Vector Engine (preserveAspectRatio="none") */
+    .vec {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      position: relative;
+      padding-top: 0.38em;
+      margin: 0 0.12em;
+      line-height: 1;
+      color: inherit;
+    }
+    .vec-arr {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0.42em;
+      overflow: visible;
+      color: inherit;
+    }
+    .vec-sym {
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1;
+      color: inherit;
+    }
+
+    /* Square Root Engine with Vinculum */
+    .sqrt {
+      display: inline-flex;
+      align-items: flex-end;
+      vertical-align: middle;
+      margin: 0 0.15em;
+      line-height: 1;
+      color: inherit;
+    }
+    .rad {
+      font-size: 1.15em;
+      margin-right: 1px;
+      font-family: 'Cambria Math', 'Times New Roman', serif;
+      line-height: 1;
+      color: inherit;
+    }
+    .radicand {
+      border-top: 1.6px solid currentColor;
+      padding-top: 1px;
+      padding-left: 2px;
+      padding-right: 2px;
+      line-height: 1.2;
+      color: inherit;
+    }
+
+    /* Pedagogical Formula Box */
     .formula-box {
-      background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(6, 182, 212, 0.3);
-      border-radius: 10px; padding: 6px 14px; margin: 6px 0; display: inline-flex;
-      align-items: center; gap: 8px; font-size: 1.05rem; font-weight: 700; color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin: 6px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #38bdf8;
     }
-    .nuclide {
+
+    /* Nuclear & Isotope Notations */
+    .nuclide, .isotope {
       display: inline-flex; align-items: center; vertical-align: middle;
-      font-style: normal; font-weight: 700; margin: 0 3px;
+      font-style: normal; font-weight: 700; margin: 0 3px; color: inherit;
     }
-    .nuclide .scripts {
+    .nuclide .scripts, .isotope .scripts {
       display: inline-flex; flex-direction: column; font-size: 0.72em; line-height: 1.05;
       text-align: right; margin-right: 2px; font-weight: 800; color: currentColor;
     }
-    .nuclide .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
+    .nuclide .sym, .isotope .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
 
     /* Graph container */
     /* Graph container: dynamic expansion based on available empty space */
@@ -1923,7 +1988,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (500 m.)",
-      "exp": "• Hai hướng Đông và Bắc vuông góc với nhau (tam giác vuông ABC tại B).<br>• <b>Độ lớn độ dịch chuyển AC:</b> d = √(AB² + BC²) = √(400² + 300²) = √(160000 + 90000) = 500 m.",
+      "exp": "• Hai hướng Đông và Bắc vuông góc với nhau (tam giác vuông ABC tại B).<br>• <b>Độ lớn độ dịch chuyển AC:</b> d = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">AB² + BC²</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">400² + 300²</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">160000 + 90000</span></span> = 500 m.",
       "svgGraph": ""
     },
     {
@@ -2046,7 +2111,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (50 m.)",
-      "exp": "• Khoảng cách không gian chính là độ lớn độ dịch chuyển nối điểm đầu A và điểm cuối B: d = √(40² + 30²) = 50 m.",
+      "exp": "• Khoảng cách không gian chính là độ lớn độ dịch chuyển nối điểm đầu A và điểm cuối B: d = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">40² + 30²</span></span> = 50 m.",
       "svgGraph": ""
     }
   ],
@@ -2143,7 +2208,7 @@
         "tổng vectơ: v₁₃ = v₁₂ + v₂₃",
         "v₁₂ + v₂₃",
         "v₁₂ - v₂₃",
-        "định lí Pythagore: √(v₁₂² + v₂₃²)",
+        "định lí Pythagore: <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">v₁₂² + v₂₃²</span></span>",
         "hiệu đại số",
         "tích đại số"
       ],
@@ -2153,8 +2218,8 @@
         2,
         3
       ],
-      "correctText": "1: tổng vectơ: v₁₃ = v₁₂ + v₂₃ | 2: v₁₂ + v₂₃ | 3: v₁₂ - v₂₃ | 4: định lí Pythagore: √(v₁₂² + v₂₃²)",
-      "exp": "<b>Công thức cộng vận tốc:</b><br>• v₁₃ = v₁₂ + v₂₃.<br>• Xuôi dòng (cùng chiều): v = v₁₂ + v₂₃.<br>• Ngược dòng (ngược chiều): v = v₁₂ - v₂₃.<br>• Vuông góc: v = √(v₁₂² + v₂₃²)."
+      "correctText": "1: tổng vectơ: v₁₃ = v₁₂ + v₂₃ | 2: v₁₂ + v₂₃ | 3: v₁₂ - v₂₃ | 4: định lí Pythagore: <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">v₁₂² + v₂₃²</span></span>",
+      "exp": "<b>Công thức cộng vận tốc:</b><br>• v₁₃ = v₁₂ + v₂₃.<br>• Xuôi dòng (cùng chiều): v = v₁₂ + v₂₃.<br>• Ngược dòng (ngược chiều): v = v₁₂ - v₂₃.<br>• Vuông góc: v = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">v₁₂² + v₂₃²</span></span>."
     },
     {
       "type": "mcq",
@@ -2835,7 +2900,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (14 m/s.)",
-      "exp": "• <b>Sử dụng hệ thức độc lập thời gian:</b> v² - v₀² = 2as<br>• Thay số: v² - 10² = 2 · 2 · 24 = 96 ⇒ v² = 100 + 96 = 196 ⇒ v = √196 = 14 m/s.",
+      "exp": "• <b>Sử dụng hệ thức độc lập thời gian:</b> v² - v₀² = 2as<br>• Thay số: v² - 10² = 2 · 2 · 24 = 96 ⇒ v² = 100 + 96 = 196 ⇒ v = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">196</span></span> = 14 m/s.",
       "svgGraph": ""
     },
     {
@@ -2868,7 +2933,7 @@
         false
       ],
       "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Sai",
-      "exp": "• <b>Ý a [Đúng]:</b> s = 1m = 1/2 · 0,5 · t² ⇒ t² = 4 ⇒ t = 2 s.<br>• <b>Ý b [Đúng]:</b> v = at = 0,5 · 2 = 1 m/s.<br>• <b>Ý c [Đúng]:</b> v<sub>tb</sub> = s/t = 1/2 = 0,5 m/s.<br>• <b>Ý d [Sai]:</b> v<sub>gi</sub>ữa = √(2·a·s/2) = √(v²/2) = v / √2 ≈ 0,707 m/s (không phải bằng v/2 = 0,5 m/s)."
+      "exp": "• <b>Ý a [Đúng]:</b> s = 1m = 1/2 · 0,5 · t² ⇒ t² = 4 ⇒ t = 2 s.<br>• <b>Ý b [Đúng]:</b> v = at = 0,5 · 2 = 1 m/s.<br>• <b>Ý c [Đúng]:</b> v<sub>tb</sub> = s/t = 1/2 = 0,5 m/s.<br>• <b>Ý d [Sai]:</b> v<sub>gi</sub>ữa = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2·a·s/2</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">v²/2</span></span> = v / <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> ≈ 0,707 m/s (không phải bằng v/2 = 0,5 m/s)."
     },
     {
       "type": "mcq",
@@ -2925,7 +2990,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (3 s.)",
-      "exp": "• <b>Công thức thời gian rơi tự do:</b> t = √(<span class=\"fraction\"><span class=\"numerator\">2h</span><span class=\"denominator\">g</span></span>)<br>• <b>Thay số:</b> t = √(<span class=\"fraction\"><span class=\"numerator\">2 · 45</span><span class=\"denominator\">10</span></span>) = √9 = 3 s.",
+      "exp": "• <b>Công thức thời gian rơi tự do:</b> t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">2h</span><span class=\"denominator\">g</span></span></span></span><br>• <b>Thay số:</b> t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">2 · 45</span><span class=\"denominator\">10</span></span></span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">9</span></span> = 3 s.",
       "svgGraph": ""
     },
     {
@@ -2944,7 +3009,7 @@
         true
       ],
       "correctText": "a) Đúng | b) Đúng | c) Sai | d) Đúng",
-      "exp": "• <b>Ý a [Đúng]:</b> Gia tốc rơi tự do g không phụ thuộc khối lượng vật.<br>• <b>Ý b [Đúng]:</b> t = √(2h/g) và v = √(2gh) bằng nhau.<br>• <b>Ý c [Sai]:</b> Trong chân không hai vật rơi như nhau (thí nghiệm ống Newton).<br>• <b>Ý d [Đúng]:</b> g lớn nhất ở 2 cực (≈ 9,83 m/s²) và nhỏ nhất ở xích đạo (≈ 9,78 m/s²), giảm dần khi lên cao."
+      "exp": "• <b>Ý a [Đúng]:</b> Gia tốc rơi tự do g không phụ thuộc khối lượng vật.<br>• <b>Ý b [Đúng]:</b> t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h/g</span></span> và v = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2gh</span></span> bằng nhau.<br>• <b>Ý c [Sai]:</b> Trong chân không hai vật rơi như nhau (thí nghiệm ống Newton).<br>• <b>Ý d [Đúng]:</b> g lớn nhất ở 2 cực (≈ 9,83 m/s²) và nhỏ nhất ở xích đạo (≈ 9,78 m/s²), giảm dần khi lên cao."
     },
     {
       "type": "match",
@@ -2953,7 +3018,7 @@
         "v = g · t",
         "h = 1/2 · g · t²",
         "v² = 2 · g · h",
-        "t = √(2h / g)"
+        "t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h / g</span></span>"
       ],
       "colB": [
         "Thời gian rơi của vật từ độ cao h",
@@ -2968,7 +3033,7 @@
         0
       ],
       "correctText": "1 - B | 2 - C | 3 - D | 4 - A",
-      "exp": "• <b>1 - B:</b> v = gt.<br>• <b>2 - C:</b> h = ½ g·t².<br>• <b>3 - D:</b> v² = 2gh.<br>• <b>4 - A:</b> t = √(2h/g)."
+      "exp": "• <b>1 - B:</b> v = gt.<br>• <b>2 - C:</b> h = ½ g·t².<br>• <b>3 - D:</b> v² = 2gh.<br>• <b>4 - A:</b> t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h/g</span></span>."
     },
     {
       "type": "drag",
@@ -3215,7 +3280,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (Sử dụng đồng hồ bấm giây thủ công đo chu kì dao động của con lắc đơn chiều dài L rồi tính g = 4π²L / T².)",
-      "exp": "• Con lắc đơn T = 2π√(L/g) ⇒ g = 4π²L/T² là phương pháp đo gia tốc trọng trường kinh điển rất chính xác với dụng cụ đơn giản.",
+      "exp": "• Con lắc đơn T = 2π<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">L/g</span></span> ⇒ g = 4π²L/T² là phương pháp đo gia tốc trọng trường kinh điển rất chính xác với dụng cụ đơn giản.",
       "svgGraph": ""
     }
   ],
@@ -3232,7 +3297,7 @@
       "ans": 0,
       "correctText": "Đáp án A (Chuyển động thẳng đều theo phương ngang (Ox) và chuyển động rơi tự do theo phương thẳng đứng (Oy).)",
       "exp": "• <b>Nguyên tắc độc lập chuyển động:</b> Theo phương ngang Ox không có lực tác dụng (F<sub>x</sub> = 0) nên chuyển động thẳng đều với v<sub>x</sub> = v₀. Theo phương thẳng đứng Oy chỉ chịu trọng lực P nên rơi tự do với gia tốc a<sub>y</sub> = g.",
-      "svgGraph": "<svg viewBox=\"0 0 500 240\" class=\"graph-svg\" xmlns=\"http://www.w3.org/2000/svg\">\n      <defs><marker id=\"arr12\" markerWidth=\"6\" markerHeight=\"6\" refX=\"5\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L6,3 L0,6 Z\" fill=\"#38bdf8\"/></marker></defs>\n      <rect width=\"100%\" height=\"100%\" fill=\"#090d16\" rx=\"8\"/>\n      <!-- Height cliff at Left -->\n      <rect x=\"50\" y=\"40\" width=\"40\" height=\"160\" fill=\"#1e293b\" stroke=\"#64748b\" stroke-width=\"2\"/>\n      <line x1=\"50\" y1=\"200\" x2=\"450\" y2=\"200\" stroke=\"#64748b\" stroke-width=\"2\"/>\n      <!-- Launch point O -->\n      <circle cx=\"90\" cy=\"40\" r=\"6\" fill=\"#ef4444\"/>\n      <text x=\"75\" y=\"32\" fill=\"#ef4444\" font-size=\"13\" font-weight=\"bold\">O</text>\n      <!-- Initial horizontal velocity v0 -->\n      <line x1=\"90\" y1=\"40\" x2=\"160\" y2=\"40\" stroke=\"#38bdf8\" stroke-width=\"3\" marker-end=\"url(#arr12)\"/>\n      <text x=\"120\" y=\"30\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"bold\">v₀</text>\n      <!-- Parabolic trajectory -->\n      <path d=\"M 90,40 Q 230,40 370,200\" fill=\"none\" stroke=\"#fbbf24\" stroke-width=\"3\"/>\n      <!-- Impact point on ground -->\n      <circle cx=\"370\" cy=\"200\" r=\"5\" fill=\"#34d399\"/>\n      <!-- Height h and Range L -->\n      <line x1=\"35\" y1=\"40\" x2=\"35\" y2=\"200\" stroke=\"#f43f5e\" stroke-width=\"2\"/>\n      <text x=\"15\" y=\"125\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\">h</text>\n      <line x1=\"90\" y1=\"215\" x2=\"370\" y2=\"215\" stroke=\"#34d399\" stroke-width=\"2\"/>\n      <text x=\"210\" y=\"230\" fill=\"#34d399\" font-size=\"13\" font-weight=\"bold\">Tầm xa L = v₀·√(2h/g)</text>\n    </svg>"
+      "svgGraph": "<svg viewBox=\"0 0 500 240\" class=\"graph-svg\" xmlns=\"http://www.w3.org/2000/svg\">\n      <defs><marker id=\"arr12\" markerWidth=\"6\" markerHeight=\"6\" refX=\"5\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L6,3 L0,6 Z\" fill=\"#38bdf8\"/></marker></defs>\n      <rect width=\"100%\" height=\"100%\" fill=\"#090d16\" rx=\"8\"/>\n      <!-- Height cliff at Left -->\n      <rect x=\"50\" y=\"40\" width=\"40\" height=\"160\" fill=\"#1e293b\" stroke=\"#64748b\" stroke-width=\"2\"/>\n      <line x1=\"50\" y1=\"200\" x2=\"450\" y2=\"200\" stroke=\"#64748b\" stroke-width=\"2\"/>\n      <!-- Launch point O -->\n      <circle cx=\"90\" cy=\"40\" r=\"6\" fill=\"#ef4444\"/>\n      <text x=\"75\" y=\"32\" fill=\"#ef4444\" font-size=\"13\" font-weight=\"bold\">O</text>\n      <!-- Initial horizontal velocity v0 -->\n      <line x1=\"90\" y1=\"40\" x2=\"160\" y2=\"40\" stroke=\"#38bdf8\" stroke-width=\"3\" marker-end=\"url(#arr12)\"/>\n      <text x=\"120\" y=\"30\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"bold\">v₀</text>\n      <!-- Parabolic trajectory -->\n      <path d=\"M 90,40 Q 230,40 370,200\" fill=\"none\" stroke=\"#fbbf24\" stroke-width=\"3\"/>\n      <!-- Impact point on ground -->\n      <circle cx=\"370\" cy=\"200\" r=\"5\" fill=\"#34d399\"/>\n      <!-- Height h and Range L -->\n      <line x1=\"35\" y1=\"40\" x2=\"35\" y2=\"200\" stroke=\"#f43f5e\" stroke-width=\"2\"/>\n      <text x=\"15\" y=\"125\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\">h</text>\n      <line x1=\"90\" y1=\"215\" x2=\"370\" y2=\"215\" stroke=\"#34d399\" stroke-width=\"2\"/>\n      <text x=\"210\" y=\"230\" fill=\"#34d399\" font-size=\"13\" font-weight=\"bold\">Tầm xa L = v₀·<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h/g</span></span></text>\n    </svg>"
     },
     {
       "type": "mcq",
@@ -3259,7 +3324,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (30 m.)",
-      "exp": "• <b>Bước 1: Tính thời gian bay t:</b> t = √(<span class=\"fraction\"><span class=\"numerator\">2h</span><span class=\"denominator\">g</span></span>) = √(<span class=\"fraction\"><span class=\"numerator\">2 · 20</span><span class=\"denominator\">10</span></span>) = √4 = 2 s.<br>• <b>Bước 2: Tính tầm ném xa L:</b> L = v₀ · t = 15 · 2 = 30 m.",
+      "exp": "• <b>Bước 1: Tính thời gian bay t:</b> t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">2h</span><span class=\"denominator\">g</span></span></span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">2 · 20</span><span class=\"denominator\">10</span></span></span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">4</span></span> = 2 s.<br>• <b>Bước 2: Tính tầm ném xa L:</b> L = v₀ · t = 15 · 2 = 30 m.",
       "svgGraph": ""
     },
     {
@@ -3278,15 +3343,15 @@
         false
       ],
       "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Sai",
-      "exp": "• <b>Ý a [Đúng]:</b> Theo phương thẳng đứng cả 2 đều rơi tự do cùng độ cao h nên t = √(2h/g) như nhau.<br>• <b>Ý b [Đúng]:</b> t = √(2h/g) chỉ phụ thuộc độ cao h và g.<br>• <b>Ý c [Đúng]:</b> v<sub>A</sub> = v<sub>y</sub> = √(2gh); v<sub>B</sub> = √(v₀² + v<sub>y</sub>²) > v<sub>A</sub>.<br>• <b>Ý d [Sai]:</b> v₀ tăng chỉ làm tăng tầm xa L = v₀t, thời gian chạm đất t không đổi."
+      "exp": "• <b>Ý a [Đúng]:</b> Theo phương thẳng đứng cả 2 đều rơi tự do cùng độ cao h nên t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h/g</span></span> như nhau.<br>• <b>Ý b [Đúng]:</b> t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h/g</span></span> chỉ phụ thuộc độ cao h và g.<br>• <b>Ý c [Đúng]:</b> v<sub>A</sub> = v<sub>y</sub> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2gh</span></span>; v<sub>B</sub> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">v₀² + v<sub>y</sub>²</span></span> > v<sub>A</sub>.<br>• <b>Ý d [Sai]:</b> v₀ tăng chỉ làm tăng tầm xa L = v₀t, thời gian chạm đất t không đổi."
     },
     {
       "type": "match",
       "q": "Ghép các công thức của chuyển động ném ngang ở Cột A với ý nghĩa tương ứng ở Cột B:",
       "colA": [
-        "t = √(2h / g)",
-        "L = v₀ · √(2h / g)",
-        "v = √(v₀² + g²t²)",
+        "t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h / g</span></span>",
+        "L = v₀ · <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h / g</span></span>",
+        "v = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">v₀² + g²t²</span></span>",
         "y = [g / (2v₀²)] · x²"
       ],
       "colB": [
@@ -3302,7 +3367,7 @@
         2
       ],
       "correctText": "1 - B | 2 - D | 3 - A | 4 - C",
-      "exp": "• <b>1 - B:</b> t = √(2h/g).<br>• <b>2 - D:</b> L = v₀·t = v₀√(2h/g).<br>• <b>3 - A:</b> v = √(v<sub>x</sub>² + v<sub>y</sub>²) = √(v₀² + g²t²).<br>• <b>4 - C:</b> y = [g/(2v₀²)]·x²."
+      "exp": "• <b>1 - B:</b> t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h/g</span></span>.<br>• <b>2 - D:</b> L = v₀·t = v₀<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h/g</span></span>.<br>• <b>3 - A:</b> v = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">v<sub>x</sub>² + v<sub>y</sub>²</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">v₀² + g²t²</span></span>.<br>• <b>4 - C:</b> y = [g/(2v₀²)]·x²."
     },
     {
       "type": "drag",
@@ -3336,7 +3401,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (500 m.)",
-      "exp": "• <b>Bước 1: Tính thời gian rơi của gói hàng:</b><br>t = √(<span class=\"fraction\"><span class=\"numerator\">2h</span><span class=\"denominator\">g</span></span>) = √(<span class=\"fraction\"><span class=\"numerator\">2 · 500</span><span class=\"denominator\">10</span></span>) = √100 = 10 s.<br>• <b>Bước 2: Tầm bay ngang của gói hàng:</b><br>L = v₀ · t = 50 · 10 = 500 m. Vậy phải thả trước 500 m.",
+      "exp": "• <b>Bước 1: Tính thời gian rơi của gói hàng:</b><br>t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">2h</span><span class=\"denominator\">g</span></span></span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">2 · 500</span><span class=\"denominator\">10</span></span></span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">100</span></span> = 10 s.<br>• <b>Bước 2: Tầm bay ngang của gói hàng:</b><br>L = v₀ · t = 50 · 10 = 500 m. Vậy phải thả trước 500 m.",
       "svgGraph": ""
     },
     {
@@ -3369,7 +3434,7 @@
         false
       ],
       "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Sai",
-      "exp": "• <b>Ý a [Đúng]:</b> v<sub>0y</sub> = v₀·sin(30°) = 20 · 0,5 = 10 m/s.<br>• <b>Ý b [Đúng]:</b> t<sub>l</sub>ên = v<sub>0y</sub> / g = 10 / 10 = 1,0 s.<br>• <b>Ý c [Đúng]:</b> H = v<sub>0y</sub>² / (2g) = 10² / 20 = 5 m.<br>• <b>Ý d [Sai]:</b> L = (v₀²·sin(60°))/g = (400 · √3/2) / 10 = 20√3 ≈ 34,64 m (không phải 20 m)."
+      "exp": "• <b>Ý a [Đúng]:</b> v<sub>0y</sub> = v₀·sin(30°) = 20 · 0,5 = 10 m/s.<br>• <b>Ý b [Đúng]:</b> t<sub>l</sub>ên = v<sub>0y</sub> / g = 10 / 10 = 1,0 s.<br>• <b>Ý c [Đúng]:</b> H = v<sub>0y</sub>² / (2g) = 10² / 20 = 5 m.<br>• <b>Ý d [Sai]:</b> L = (v₀²·sin(60°))/g = (400 · <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2) / 10 = 20<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> ≈ 34,64 m (không phải 20 m)."
     },
     {
       "type": "mcq",
@@ -3412,7 +3477,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (10 N.)",
-      "exp": "• <b>Công thức góc vuông:</b> F = √(F₁² + F₂²)<br>• <b>Thay số:</b> F = √(6² + 8²) = √(36 + 64) = √100 = 10 N.",
+      "exp": "• <b>Công thức góc vuông:</b> F = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">F₁² + F₂²</span></span><br>• <b>Thay số:</b> F = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">6² + 8²</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">36 + 64</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">100</span></span> = 10 N.",
       "svgGraph": ""
     },
     {
@@ -3457,9 +3522,9 @@
         "Góc α bất kì"
       ],
       "colB": [
-        "F = √(F₁² + F₂²)",
+        "F = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">F₁² + F₂²</span></span>",
         "F = F₁ + F₂",
-        "F = √(F₁² + F₂² + 2F₁F₂·cos(α))",
+        "F = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">F₁² + F₂² + 2F₁F₂·cos(α)</span></span>",
         "F = |F₁ - F₂|"
       ],
       "ans": [
@@ -3469,7 +3534,7 @@
         2
       ],
       "correctText": "1 - B | 2 - D | 3 - A | 4 - C",
-      "exp": "• <b>1 - B:</b> Cùng hướng: F = F₁ + F₂.<br>• <b>2 - D:</b> Ngược hướng: F = |F₁ - F₂|.<br>• <b>3 - A:</b> Vuông góc: F = √(F₁² + F₂²).<br>• <b>4 - C:</b> Góc α bất kì: F = √(F₁² + F₂² + 2F₁F₂cosα)."
+      "exp": "• <b>1 - B:</b> Cùng hướng: F = F₁ + F₂.<br>• <b>2 - D:</b> Ngược hướng: F = |F₁ - F₂|.<br>• <b>3 - A:</b> Vuông góc: F = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">F₁² + F₂²</span></span>.<br>• <b>4 - C:</b> Góc α bất kì: F = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">F₁² + F₂² + 2F₁F₂cosα</span></span>."
     },
     {
       "type": "drag",
@@ -3517,7 +3582,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (173 N.)",
-      "exp": "• <b>Góc giữa hai lực:</b> θ = 2α = 60°.<br>• <b>Công thức hợp lực khi F₁ = F₂:</b> F = 2·F₁·cos(<span class=\"fraction\"><span class=\"numerator\">θ</span><span class=\"denominator\">2</span></span>) = 2 · 100 · cos(30°) = 200 · <span class=\"fraction\"><span class=\"numerator\">√3</span><span class=\"denominator\">2</span></span> = 100√3 ≈ 173,2 N.",
+      "exp": "• <b>Góc giữa hai lực:</b> θ = 2α = 60°.<br>• <b>Công thức hợp lực khi F₁ = F₂:</b> F = 2·F₁·cos(<span class=\"fraction\"><span class=\"numerator\">θ</span><span class=\"denominator\">2</span></span>) = 2 · 100 · cos(30°) = 200 · <span class=\"fraction\"><span class=\"numerator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span></span><span class=\"denominator\">2</span></span> = 100<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> ≈ 173,2 N.",
       "svgGraph": ""
     },
     {
@@ -3536,7 +3601,7 @@
         false
       ],
       "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Sai",
-      "exp": "• <b>Ý a [Đúng]:</b> P = mg = 1 · 10 = 10 N.<br>• <b>Ý b [Đúng]:</b> T₁ + T₂ + P = 0 ⇒ T₁ + T₂ = -P.<br>• <b>Ý c [Đúng]:</b> 2·T·sin(45°) = P ⇒ T = 10 / (2 · √2/2) = 10/√2 = 5√2 ≈ 7,07 N.<br>• <b>Ý d [Sai]:</b> sin(α) giảm về 0 thì T = P / (2·sinα) sẽ tiến tới vô cùng rất dễ làm đứt dây."
+      "exp": "• <b>Ý a [Đúng]:</b> P = mg = 1 · 10 = 10 N.<br>• <b>Ý b [Đúng]:</b> T₁ + T₂ + P = 0 ⇒ T₁ + T₂ = -P.<br>• <b>Ý c [Đúng]:</b> 2·T·sin(45°) = P ⇒ T = 10 / (2 · <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>/2) = 10/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> = 5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> ≈ 7,07 N.<br>• <b>Ý d [Sai]:</b> sin(α) giảm về 0 thì T = P / (2·sinα) sẽ tiến tới vô cùng rất dễ làm đứt dây."
     },
     {
       "type": "mcq",
@@ -4371,7 +4436,7 @@
         true
       ],
       "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Đúng",
-      "exp": "• <b>Ý a [Đúng]:</b> Trượt đều ⇒ a = 0.<br>• <b>Ý b [Đúng]:</b> P₁ = mg·sin(30°) = 2 · 10 · 0,5 = 10 N.<br>• <b>Ý c [Đúng]:</b> a = 0 ⇒ F<sub>mst</sub> = P₁ = 10 N.<br>• <b>Ý d [Đúng]:</b> F<sub>mst</sub> = μ·N = μ·mg·cos(30°) = mg·sin(30°) ⇒ μ = tan(30°) = 1/√3 ≈ 0,577."
+      "exp": "• <b>Ý a [Đúng]:</b> Trượt đều ⇒ a = 0.<br>• <b>Ý b [Đúng]:</b> P₁ = mg·sin(30°) = 2 · 10 · 0,5 = 10 N.<br>• <b>Ý c [Đúng]:</b> a = 0 ⇒ F<sub>mst</sub> = P₁ = 10 N.<br>• <b>Ý d [Đúng]:</b> F<sub>mst</sub> = μ·N = μ·mg·cos(30°) = mg·sin(30°) ⇒ μ = tan(30°) = 1/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> ≈ 0,577."
     },
     {
       "type": "mcq",
@@ -4586,7 +4651,7 @@
     },
     {
       "type": "mcq",
-      "q": "Một vật trượt xuống một mặt phẳng nghiêng góc α = 30° có hệ số ma sát trượt μ = 0,2. Lấy g = 10 m/s² và √3 ≈ 1,73. Gia tốc trượt của vật xấp xỉ bằng:",
+      "q": "Một vật trượt xuống một mặt phẳng nghiêng góc α = 30° có hệ số ma sát trượt μ = 0,2. Lấy g = 10 m/s² và <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> ≈ 1,73. Gia tốc trượt của vật xấp xỉ bằng:",
       "opts": [
         "3,27 m/s².",
         "5,00 m/s².",
@@ -4672,7 +4737,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (156,7 N.)",
-      "exp": "• <b>Chiếu lực lên trục thẳng đứng Oy:</b> N + F·sin(α) - P = 0<br>• <b>Áp lực:</b> N = P - F·sin(α) = m·g - F·sin(60°) = 20 · 10 - 50 · <span class=\"fraction\"><span class=\"numerator\">√3</span><span class=\"denominator\">2</span></span> = 200 - 43,3 = 156,7 N. (Lực kéo chếch lên làm giảm áp lực).",
+      "exp": "• <b>Chiếu lực lên trục thẳng đứng Oy:</b> N + F·sin(α) - P = 0<br>• <b>Áp lực:</b> N = P - F·sin(α) = m·g - F·sin(60°) = 20 · 10 - 50 · <span class=\"fraction\"><span class=\"numerator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span></span><span class=\"denominator\">2</span></span> = 200 - 43,3 = 156,7 N. (Lực kéo chếch lên làm giảm áp lực).",
       "svgGraph": ""
     },
     {
@@ -4686,7 +4751,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (0,577 (tan 30°).)",
-      "exp": "• Tại góc tới hạn bắt đầu trượt: Thành phần kéo P·sin(α) cân bằng với ma sát nghỉ cực đại μ_n·P·cos(α) ⇒ μ_n = tan(α) = tan(30°) = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">√3</span></span> ≈ 0,577.",
+      "exp": "• Tại góc tới hạn bắt đầu trượt: Thành phần kéo P·sin(α) cân bằng với ma sát nghỉ cực đại μ_n·P·cos(α) ⇒ μ_n = tan(α) = tan(30°) = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span></span></span> ≈ 0,577.",
       "svgGraph": ""
     },
     {
@@ -4711,14 +4776,14 @@
       "type": "mcq",
       "q": "Trong các vụ va chạm ô tô được tái hiện để điều tra tai nạn giao thông, các kĩ sư hiện trường thường dựa vào vết trượt phanh lốp trên mặt đường để xác định yếu tố nào của xe trước khi phanh?",
       "opts": [
-        "Vận tốc tức thời của xe ngay trước khi tài xế đạp phanh khẩn cấp: v = √(2·μ·g·s).",
+        "Vận tốc tức thời của xe ngay trước khi tài xế đạp phanh khẩn cấp: v = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2·μ·g·s</span></span>.",
         "Dung tích bình xăng của xe ô tô.",
         "Công suất định mức của ắc quy xe điện.",
         "Số lượng hành khách ngồi trên xe."
       ],
       "ans": 0,
-      "correctText": "Đáp án A (Vận tốc tức thời của xe ngay trước khi tài xế đạp phanh khẩn cấp: v = √(2·μ·g·s).)",
-      "exp": "• Áp dụng định lí động năng hoặc hệ thức độc lập: v² - 0 = 2·a·s = 2·(μ·g)·s ⇒ v = √(2μgs). Đo vết phanh s và đo hệ số ma sát μ của mặt đường sẽ tìm được tốc độ v ban đầu của xe.",
+      "correctText": "Đáp án A (Vận tốc tức thời của xe ngay trước khi tài xế đạp phanh khẩn cấp: v = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2·μ·g·s</span></span>.)",
+      "exp": "• Áp dụng định lí động năng hoặc hệ thức độc lập: v² - 0 = 2·a·s = 2·(μ·g)·s ⇒ v = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2μgs</span></span>. Đo vết phanh s và đo hệ số ma sát μ của mặt đường sẽ tìm được tốc độ v ban đầu của xe.",
       "svgGraph": ""
     }
   ],
@@ -5006,7 +5071,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (5,0 N.)",
-      "exp": "• <b>Hợp lực góc vuông:</b> F = √(3,0² + 4,0²) = √(9 + 16) = √25 = 5,0 N.",
+      "exp": "• <b>Hợp lực góc vuông:</b> F = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3,0² + 4,0²</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">9 + 16</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">25</span></span> = 5,0 N.",
       "svgGraph": ""
     },
     {
@@ -5597,7 +5662,7 @@
       ],
       "ans": 0,
       "correctText": "Đáp án A (20 m/s.)",
-      "exp": "• <b>Bảo toàn cơ năng giữa đỉnh và mặt đất:</b><br>m·g·h = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>m·v² ⇒ v = √(2·g·h) = √(2 · 10 · 20) = √400 = 20 m/s.",
+      "exp": "• <b>Bảo toàn cơ năng giữa đỉnh và mặt đất:</b><br>m·g·h = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>m·v² ⇒ v = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2·g·h</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2 · 10 · 20</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">400</span></span> = 20 m/s.",
       "svgGraph": ""
     },
     {
@@ -6194,7 +6259,7 @@
     },
     {
       "type": "tf",
-      "q": "Một quả lựu đạn đang bay theo phương ngang với vận tốc v₀ = 10 m/s ở độ cao h thì nổ thành hai mảnh có khối lượng bằng nhau m₁ = m₂. Ngay sau khi nổ, mảnh 1 bay thẳng đứng xuống dưới với vận tốc v₁ = 10√3 m/s. Xét tính Đúng / Sai của các khẳng định sau:",
+      "q": "Một quả lựu đạn đang bay theo phương ngang với vận tốc v₀ = 10 m/s ở độ cao h thì nổ thành hai mảnh có khối lượng bằng nhau m₁ = m₂. Ngay sau khi nổ, mảnh 1 bay thẳng đứng xuống dưới với vận tốc v₁ = 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> m/s. Xét tính Đúng / Sai của các khẳng định sau:",
       "stmts": [
         "Trong quá trình lựu đạn nổ, nội lực nổ của thuốc nổ lớn hơn rất nhiều so với ngoại lực (trọng lực) nên động lượng của hệ được bảo toàn.",
         "Vectơ động lượng trước khi nổ có phương nằm ngang có độ lớn p₀ = 2m₁ · v₀.",
@@ -6208,7 +6273,7 @@
         true
       ],
       "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Đúng",
-      "exp": "• <b>Ý a [Đúng]:</b> Nổ là tương tác cực nhanh, nội lực áp đảo, bảo toàn p.<br>• <b>Ý b [Đúng]:</b> p₀ = M·v₀ = 2m₁·v₀ nằm ngang.<br>• <b>Ý c, d [Đúng]:</b> p₀ nằm ngang, p₁ thẳng đứng xuống dưới ⇒ tam giác vuông động lượng: p₂² = p₀² + p₁² ⇒ (m₁v₂)² = (2m₁v₀)² + (m₁v₁)² ⇒ v₂ = √[(2·10)² + (10√3)²] = √(400 + 300) = √700 = 10√7... Khoan, p₀ = Mv₀ = 2m₁·10 = 20m₁; p₁ = m₁·10√3 ⇒ p₂ = m₁·√(20² + 300) = m₁√700; góc tanα = p₁/p₀ = 10√3 / 20 = √3/2."
+      "exp": "• <b>Ý a [Đúng]:</b> Nổ là tương tác cực nhanh, nội lực áp đảo, bảo toàn p.<br>• <b>Ý b [Đúng]:</b> p₀ = M·v₀ = 2m₁·v₀ nằm ngang.<br>• <b>Ý c, d [Đúng]:</b> p₀ nằm ngang, p₁ thẳng đứng xuống dưới ⇒ tam giác vuông động lượng: p₂² = p₀² + p₁² ⇒ (m₁v₂)² = (2m₁v₀)² + (m₁v₁)² ⇒ v₂ = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">(2·10)² + (10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>)²</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">400 + 300</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">700</span></span> = 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">7</span></span>... Khoan, p₀ = Mv₀ = 2m₁·10 = 20m₁; p₁ = m₁·10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> ⇒ p₂ = m₁·<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">20² + 300</span></span> = m₁<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">700</span></span>; góc tanα = p₁/p₀ = 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> / 20 = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2."
     },
     {
       "type": "mcq",
@@ -6721,7 +6786,7 @@
         true
       ],
       "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Đúng",
-      "exp": "• <b>Ý a [Đúng]:</b> a<sub>ht</sub> = <span class=\"fraction\"><span class=\"numerator\">v²</span><span class=\"denominator\">R</span></span> = <span class=\"fraction\"><span class=\"numerator\">10²</span><span class=\"denominator\">40</span></span> = 2,5 m/s².<br>• <b>Ý b [Đúng]:</b> P = m · g = 1000 · 10 = 10 000 N.<br>• <b>Ý c [Đúng]:</b> Hợp lực P - N = m · a<sub>ht</sub> ⇒ N = P - m · a<sub>ht</sub> = 10 000 - 1000 · 2,5 = 7500 N.<br>• <b>Ý d [Đúng]:</b> Xe rời cầu khi N = 0 ⇒ v<sub>bay</sub> = √(g · R) = √(10 · 40) = 20 m/s.",
+      "exp": "• <b>Ý a [Đúng]:</b> a<sub>ht</sub> = <span class=\"fraction\"><span class=\"numerator\">v²</span><span class=\"denominator\">R</span></span> = <span class=\"fraction\"><span class=\"numerator\">10²</span><span class=\"denominator\">40</span></span> = 2,5 m/s².<br>• <b>Ý b [Đúng]:</b> P = m · g = 1000 · 10 = 10 000 N.<br>• <b>Ý c [Đúng]:</b> Hợp lực P - N = m · a<sub>ht</sub> ⇒ N = P - m · a<sub>ht</sub> = 10 000 - 1000 · 2,5 = 7500 N.<br>• <b>Ý d [Đúng]:</b> Xe rời cầu khi N = 0 ⇒ v<sub>bay</sub> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">g · R</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">10 · 40</span></span> = 20 m/s.",
       "stmts": [
         "Tại điểm cao nhất trên đỉnh cầu, gia tốc hướng tâm của xe có độ lớn bằng 2,5 m/s².",
         "Trọng lực tác dụng lên ô tô có độ lớn P = 10 000 N.",
@@ -7987,15 +8052,15 @@
         const revContainer = document.getElementById('examReviewContainer');
         if (revContainer && revContainer.style.display === 'block') return;
 
-        // ArrowUp or ArrowLeft: Previous question
-        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        // ArrowLeft: Lùi về câu trước (prevQuestion)
+        if (e.key === 'ArrowLeft') {
           e.preventDefault();
           if (currentQ > 0) {
             prevQuestion();
           }
         }
-        // ArrowDown or ArrowRight: Next question
-        else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        // ArrowRight: Tiến tới câu sau (nextQuestion)
+        else if (e.key === 'ArrowRight') {
           e.preventDefault();
           if (currentQ < questions.length - 1) {
             nextQuestion();
@@ -8006,7 +8071,53 @@
             }
           }
         }
+        // ArrowUp: Lùi về bài trước (prevLesson)
+        else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          prevLesson();
+        }
+        // ArrowDown: Tiến tới bài sau (nextLesson)
+        else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          nextLesson();
+        }
       });
+    }
+
+    function prevLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển về bài học trước không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex > 0) {
+        select.selectedIndex--;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.PREV_LESSON_URL) {
+        window.location.href = window.PREV_LESSON_URL;
+      }
+    }
+
+    function nextLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển sang bài học tiếp theo không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex < select.options.length - 1) {
+        select.selectedIndex++;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.NEXT_LESSON_URL) {
+        window.location.href = window.NEXT_LESSON_URL;
+      }
     }
 
     function confirmSubmitExam() {

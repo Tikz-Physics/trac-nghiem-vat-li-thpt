@@ -430,25 +430,90 @@
       flex-shrink: 0;
     }
 
-    /* CSS Formula Engine */
+    /* CSS Formula & Notation Engine */
     .math-sym { font-family: 'Cambria Math', 'Times New Roman', serif; font-style: italic; color: inherit; font-weight: 600; }
-    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 3px; font-size: 0.92em; line-height: 1.1; margin: 0 2px; color: inherit; }
-    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; }
-    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; }
+    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 0.2em; font-size: 0.95em; line-height: 1.1; margin: 0 2px; color: inherit; }
+    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+
+    /* Pure Inline SVG Vector Engine (preserveAspectRatio="none") */
+    .vec {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      position: relative;
+      padding-top: 0.38em;
+      margin: 0 0.12em;
+      line-height: 1;
+      color: inherit;
+    }
+    .vec-arr {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0.42em;
+      overflow: visible;
+      color: inherit;
+    }
+    .vec-sym {
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1;
+      color: inherit;
+    }
+
+    /* Square Root Engine with Vinculum */
+    .sqrt {
+      display: inline-flex;
+      align-items: flex-end;
+      vertical-align: middle;
+      margin: 0 0.15em;
+      line-height: 1;
+      color: inherit;
+    }
+    .rad {
+      font-size: 1.15em;
+      margin-right: 1px;
+      font-family: 'Cambria Math', 'Times New Roman', serif;
+      line-height: 1;
+      color: inherit;
+    }
+    .radicand {
+      border-top: 1.6px solid currentColor;
+      padding-top: 1px;
+      padding-left: 2px;
+      padding-right: 2px;
+      line-height: 1.2;
+      color: inherit;
+    }
+
+    /* Pedagogical Formula Box */
     .formula-box {
-      background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(6, 182, 212, 0.3);
-      border-radius: 10px; padding: 6px 14px; margin: 6px 0; display: inline-flex;
-      align-items: center; gap: 8px; font-size: 1.05rem; font-weight: 700; color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin: 6px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #38bdf8;
     }
-    .nuclide {
+
+    /* Nuclear & Isotope Notations */
+    .nuclide, .isotope {
       display: inline-flex; align-items: center; vertical-align: middle;
-      font-style: normal; font-weight: 700; margin: 0 3px;
+      font-style: normal; font-weight: 700; margin: 0 3px; color: inherit;
     }
-    .nuclide .scripts {
+    .nuclide .scripts, .isotope .scripts {
       display: inline-flex; flex-direction: column; font-size: 0.72em; line-height: 1.05;
       text-align: right; margin-right: 2px; font-weight: 800; color: currentColor;
     }
-    .nuclide .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
+    .nuclide .sym, .isotope .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
 
     /* Graph container */
     /* Graph container: dynamic expansion based on available empty space */
@@ -1195,7 +1260,7 @@
   },
   {
     "type": "tf",
-    "q": "Một quả lựu đạn đang bay theo phương ngang với vận tốc v₀ = 10 m/s ở độ cao h thì nổ thành hai mảnh có khối lượng bằng nhau m₁ = m₂. Ngay sau khi nổ, mảnh 1 bay thẳng đứng xuống dưới với vận tốc v₁ = 10√3 m/s. Xét tính Đúng / Sai của các khẳng định sau:",
+    "q": "Một quả lựu đạn đang bay theo phương ngang với vận tốc v₀ = 10 m/s ở độ cao h thì nổ thành hai mảnh có khối lượng bằng nhau m₁ = m₂. Ngay sau khi nổ, mảnh 1 bay thẳng đứng xuống dưới với vận tốc v₁ = 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> m/s. Xét tính Đúng / Sai của các khẳng định sau:",
     "stmts": [
       "Trong quá trình lựu đạn nổ, nội lực nổ của thuốc nổ lớn hơn rất nhiều so với ngoại lực (trọng lực) nên động lượng của hệ được bảo toàn.",
       "Vectơ động lượng trước khi nổ có phương nằm ngang có độ lớn p₀ = 2m₁ · v₀.",
@@ -1209,7 +1274,7 @@
       true
     ],
     "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Đúng",
-    "exp": "• <b>Ý a [Đúng]:</b> Nổ là tương tác cực nhanh, nội lực áp đảo, bảo toàn p.<br>• <b>Ý b [Đúng]:</b> p₀ = M·v₀ = 2m₁·v₀ nằm ngang.<br>• <b>Ý c, d [Đúng]:</b> p₀ nằm ngang, p₁ thẳng đứng xuống dưới ⇒ tam giác vuông động lượng: p₂² = p₀² + p₁² ⇒ (m₁v₂)² = (2m₁v₀)² + (m₁v₁)² ⇒ v₂ = √[(2·10)² + (10√3)²] = √(400 + 300) = √700 = 10√7... Khoan, p₀ = Mv₀ = 2m₁·10 = 20m₁; p₁ = m₁·10√3 ⇒ p₂ = m₁·√(20² + 300) = m₁√700; góc tanα = p₁/p₀ = 10√3 / 20 = √3/2."
+    "exp": "• <b>Ý a [Đúng]:</b> Nổ là tương tác cực nhanh, nội lực áp đảo, bảo toàn p.<br>• <b>Ý b [Đúng]:</b> p₀ = M·v₀ = 2m₁·v₀ nằm ngang.<br>• <b>Ý c, d [Đúng]:</b> p₀ nằm ngang, p₁ thẳng đứng xuống dưới ⇒ tam giác vuông động lượng: p₂² = p₀² + p₁² ⇒ (m₁v₂)² = (2m₁v₀)² + (m₁v₁)² ⇒ v₂ = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">(2·10)² + (10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>)²</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">400 + 300</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">700</span></span> = 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">7</span></span>... Khoan, p₀ = Mv₀ = 2m₁·10 = 20m₁; p₁ = m₁·10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> ⇒ p₂ = m₁·<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">20² + 300</span></span> = m₁<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">700</span></span>; góc tanα = p₁/p₀ = 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> / 20 = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2."
   },
   {
     "type": "mcq",
@@ -2144,15 +2209,15 @@
         const revContainer = document.getElementById('examReviewContainer');
         if (revContainer && revContainer.style.display === 'block') return;
 
-        // ArrowUp or ArrowLeft: Previous question
-        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        // ArrowLeft: Lùi về câu trước (prevQuestion)
+        if (e.key === 'ArrowLeft') {
           e.preventDefault();
           if (currentQ > 0) {
             prevQuestion();
           }
         }
-        // ArrowDown or ArrowRight: Next question
-        else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        // ArrowRight: Tiến tới câu sau (nextQuestion)
+        else if (e.key === 'ArrowRight') {
           e.preventDefault();
           if (currentQ < questions.length - 1) {
             nextQuestion();
@@ -2163,7 +2228,53 @@
             }
           }
         }
+        // ArrowUp: Lùi về bài trước (prevLesson)
+        else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          prevLesson();
+        }
+        // ArrowDown: Tiến tới bài sau (nextLesson)
+        else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          nextLesson();
+        }
       });
+    }
+
+    function prevLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển về bài học trước không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex > 0) {
+        select.selectedIndex--;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.PREV_LESSON_URL) {
+        window.location.href = window.PREV_LESSON_URL;
+      }
+    }
+
+    function nextLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển sang bài học tiếp theo không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex < select.options.length - 1) {
+        select.selectedIndex++;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.NEXT_LESSON_URL) {
+        window.location.href = window.NEXT_LESSON_URL;
+      }
     }
 
     function confirmSubmitExam() {

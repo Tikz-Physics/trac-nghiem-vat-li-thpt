@@ -430,25 +430,90 @@
       flex-shrink: 0;
     }
 
-    /* CSS Formula Engine */
+    /* CSS Formula & Notation Engine */
     .math-sym { font-family: 'Cambria Math', 'Times New Roman', serif; font-style: italic; color: inherit; font-weight: 600; }
-    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 3px; font-size: 0.92em; line-height: 1.1; margin: 0 2px; color: inherit; }
-    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; }
-    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; }
+    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 0.2em; font-size: 0.95em; line-height: 1.1; margin: 0 2px; color: inherit; }
+    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+
+    /* Pure Inline SVG Vector Engine (preserveAspectRatio="none") */
+    .vec {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      position: relative;
+      padding-top: 0.38em;
+      margin: 0 0.12em;
+      line-height: 1;
+      color: inherit;
+    }
+    .vec-arr {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0.42em;
+      overflow: visible;
+      color: inherit;
+    }
+    .vec-sym {
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1;
+      color: inherit;
+    }
+
+    /* Square Root Engine with Vinculum */
+    .sqrt {
+      display: inline-flex;
+      align-items: flex-end;
+      vertical-align: middle;
+      margin: 0 0.15em;
+      line-height: 1;
+      color: inherit;
+    }
+    .rad {
+      font-size: 1.15em;
+      margin-right: 1px;
+      font-family: 'Cambria Math', 'Times New Roman', serif;
+      line-height: 1;
+      color: inherit;
+    }
+    .radicand {
+      border-top: 1.6px solid currentColor;
+      padding-top: 1px;
+      padding-left: 2px;
+      padding-right: 2px;
+      line-height: 1.2;
+      color: inherit;
+    }
+
+    /* Pedagogical Formula Box */
     .formula-box {
-      background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(6, 182, 212, 0.3);
-      border-radius: 10px; padding: 6px 14px; margin: 6px 0; display: inline-flex;
-      align-items: center; gap: 8px; font-size: 1.05rem; font-weight: 700; color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin: 6px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #38bdf8;
     }
-    .nuclide {
+
+    /* Nuclear & Isotope Notations */
+    .nuclide, .isotope {
       display: inline-flex; align-items: center; vertical-align: middle;
-      font-style: normal; font-weight: 700; margin: 0 3px;
+      font-style: normal; font-weight: 700; margin: 0 3px; color: inherit;
     }
-    .nuclide .scripts {
+    .nuclide .scripts, .isotope .scripts {
       display: inline-flex; flex-direction: column; font-size: 0.72em; line-height: 1.05;
       text-align: right; margin-right: 2px; font-weight: 800; color: currentColor;
     }
-    .nuclide .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
+    .nuclide .sym, .isotope .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
 
     /* Graph container */
     /* Graph container: dynamic expansion based on available empty space */
@@ -1125,8 +1190,8 @@
     "q": "Ghép khoảng thời gian ngắn nhất chuyển động của vật dao động điều hoà ở Cột A với phân số chu kì tương ứng ở Cột B:",
     "colA": [
       "Từ VCB (x = 0) đến vị trí x = A/2",
-      "Từ VCB (x = 0) đến vị trí x = A/√2",
-      "Từ VCB (x = 0) đến vị trí x = A·√3/2",
+      "Từ VCB (x = 0) đến vị trí x = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>",
+      "Từ VCB (x = 0) đến vị trí x = A·<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2",
       "Từ VCB (x = 0) đến vị trí biên x = A"
     ],
     "colB": [
@@ -1142,7 +1207,7 @@
       2
     ],
     "correctText": "1 - D | 2 - A | 3 - B | 4 - C",
-    "exp": "• <b>1 - D:</b> Từ 0 đến A/2: góc quét π/6 ⇒ Δt = T/12.<br>• <b>2 - A:</b> Từ 0 đến A/√2: góc quét π/4 ⇒ Δt = T/8.<br>• <b>3 - B:</b> Từ 0 đến A√3/2: góc quét π/3 ⇒ Δt = T/6.<br>• <b>4 - C:</b> Từ 0 đến A: góc quét π/2 ⇒ Δt = T/4."
+    "exp": "• <b>1 - D:</b> Từ 0 đến A/2: góc quét π/6 ⇒ Δt = T/12.<br>• <b>2 - A:</b> Từ 0 đến A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>: góc quét π/4 ⇒ Δt = T/8.<br>• <b>3 - B:</b> Từ 0 đến A<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2: góc quét π/3 ⇒ Δt = T/6.<br>• <b>4 - C:</b> Từ 0 đến A: góc quét π/2 ⇒ Δt = T/4."
   },
   {
     "type": "drag",
@@ -1177,7 +1242,7 @@
     ],
     "ans": "A",
     "correctText": "Đáp án A (5 cm.)",
-    "exp": "• Áp dụng hệ thức độc lập: A = √(x² + v²/ω²).<br>• Thay số: A = √(4² + (15/5)²) = √(16 + 9) = √25 = 5 cm.",
+    "exp": "• Áp dụng hệ thức độc lập: A = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">x² + v²/ω²</span></span>.<br>• Thay số: A = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">4² + (15/5)²</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">16 + 9</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">25</span></span> = 5 cm.",
     "svgGraph": ""
   },
   {
@@ -1186,7 +1251,7 @@
     "opts": [
       "10 cm.",
       "5 cm.",
-      "5√2 cm.",
+      "5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.",
       "15 cm."
     ],
     "ans": "A",
@@ -1198,9 +1263,9 @@
     "type": "tf",
     "q": "Một con lắc lò xo dao động điều hoà theo phương ngang với biên độ 10 cm và chu kì 1 s. Xét tính Đúng / Sai của các mệnh đề sau:",
     "stmts": [
-      "Quãng đường lớn nhất vật đi được trong khoảng thời gian 0,25 s (T/4) là 10√2 cm.",
-      "Quãng đường nhỏ nhất vật đi được trong khoảng thời gian 0,25 s (T/4) là 20 - 10√2 cm.",
-      "Tốc độ của vật khi đi qua vị trí x = 5√2 cm bằng một nửa tốc độ cực đại.",
+      "Quãng đường lớn nhất vật đi được trong khoảng thời gian 0,25 s (T/4) là 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.",
+      "Quãng đường nhỏ nhất vật đi được trong khoảng thời gian 0,25 s (T/4) là 20 - 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.",
+      "Tốc độ của vật khi đi qua vị trí x = 5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm bằng một nửa tốc độ cực đại.",
       "Thời gian vật chuyển động nhanh dần trong mỗi chu kì là 0,5 s."
     ],
     "ans": [
@@ -1210,7 +1275,7 @@
       true
     ],
     "correctText": "a) Đúng | b) Đúng | c) Sai | d) Đúng",
-    "exp": "• <b>Ý a [Đúng]:</b> S<sub>max</sub> trong T/4 = 2A·sin(Δφ/2) = 2 · 10 · sin(π/4) = 10√2 cm.<br>• <b>Ý b [Đúng]:</b> S<sub>min</sub> trong T/4 = 2A(1 - cos(Δφ/2)) = 20(1 - cos(π/4)) = 20 - 10√2 cm.<br>• <b>Ý c [Sai]:</b> x = A/√2 ⇒ v = v<sub>max</sub>/√2 ≈ 0,707 v<sub>max</sub> (không phải một nửa).<br>• <b>Ý d [Đúng]:</b> Nhanh dần khi đi từ biên về VCB (2 lần mỗi chu kì, mỗi lần T/4), tổng thời gian là T/2 = 0,5 s."
+    "exp": "• <b>Ý a [Đúng]:</b> S<sub>max</sub> trong T/4 = 2A·sin(Δφ/2) = 2 · 10 · sin(π/4) = 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.<br>• <b>Ý b [Đúng]:</b> S<sub>min</sub> trong T/4 = 2A(1 - cos(Δφ/2)) = 20(1 - cos(π/4)) = 20 - 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.<br>• <b>Ý c [Sai]:</b> x = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> ⇒ v = v<sub>max</sub>/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> ≈ 0,707 v<sub>max</sub> (không phải một nửa).<br>• <b>Ý d [Đúng]:</b> Nhanh dần khi đi từ biên về VCB (2 lần mỗi chu kì, mỗi lần T/4), tổng thời gian là T/2 = 0,5 s."
   },
   {
     "type": "mcq",
@@ -2136,15 +2201,15 @@
         const revContainer = document.getElementById('examReviewContainer');
         if (revContainer && revContainer.style.display === 'block') return;
 
-        // ArrowUp or ArrowLeft: Previous question
-        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        // ArrowLeft: Lùi về câu trước (prevQuestion)
+        if (e.key === 'ArrowLeft') {
           e.preventDefault();
           if (currentQ > 0) {
             prevQuestion();
           }
         }
-        // ArrowDown or ArrowRight: Next question
-        else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        // ArrowRight: Tiến tới câu sau (nextQuestion)
+        else if (e.key === 'ArrowRight') {
           e.preventDefault();
           if (currentQ < questions.length - 1) {
             nextQuestion();
@@ -2155,7 +2220,53 @@
             }
           }
         }
+        // ArrowUp: Lùi về bài trước (prevLesson)
+        else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          prevLesson();
+        }
+        // ArrowDown: Tiến tới bài sau (nextLesson)
+        else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          nextLesson();
+        }
       });
+    }
+
+    function prevLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển về bài học trước không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex > 0) {
+        select.selectedIndex--;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.PREV_LESSON_URL) {
+        window.location.href = window.PREV_LESSON_URL;
+      }
+    }
+
+    function nextLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển sang bài học tiếp theo không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex < select.options.length - 1) {
+        select.selectedIndex++;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.NEXT_LESSON_URL) {
+        window.location.href = window.NEXT_LESSON_URL;
+      }
     }
 
     function confirmSubmitExam() {

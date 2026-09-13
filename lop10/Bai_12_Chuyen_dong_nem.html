@@ -430,25 +430,90 @@
       flex-shrink: 0;
     }
 
-    /* CSS Formula Engine */
+    /* CSS Formula & Notation Engine */
     .math-sym { font-family: 'Cambria Math', 'Times New Roman', serif; font-style: italic; color: inherit; font-weight: 600; }
-    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 3px; font-size: 0.92em; line-height: 1.1; margin: 0 2px; color: inherit; }
-    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; }
-    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; }
+    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 0.2em; font-size: 0.95em; line-height: 1.1; margin: 0 2px; color: inherit; }
+    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+
+    /* Pure Inline SVG Vector Engine (preserveAspectRatio="none") */
+    .vec {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      position: relative;
+      padding-top: 0.38em;
+      margin: 0 0.12em;
+      line-height: 1;
+      color: inherit;
+    }
+    .vec-arr {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0.42em;
+      overflow: visible;
+      color: inherit;
+    }
+    .vec-sym {
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1;
+      color: inherit;
+    }
+
+    /* Square Root Engine with Vinculum */
+    .sqrt {
+      display: inline-flex;
+      align-items: flex-end;
+      vertical-align: middle;
+      margin: 0 0.15em;
+      line-height: 1;
+      color: inherit;
+    }
+    .rad {
+      font-size: 1.15em;
+      margin-right: 1px;
+      font-family: 'Cambria Math', 'Times New Roman', serif;
+      line-height: 1;
+      color: inherit;
+    }
+    .radicand {
+      border-top: 1.6px solid currentColor;
+      padding-top: 1px;
+      padding-left: 2px;
+      padding-right: 2px;
+      line-height: 1.2;
+      color: inherit;
+    }
+
+    /* Pedagogical Formula Box */
     .formula-box {
-      background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(6, 182, 212, 0.3);
-      border-radius: 10px; padding: 6px 14px; margin: 6px 0; display: inline-flex;
-      align-items: center; gap: 8px; font-size: 1.05rem; font-weight: 700; color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin: 6px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #38bdf8;
     }
-    .nuclide {
+
+    /* Nuclear & Isotope Notations */
+    .nuclide, .isotope {
       display: inline-flex; align-items: center; vertical-align: middle;
-      font-style: normal; font-weight: 700; margin: 0 3px;
+      font-style: normal; font-weight: 700; margin: 0 3px; color: inherit;
     }
-    .nuclide .scripts {
+    .nuclide .scripts, .isotope .scripts {
       display: inline-flex; flex-direction: column; font-size: 0.72em; line-height: 1.05;
       text-align: right; margin-right: 2px; font-weight: 800; color: currentColor;
     }
-    .nuclide .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
+    .nuclide .sym, .isotope .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
 
     /* Graph container */
     /* Graph container: dynamic expansion based on available empty space */
@@ -1072,7 +1137,7 @@
     "ans": 0,
     "correctText": "Đáp án A (Chuyển động thẳng đều theo phương ngang (Ox) và chuyển động rơi tự do theo phương thẳng đứng (Oy).)",
     "exp": "• <b>Nguyên tắc độc lập chuyển động:</b> Theo phương ngang Ox không có lực tác dụng (F<sub>x</sub> = 0) nên chuyển động thẳng đều với v<sub>x</sub> = v₀. Theo phương thẳng đứng Oy chỉ chịu trọng lực P nên rơi tự do với gia tốc a<sub>y</sub> = g.",
-    "svgGraph": "<svg viewBox=\"0 0 500 240\" class=\"graph-svg\" xmlns=\"http://www.w3.org/2000/svg\">\n      <defs><marker id=\"arr12\" markerWidth=\"6\" markerHeight=\"6\" refX=\"5\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L6,3 L0,6 Z\" fill=\"#38bdf8\"/></marker></defs>\n      <rect width=\"100%\" height=\"100%\" fill=\"#090d16\" rx=\"8\"/>\n      <!-- Height cliff at Left -->\n      <rect x=\"50\" y=\"40\" width=\"40\" height=\"160\" fill=\"#1e293b\" stroke=\"#64748b\" stroke-width=\"2\"/>\n      <line x1=\"50\" y1=\"200\" x2=\"450\" y2=\"200\" stroke=\"#64748b\" stroke-width=\"2\"/>\n      <!-- Launch point O -->\n      <circle cx=\"90\" cy=\"40\" r=\"6\" fill=\"#ef4444\"/>\n      <text x=\"75\" y=\"32\" fill=\"#ef4444\" font-size=\"13\" font-weight=\"bold\">O</text>\n      <!-- Initial horizontal velocity v0 -->\n      <line x1=\"90\" y1=\"40\" x2=\"160\" y2=\"40\" stroke=\"#38bdf8\" stroke-width=\"3\" marker-end=\"url(#arr12)\"/>\n      <text x=\"120\" y=\"30\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"bold\">v₀</text>\n      <!-- Parabolic trajectory -->\n      <path d=\"M 90,40 Q 230,40 370,200\" fill=\"none\" stroke=\"#fbbf24\" stroke-width=\"3\"/>\n      <!-- Impact point on ground -->\n      <circle cx=\"370\" cy=\"200\" r=\"5\" fill=\"#34d399\"/>\n      <!-- Height h and Range L -->\n      <line x1=\"35\" y1=\"40\" x2=\"35\" y2=\"200\" stroke=\"#f43f5e\" stroke-width=\"2\"/>\n      <text x=\"15\" y=\"125\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\">h</text>\n      <line x1=\"90\" y1=\"215\" x2=\"370\" y2=\"215\" stroke=\"#34d399\" stroke-width=\"2\"/>\n      <text x=\"210\" y=\"230\" fill=\"#34d399\" font-size=\"13\" font-weight=\"bold\">Tầm xa L = v₀·√(2h/g)</text>\n    </svg>"
+    "svgGraph": "<svg viewBox=\"0 0 500 240\" class=\"graph-svg\" xmlns=\"http://www.w3.org/2000/svg\">\n      <defs><marker id=\"arr12\" markerWidth=\"6\" markerHeight=\"6\" refX=\"5\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L6,3 L0,6 Z\" fill=\"#38bdf8\"/></marker></defs>\n      <rect width=\"100%\" height=\"100%\" fill=\"#090d16\" rx=\"8\"/>\n      <!-- Height cliff at Left -->\n      <rect x=\"50\" y=\"40\" width=\"40\" height=\"160\" fill=\"#1e293b\" stroke=\"#64748b\" stroke-width=\"2\"/>\n      <line x1=\"50\" y1=\"200\" x2=\"450\" y2=\"200\" stroke=\"#64748b\" stroke-width=\"2\"/>\n      <!-- Launch point O -->\n      <circle cx=\"90\" cy=\"40\" r=\"6\" fill=\"#ef4444\"/>\n      <text x=\"75\" y=\"32\" fill=\"#ef4444\" font-size=\"13\" font-weight=\"bold\">O</text>\n      <!-- Initial horizontal velocity v0 -->\n      <line x1=\"90\" y1=\"40\" x2=\"160\" y2=\"40\" stroke=\"#38bdf8\" stroke-width=\"3\" marker-end=\"url(#arr12)\"/>\n      <text x=\"120\" y=\"30\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"bold\">v₀</text>\n      <!-- Parabolic trajectory -->\n      <path d=\"M 90,40 Q 230,40 370,200\" fill=\"none\" stroke=\"#fbbf24\" stroke-width=\"3\"/>\n      <!-- Impact point on ground -->\n      <circle cx=\"370\" cy=\"200\" r=\"5\" fill=\"#34d399\"/>\n      <!-- Height h and Range L -->\n      <line x1=\"35\" y1=\"40\" x2=\"35\" y2=\"200\" stroke=\"#f43f5e\" stroke-width=\"2\"/>\n      <text x=\"15\" y=\"125\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\">h</text>\n      <line x1=\"90\" y1=\"215\" x2=\"370\" y2=\"215\" stroke=\"#34d399\" stroke-width=\"2\"/>\n      <text x=\"210\" y=\"230\" fill=\"#34d399\" font-size=\"13\" font-weight=\"bold\">Tầm xa L = v₀·<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h/g</span></span></text>\n    </svg>"
   },
   {
     "type": "mcq",
@@ -1099,7 +1164,7 @@
     ],
     "ans": 0,
     "correctText": "Đáp án A (30 m.)",
-    "exp": "• <b>Bước 1: Tính thời gian bay t:</b> t = √(<span class=\"fraction\"><span class=\"numerator\">2h</span><span class=\"denominator\">g</span></span>) = √(<span class=\"fraction\"><span class=\"numerator\">2 · 20</span><span class=\"denominator\">10</span></span>) = √4 = 2 s.<br>• <b>Bước 2: Tính tầm ném xa L:</b> L = v₀ · t = 15 · 2 = 30 m.",
+    "exp": "• <b>Bước 1: Tính thời gian bay t:</b> t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">2h</span><span class=\"denominator\">g</span></span></span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">2 · 20</span><span class=\"denominator\">10</span></span></span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">4</span></span> = 2 s.<br>• <b>Bước 2: Tính tầm ném xa L:</b> L = v₀ · t = 15 · 2 = 30 m.",
     "svgGraph": ""
   },
   {
@@ -1118,15 +1183,15 @@
       false
     ],
     "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Sai",
-    "exp": "• <b>Ý a [Đúng]:</b> Theo phương thẳng đứng cả 2 đều rơi tự do cùng độ cao h nên t = √(2h/g) như nhau.<br>• <b>Ý b [Đúng]:</b> t = √(2h/g) chỉ phụ thuộc độ cao h và g.<br>• <b>Ý c [Đúng]:</b> v<sub>A</sub> = v<sub>y</sub> = √(2gh); v<sub>B</sub> = √(v₀² + v<sub>y</sub>²) > v<sub>A</sub>.<br>• <b>Ý d [Sai]:</b> v₀ tăng chỉ làm tăng tầm xa L = v₀t, thời gian chạm đất t không đổi."
+    "exp": "• <b>Ý a [Đúng]:</b> Theo phương thẳng đứng cả 2 đều rơi tự do cùng độ cao h nên t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h/g</span></span> như nhau.<br>• <b>Ý b [Đúng]:</b> t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h/g</span></span> chỉ phụ thuộc độ cao h và g.<br>• <b>Ý c [Đúng]:</b> v<sub>A</sub> = v<sub>y</sub> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2gh</span></span>; v<sub>B</sub> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">v₀² + v<sub>y</sub>²</span></span> > v<sub>A</sub>.<br>• <b>Ý d [Sai]:</b> v₀ tăng chỉ làm tăng tầm xa L = v₀t, thời gian chạm đất t không đổi."
   },
   {
     "type": "match",
     "q": "Ghép các công thức của chuyển động ném ngang ở Cột A với ý nghĩa tương ứng ở Cột B:",
     "colA": [
-      "t = √(2h / g)",
-      "L = v₀ · √(2h / g)",
-      "v = √(v₀² + g²t²)",
+      "t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h / g</span></span>",
+      "L = v₀ · <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h / g</span></span>",
+      "v = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">v₀² + g²t²</span></span>",
       "y = [g / (2v₀²)] · x²"
     ],
     "colB": [
@@ -1142,7 +1207,7 @@
       2
     ],
     "correctText": "1 - B | 2 - D | 3 - A | 4 - C",
-    "exp": "• <b>1 - B:</b> t = √(2h/g).<br>• <b>2 - D:</b> L = v₀·t = v₀√(2h/g).<br>• <b>3 - A:</b> v = √(v<sub>x</sub>² + v<sub>y</sub>²) = √(v₀² + g²t²).<br>• <b>4 - C:</b> y = [g/(2v₀²)]·x²."
+    "exp": "• <b>1 - B:</b> t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h/g</span></span>.<br>• <b>2 - D:</b> L = v₀·t = v₀<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2h/g</span></span>.<br>• <b>3 - A:</b> v = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">v<sub>x</sub>² + v<sub>y</sub>²</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">v₀² + g²t²</span></span>.<br>• <b>4 - C:</b> y = [g/(2v₀²)]·x²."
   },
   {
     "type": "drag",
@@ -1176,7 +1241,7 @@
     ],
     "ans": 0,
     "correctText": "Đáp án A (500 m.)",
-    "exp": "• <b>Bước 1: Tính thời gian rơi của gói hàng:</b><br>t = √(<span class=\"fraction\"><span class=\"numerator\">2h</span><span class=\"denominator\">g</span></span>) = √(<span class=\"fraction\"><span class=\"numerator\">2 · 500</span><span class=\"denominator\">10</span></span>) = √100 = 10 s.<br>• <b>Bước 2: Tầm bay ngang của gói hàng:</b><br>L = v₀ · t = 50 · 10 = 500 m. Vậy phải thả trước 500 m.",
+    "exp": "• <b>Bước 1: Tính thời gian rơi của gói hàng:</b><br>t = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">2h</span><span class=\"denominator\">g</span></span></span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">2 · 500</span><span class=\"denominator\">10</span></span></span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">100</span></span> = 10 s.<br>• <b>Bước 2: Tầm bay ngang của gói hàng:</b><br>L = v₀ · t = 50 · 10 = 500 m. Vậy phải thả trước 500 m.",
     "svgGraph": ""
   },
   {
@@ -1209,7 +1274,7 @@
       false
     ],
     "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Sai",
-    "exp": "• <b>Ý a [Đúng]:</b> v<sub>0y</sub> = v₀·sin(30°) = 20 · 0,5 = 10 m/s.<br>• <b>Ý b [Đúng]:</b> t<sub>l</sub>ên = v<sub>0y</sub> / g = 10 / 10 = 1,0 s.<br>• <b>Ý c [Đúng]:</b> H = v<sub>0y</sub>² / (2g) = 10² / 20 = 5 m.<br>• <b>Ý d [Sai]:</b> L = (v₀²·sin(60°))/g = (400 · √3/2) / 10 = 20√3 ≈ 34,64 m (không phải 20 m)."
+    "exp": "• <b>Ý a [Đúng]:</b> v<sub>0y</sub> = v₀·sin(30°) = 20 · 0,5 = 10 m/s.<br>• <b>Ý b [Đúng]:</b> t<sub>l</sub>ên = v<sub>0y</sub> / g = 10 / 10 = 1,0 s.<br>• <b>Ý c [Đúng]:</b> H = v<sub>0y</sub>² / (2g) = 10² / 20 = 5 m.<br>• <b>Ý d [Sai]:</b> L = (v₀²·sin(60°))/g = (400 · <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2) / 10 = 20<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> ≈ 34,64 m (không phải 20 m)."
   },
   {
     "type": "mcq",
@@ -2144,15 +2209,15 @@
         const revContainer = document.getElementById('examReviewContainer');
         if (revContainer && revContainer.style.display === 'block') return;
 
-        // ArrowUp or ArrowLeft: Previous question
-        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        // ArrowLeft: Lùi về câu trước (prevQuestion)
+        if (e.key === 'ArrowLeft') {
           e.preventDefault();
           if (currentQ > 0) {
             prevQuestion();
           }
         }
-        // ArrowDown or ArrowRight: Next question
-        else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        // ArrowRight: Tiến tới câu sau (nextQuestion)
+        else if (e.key === 'ArrowRight') {
           e.preventDefault();
           if (currentQ < questions.length - 1) {
             nextQuestion();
@@ -2163,7 +2228,53 @@
             }
           }
         }
+        // ArrowUp: Lùi về bài trước (prevLesson)
+        else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          prevLesson();
+        }
+        // ArrowDown: Tiến tới bài sau (nextLesson)
+        else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          nextLesson();
+        }
       });
+    }
+
+    function prevLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển về bài học trước không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex > 0) {
+        select.selectedIndex--;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.PREV_LESSON_URL) {
+        window.location.href = window.PREV_LESSON_URL;
+      }
+    }
+
+    function nextLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển sang bài học tiếp theo không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex < select.options.length - 1) {
+        select.selectedIndex++;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.NEXT_LESSON_URL) {
+        window.location.href = window.NEXT_LESSON_URL;
+      }
     }
 
     function confirmSubmitExam() {

@@ -430,25 +430,90 @@
       flex-shrink: 0;
     }
 
-    /* CSS Formula Engine */
+    /* CSS Formula & Notation Engine */
     .math-sym { font-family: 'Cambria Math', 'Times New Roman', serif; font-style: italic; color: inherit; font-weight: 600; }
-    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 3px; font-size: 0.92em; line-height: 1.1; margin: 0 2px; color: inherit; }
-    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; }
-    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; }
+    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 0.2em; font-size: 0.95em; line-height: 1.1; margin: 0 2px; color: inherit; }
+    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+
+    /* Pure Inline SVG Vector Engine (preserveAspectRatio="none") */
+    .vec {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      position: relative;
+      padding-top: 0.38em;
+      margin: 0 0.12em;
+      line-height: 1;
+      color: inherit;
+    }
+    .vec-arr {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0.42em;
+      overflow: visible;
+      color: inherit;
+    }
+    .vec-sym {
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1;
+      color: inherit;
+    }
+
+    /* Square Root Engine with Vinculum */
+    .sqrt {
+      display: inline-flex;
+      align-items: flex-end;
+      vertical-align: middle;
+      margin: 0 0.15em;
+      line-height: 1;
+      color: inherit;
+    }
+    .rad {
+      font-size: 1.15em;
+      margin-right: 1px;
+      font-family: 'Cambria Math', 'Times New Roman', serif;
+      line-height: 1;
+      color: inherit;
+    }
+    .radicand {
+      border-top: 1.6px solid currentColor;
+      padding-top: 1px;
+      padding-left: 2px;
+      padding-right: 2px;
+      line-height: 1.2;
+      color: inherit;
+    }
+
+    /* Pedagogical Formula Box */
     .formula-box {
-      background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(6, 182, 212, 0.3);
-      border-radius: 10px; padding: 6px 14px; margin: 6px 0; display: inline-flex;
-      align-items: center; gap: 8px; font-size: 1.05rem; font-weight: 700; color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin: 6px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #38bdf8;
     }
-    .nuclide {
+
+    /* Nuclear & Isotope Notations */
+    .nuclide, .isotope {
       display: inline-flex; align-items: center; vertical-align: middle;
-      font-style: normal; font-weight: 700; margin: 0 3px;
+      font-style: normal; font-weight: 700; margin: 0 3px; color: inherit;
     }
-    .nuclide .scripts {
+    .nuclide .scripts, .isotope .scripts {
       display: inline-flex; flex-direction: column; font-size: 0.72em; line-height: 1.05;
       text-align: right; margin-right: 2px; font-weight: 800; color: currentColor;
     }
-    .nuclide .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
+    .nuclide .sym, .isotope .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
 
     /* Graph container */
     /* Graph container: dynamic expansion based on available empty space */
@@ -1078,14 +1143,14 @@
     "type": "mcq",
     "q": "Một chất điểm dao động điều hoà với biên độ A = 10 cm. Vị trí có thế năng bằng 3 lần động năng (W<sub>t</sub> = 3W<sub>đ</sub>) cách vị trí cân bằng một khoảng là:",
     "opts": [
-      "5√3 cm.",
+      "5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> cm.",
       "5 cm.",
-      "5√2 cm.",
+      "5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.",
       "2,5 cm."
     ],
     "ans": "A",
-    "correctText": "Đáp án A (5√3 cm.)",
-    "exp": "• Ta có: W<sub>t</sub> = 3W<sub>đ</sub> ⇒ W<sub>đ</sub> = W<sub>t</sub> / 3.<br>• Cơ năng: W = W<sub>đ</sub> + W<sub>t</sub> = W<sub>t</sub>/3 + W<sub>t</sub> = <span class=\"fraction\"><span class=\"numerator\">4</span><span class=\"denominator\">3</span></span>W<sub>t</sub> ⇒ W<sub>t</sub> = <span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">4</span></span>W.<br>• Do W<sub>t</sub> ∝ x² và W ∝ A² nên: x² = <span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">4</span></span>A² ⇒ |x| = A·<span class=\"fraction\"><span class=\"numerator\">√3</span><span class=\"denominator\">2</span></span> = 10 · <span class=\"fraction\"><span class=\"numerator\">√3</span><span class=\"denominator\">2</span></span> = 5√3 cm.",
+    "correctText": "Đáp án A (5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> cm.)",
+    "exp": "• Ta có: W<sub>t</sub> = 3W<sub>đ</sub> ⇒ W<sub>đ</sub> = W<sub>t</sub> / 3.<br>• Cơ năng: W = W<sub>đ</sub> + W<sub>t</sub> = W<sub>t</sub>/3 + W<sub>t</sub> = <span class=\"fraction\"><span class=\"numerator\">4</span><span class=\"denominator\">3</span></span>W<sub>t</sub> ⇒ W<sub>t</sub> = <span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">4</span></span>W.<br>• Do W<sub>t</sub> ∝ x² và W ∝ A² nên: x² = <span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">4</span></span>A² ⇒ |x| = A·<span class=\"fraction\"><span class=\"numerator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span></span><span class=\"denominator\">2</span></span> = 10 · <span class=\"fraction\"><span class=\"numerator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span></span><span class=\"denominator\">2</span></span> = 5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> cm.",
     "svgGraph": ""
   },
   {
@@ -1107,7 +1172,7 @@
     "q": "Một con lắc lò xo gồm lò xo có độ cứng k = 50 N/m và vật nhỏ khối lượng m = 200 g dao động điều hoà trên trục Ox nằm ngang với biên độ A = 6 cm. Xét tính Đúng / Sai của các mệnh đề sau:",
     "stmts": [
       "Cơ năng toàn phần của con lắc là W = 0,09 J.",
-      "Tốc độ cực đại của vật khi đi qua vị trí cân bằng là 30√10 cm/s.",
+      "Tốc độ cực đại của vật khi đi qua vị trí cân bằng là 30<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">10</span></span> cm/s.",
       "Khi vật ở vị trí có li độ x = 3 cm thì động năng của vật lớn hơn thế năng.",
       "Khi vật chuyển động từ biên về vị trí cân bằng thì thế năng chuyển hoá hoàn toàn thành động năng."
     ],
@@ -1118,7 +1183,7 @@
       true
     ],
     "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Đúng",
-    "exp": "• <b>Ý a [Đúng]:</b> W = 0,5·k·A² = 0,5 · 50 · (0,06)² = 0,09 J (90 mJ).<br>• <b>Ý b [Đúng]:</b> ω = √(k/m) = √(50/0,2) = √250 = 5√10 rad/s ⇒ v<sub>max</sub> = ωA = 5√10 · 6 = 30√10 cm/s.<br>• <b>Ý c [Đúng]:</b> x = 3 cm = A/2 ⇒ W<sub>t</sub> = W/4 ⇒ W<sub>đ</sub> = 3W/4 > W<sub>t</sub>.<br>• <b>Ý d [Đúng]:</b> Tại biên W<sub>t</sub> = W và W<sub>đ</sub> = 0; tại VCB W<sub>t</sub> = 0 và W<sub>đ</sub> = W."
+    "exp": "• <b>Ý a [Đúng]:</b> W = 0,5·k·A² = 0,5 · 50 · (0,06)² = 0,09 J (90 mJ).<br>• <b>Ý b [Đúng]:</b> ω = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">k/m</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">50/0,2</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">250</span></span> = 5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">10</span></span> rad/s ⇒ v<sub>max</sub> = ωA = 5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">10</span></span> · 6 = 30<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">10</span></span> cm/s.<br>• <b>Ý c [Đúng]:</b> x = 3 cm = A/2 ⇒ W<sub>t</sub> = W/4 ⇒ W<sub>đ</sub> = 3W/4 > W<sub>t</sub>.<br>• <b>Ý d [Đúng]:</b> Tại biên W<sub>t</sub> = W và W<sub>đ</sub> = 0; tại VCB W<sub>t</sub> = 0 và W<sub>đ</sub> = W."
   },
   {
     "type": "match",
@@ -1132,8 +1197,8 @@
     "colB": [
       "Li độ |x| = A/3",
       "Li độ |x| = A/2",
-      "Li độ |x| = A√3/2",
-      "Li độ |x| = A/√2"
+      "Li độ |x| = A<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2",
+      "Li độ |x| = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>"
     ],
     "ans": [
       3,
@@ -1142,7 +1207,7 @@
       0
     ],
     "correctText": "1 - D | 2 - B | 3 - C | 4 - A",
-    "exp": "• <b>Công thức tổng quát:</b> W<sub>đ</sub> = n·W<sub>t</sub> ⇒ |x| = A / √(n+1).<br>• <b>1 - D:</b> n = 1 ⇒ |x| = A/√2.<br>• <b>2 - B:</b> n = 3 ⇒ |x| = A/√4 = A/2.<br>• <b>3 - C:</b> W<sub>t</sub> = 3W<sub>đ</sub> ⇒ n = 1/3 ⇒ |x| = A / √(4/3) = A√3/2.<br>• <b>4 - A:</b> n = 8 ⇒ |x| = A/√9 = A/3."
+    "exp": "• <b>Công thức tổng quát:</b> W<sub>đ</sub> = n·W<sub>t</sub> ⇒ |x| = A / <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">n+1</span></span>.<br>• <b>1 - D:</b> n = 1 ⇒ |x| = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>.<br>• <b>2 - B:</b> n = 3 ⇒ |x| = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">4</span></span> = A/2.<br>• <b>3 - C:</b> W<sub>t</sub> = 3W<sub>đ</sub> ⇒ n = 1/3 ⇒ |x| = A / <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">4/3</span></span> = A<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2.<br>• <b>4 - A:</b> n = 8 ⇒ |x| = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">9</span></span> = A/3."
   },
   {
     "type": "drag",
@@ -1151,7 +1216,7 @@
     "words": [
       "25%",
       "75%",
-      "√3/2",
+      "<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2",
       "2 lần",
       "50%",
       "1/2",
@@ -1163,8 +1228,8 @@
       2,
       3
     ],
-    "correctText": "1: 25% | 2: 75% | 3: √3/2 | 4: 2 lần",
-    "exp": "• x = A/2 ⇒ W<sub>t</sub> = (1/4)W = 25% cơ năng.<br>• Động năng W<sub>đ</sub> = 75% cơ năng.<br>• v = v<sub>max</sub> · √3/2.<br>• ω' = 2ω (gấp 2 lần)."
+    "correctText": "1: 25% | 2: 75% | 3: <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2 | 4: 2 lần",
+    "exp": "• x = A/2 ⇒ W<sub>t</sub> = (1/4)W = 25% cơ năng.<br>• Động năng W<sub>đ</sub> = 75% cơ năng.<br>• v = v<sub>max</sub> · <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2.<br>• ω' = 2ω (gấp 2 lần)."
   },
   {
     "type": "mcq",
@@ -1182,7 +1247,7 @@
   },
   {
     "type": "mcq",
-    "q": "Một con lắc lò xo dao động điều hoà với biên độ A. Khi vật đi từ vị trí cân bằng x = 0 đến vị trí có li độ x = A/√2 thì tỉ lệ thế năng tăng thêm so với cơ năng là:",
+    "q": "Một con lắc lò xo dao động điều hoà với biên độ A. Khi vật đi từ vị trí cân bằng x = 0 đến vị trí có li độ x = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> thì tỉ lệ thế năng tăng thêm so với cơ năng là:",
     "opts": [
       "50%.",
       "25%.",
@@ -1191,7 +1256,7 @@
     ],
     "ans": "A",
     "correctText": "Đáp án A (50%.)",
-    "exp": "• Tại x = 0 thì W<sub>t</sub> = 0.<br>• Tại x = A/√2 thì W<sub>t</sub> = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>mω²(A/√2)² = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">4</span></span>mω²A² = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>W = 50%W.<br>• Như vậy thế năng đã tăng thêm 50% cơ năng.",
+    "exp": "• Tại x = 0 thì W<sub>t</sub> = 0.<br>• Tại x = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> thì W<sub>t</sub> = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>mω²(A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>)² = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">4</span></span>mω²A² = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>W = 50%W.<br>• Như vậy thế năng đã tăng thêm 50% cơ năng.",
     "svgGraph": ""
   },
   {
@@ -1199,7 +1264,7 @@
     "q": "Một chất điểm dao động điều hoà có cơ năng W = 0,18 J và biên độ A = 6 cm. Xét tính Đúng / Sai của các nhận định sau:",
     "stmts": [
       "Độ cứng tương đương của hệ dao động là k = 100 N/m.",
-      "Khi vật đi qua vị trí có li độ x = 3√2 cm thì động năng của vật là 0,09 J.",
+      "Khi vật đi qua vị trí có li độ x = 3<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm thì động năng của vật là 0,09 J.",
       "Thế năng của vật đạt cực đại khi vật có gia tốc bằng 0.",
       "Trong một chu kì dao động, có 4 thời điểm động năng bằng thế năng."
     ],
@@ -1210,7 +1275,7 @@
       true
     ],
     "correctText": "a) Đúng | b) Đúng | c) Sai | d) Đúng",
-    "exp": "• <b>Ý a [Đúng]:</b> W = 0,5 k A² ⇒ k = 2W / A² = 2 · 0,18 / (0,06)² = 0,36 / 0,0036 = 100 N/m.<br>• <b>Ý b [Đúng]:</b> x = 3√2 cm = A/√2 ⇒ W<sub>đ</sub> = W<sub>t</sub> = W/2 = 0,18/2 = 0,09 J.<br>• <b>Ý c [Sai]:</b> Gia tốc bằng 0 tại VCB x = 0, lúc đó thế năng bằng 0 (triệt tiêu), không phải cực đại.<br>• <b>Ý d [Đúng]:</b> Vị trí x = ±A/√2 có 4 lần qua trong 1 chu kì, tại đó W<sub>đ</sub> = W<sub>t</sub>."
+    "exp": "• <b>Ý a [Đúng]:</b> W = 0,5 k A² ⇒ k = 2W / A² = 2 · 0,18 / (0,06)² = 0,36 / 0,0036 = 100 N/m.<br>• <b>Ý b [Đúng]:</b> x = 3<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> ⇒ W<sub>đ</sub> = W<sub>t</sub> = W/2 = 0,18/2 = 0,09 J.<br>• <b>Ý c [Sai]:</b> Gia tốc bằng 0 tại VCB x = 0, lúc đó thế năng bằng 0 (triệt tiêu), không phải cực đại.<br>• <b>Ý d [Đúng]:</b> Vị trí x = ±A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> có 4 lần qua trong 1 chu kì, tại đó W<sub>đ</sub> = W<sub>t</sub>."
   },
   {
     "type": "mcq",
@@ -1219,7 +1284,7 @@
       "<span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">4</span></span>W.",
       "<span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">4</span></span>W.",
       "<span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>W.",
-      "<span class=\"fraction\"><span class=\"numerator\">√3</span><span class=\"denominator\">2</span></span>W."
+      "<span class=\"fraction\"><span class=\"numerator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span></span><span class=\"denominator\">2</span></span>W."
     ],
     "ans": "A",
     "correctText": "Đáp án A (<span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">4</span></span>W.)",
@@ -2136,15 +2201,15 @@
         const revContainer = document.getElementById('examReviewContainer');
         if (revContainer && revContainer.style.display === 'block') return;
 
-        // ArrowUp or ArrowLeft: Previous question
-        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        // ArrowLeft: Lùi về câu trước (prevQuestion)
+        if (e.key === 'ArrowLeft') {
           e.preventDefault();
           if (currentQ > 0) {
             prevQuestion();
           }
         }
-        // ArrowDown or ArrowRight: Next question
-        else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        // ArrowRight: Tiến tới câu sau (nextQuestion)
+        else if (e.key === 'ArrowRight') {
           e.preventDefault();
           if (currentQ < questions.length - 1) {
             nextQuestion();
@@ -2155,7 +2220,53 @@
             }
           }
         }
+        // ArrowUp: Lùi về bài trước (prevLesson)
+        else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          prevLesson();
+        }
+        // ArrowDown: Tiến tới bài sau (nextLesson)
+        else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          nextLesson();
+        }
       });
+    }
+
+    function prevLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển về bài học trước không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex > 0) {
+        select.selectedIndex--;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.PREV_LESSON_URL) {
+        window.location.href = window.PREV_LESSON_URL;
+      }
+    }
+
+    function nextLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển sang bài học tiếp theo không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex < select.options.length - 1) {
+        select.selectedIndex++;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.NEXT_LESSON_URL) {
+        window.location.href = window.NEXT_LESSON_URL;
+      }
     }
 
     function confirmSubmitExam() {

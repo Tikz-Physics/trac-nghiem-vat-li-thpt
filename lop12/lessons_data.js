@@ -1850,7 +1850,7 @@ const lessonsData = {
         true
       ],
       "correctText": "a) ĐÚNG | b) SAI | c) ĐÚNG | d) ĐÚNG",
-      "exp": "• <b>Ý a: ĐÚNG.</b> <span class=\"math-sym\">E</span><sub>d</sub> = 1,5<span class=\"math-sym\">kT</span> chỉ phụ thuộc nhiệt độ <span class=\"math-sym\">T</span>.<br>• <b>Ý b: SAI.</b> Vì <span class=\"math-sym\">v</span><sub>cqp</sub> = <span class=\"fraction\"><span class=\"numerator\">3RT</span><span class=\"denominator\">M</span></span><sup><span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span></sup>, khối lượng mol <span class=\"math-sym\">M</span> càng lớn thì tốc độ càng <b>nhỏ</b>.<br>• <b>Ý c: ĐÚNG.</b> Tốc độ tỉ lệ với căn bậc hai của nhiệt độ tuyệt đối: <span class=\"math-sym\">v ∝ √T</span>. Khi T tăng 4 lần thì v tăng √4 = 2 lần.<br>• <b>Ý d: ĐÚNG.</b> Tốc độ căn quân phương của khí N₂ ở 300 K cỡ 500 m/s."
+      "exp": "• <b>Ý a: ĐÚNG.</b> <span class=\"math-sym\">E</span><sub>d</sub> = 1,5<span class=\"math-sym\">kT</span> chỉ phụ thuộc nhiệt độ <span class=\"math-sym\">T</span>.<br>• <b>Ý b: SAI.</b> Vì <span class=\"math-sym\">v</span><sub>cqp</sub> = <span class=\"fraction\"><span class=\"numerator\">3RT</span><span class=\"denominator\">M</span></span><sup><span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span></sup>, khối lượng mol <span class=\"math-sym\">M</span> càng lớn thì tốc độ càng <b>nhỏ</b>.<br>• <b>Ý c: ĐÚNG.</b> Tốc độ tỉ lệ với căn bậc hai của nhiệt độ tuyệt đối: <span class=\"math-sym\">v ∝ <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">T</span></span></span>. Khi T tăng 4 lần thì v tăng <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">4</span></span> = 2 lần.<br>• <b>Ý d: ĐÚNG.</b> Tốc độ căn quân phương của khí N₂ ở 300 K cỡ 500 m/s."
     },
     {
       "type": "match",
@@ -1862,7 +1862,7 @@ const lessonsData = {
         "Hằng số Boltzmann k"
       ],
       "colB": [
-        "√(<span class=\"fraction\"><span class=\"numerator\">3RT</span><span class=\"denominator\">M</span></span>) hay √(<span class=\"fraction\"><span class=\"numerator\">3kT</span><span class=\"denominator\">m</span></span>)",
+        "<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">3RT</span><span class=\"denominator\">M</span></span></span></span> hay <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">3kT</span><span class=\"denominator\">m</span></span></span></span>",
         "<span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">2</span></span> · k · T",
         "<span class=\"fraction\"><span class=\"numerator\">R</span><span class=\"denominator\">N<sub>A</sub></span></span> ≈ 1,38 · 10⁻²³ J/K",
         "<span class=\"fraction\"><span class=\"numerator\">2</span><span class=\"denominator\">3</span></span> · n₀ · Ed"
@@ -1913,7 +1913,7 @@ const lessonsData = {
       ],
       "ans": 0,
       "correctText": "Đáp án A",
-      "exp": "• <b>Tốc độ căn quân phương:</b> v<sub>rms</sub> = √(<span class=\"fraction\"><span class=\"numerator\">3RT</span><span class=\"denominator\">M</span></span>). Phân tử khí hydro (H₂, khối lượng mol M = 2 g/mol) có khối lượng phân tử nhẹ hơn rất nhiều so với oxy (O₂, M = 32 g/mol) và nitơ (N₂, M = 28 g/mol).<br>• Ở cùng nhiệt độ, tốc độ chuyển động nhiệt của phân tử hydro rất lớn (cỡ 1,9 km/s), lớn hơn tốc độ thoát ly của Trái Đất đối với các phân tử ở tầng cao khí quyển. Trải qua hàng tỉ năm, hầu hết các phân tử hydro nhẹ đã bay thoát khỏi trường hấp dẫn của Trái Đất vào không gian vũ trụ."
+      "exp": "• <b>Tốc độ căn quân phương:</b> v<sub>rms</sub> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\"><span class=\"fraction\"><span class=\"numerator\">3RT</span><span class=\"denominator\">M</span></span></span></span>. Phân tử khí hydro (H₂, khối lượng mol M = 2 g/mol) có khối lượng phân tử nhẹ hơn rất nhiều so với oxy (O₂, M = 32 g/mol) và nitơ (N₂, M = 28 g/mol).<br>• Ở cùng nhiệt độ, tốc độ chuyển động nhiệt của phân tử hydro rất lớn (cỡ 1,9 km/s), lớn hơn tốc độ thoát ly của Trái Đất đối với các phân tử ở tầng cao khí quyển. Trải qua hàng tỉ năm, hầu hết các phân tử hydro nhẹ đã bay thoát khỏi trường hấp dẫn của Trái Đất vào không gian vũ trụ."
     },
     {
       "type": "tf",
@@ -2283,7 +2283,7 @@ const lessonsData = {
       ],
       "ans": 0,
       "correctText": "Đáp án A",
-      "exp": "• <b>Định luật Ampère:</b> <span class=\"math-sym\">F = I · B · L · \sin α</span>. Lực từ đạt cực đại khi dây dẫn vuông góc với đường sức từ (α = 90°).",
+      "exp": "• <b>Định luật Ampère:</b> <span class=\"math-sym\">F = I · B · L · sin α</span>. Lực từ đạt cực đại khi dây dẫn vuông góc với đường sức từ (α = 90°).",
       "svgGraph": "<svg viewBox=\"0 0 460 210\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\">\n  <defs>\n    <linearGradient id=\"handG\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\"><stop offset=\"0%\" stop-color=\"#4f46e5\"/><stop offset=\"100%\" stop-color=\"#06b6d4\"/></linearGradient>\n  </defs>\n  <!-- Vector F (Thumb, up) -->\n  <g transform=\"translate(180, 25)\">\n    <line x1=\"50\" y1=\"120\" x2=\"50\" y2=\"20\" stroke=\"#f43f5e\" stroke-width=\"4\"/>\n    <polygon points=\"50,10 42,28 58,28\" fill=\"#f43f5e\"/>\n    <text x=\"65\" y=\"25\" fill=\"#f43f5e\" font-size=\"16\" font-weight=\"800\">F (Lực từ)</text>\n    <!-- Vector I (4 fingers, right) -->\n    <line x1=\"50\" y1=\"120\" x2=\"160\" y2=\"120\" stroke=\"#10b981\" stroke-width=\"4\"/>\n    <polygon points=\"170,120 152,112 152,128\" fill=\"#10b981\"/>\n    <text x=\"175\" y=\"125\" fill=\"#10b981\" font-size=\"16\" font-weight=\"800\">I (Dòng điện)</text>\n    <!-- Vector B (Field into palm, perspective dots) -->\n    <circle cx=\"50\" cy=\"120\" r=\"10\" fill=\"none\" stroke=\"#38bdf8\" stroke-width=\"3\"/>\n    <line x1=\"43\" y1=\"113\" x2=\"57\" y2=\"127\" stroke=\"#38bdf8\" stroke-width=\"3\"/>\n    <line x1=\"57\" y1=\"113\" x2=\"43\" y2=\"127\" stroke=\"#38bdf8\" stroke-width=\"3\"/>\n    <text x=\"35\" y=\"150\" fill=\"#38bdf8\" font-size=\"15\" font-weight=\"800\">B (Cảm ứng từ đi vào lòng bàn tay ⊗)</text>\n  </g>\n  <rect x=\"25\" y=\"30\" width=\"135\" height=\"145\" rx=\"12\" fill=\"rgba(79,70,229,0.15)\" stroke=\"#818cf8\" stroke-width=\"1.5\"/>\n  <text x=\"92\" y=\"55\" fill=\"#818cf8\" font-size=\"13\" font-weight=\"800\" text-anchor=\"middle\">QUY TẮC</text>\n  <text x=\"92\" y=\"73\" fill=\"#818cf8\" font-size=\"12\" font-weight=\"700\" text-anchor=\"middle\">BÀN TAY TRÁI</text>\n  <text x=\"92\" y=\"105\" fill=\"#cbd5e1\" font-size=\"10\" text-anchor=\"middle\">• Lòng tay hứng B</text>\n  <text x=\"92\" y=\"125\" fill=\"#cbd5e1\" font-size=\"10\" text-anchor=\"middle\">• 4 ngón chỉ chiều I</text>\n  <text x=\"92\" y=\"145\" fill=\"#cbd5e1\" font-size=\"10\" text-anchor=\"middle\">• Ngón cái 90° chỉ F</text>\n</svg>"
     },
     {
@@ -2328,7 +2328,7 @@ const lessonsData = {
         true
       ],
       "correctText": "a) ĐÚNG | b) ĐÚNG | c) SAI | d) ĐÚNG",
-      "exp": "• <b>Ý a: ĐÚNG.</b> Nội dung chuẩn quy tắc bàn tay trái.<br>• <b>Ý b: ĐÚNG.</b> Vectơ <span class=\"math-sym\">F ⊥ (I, B)</span>.<br>• <b>Ý c: SAI.</b> Khi song song thì <span class=\"math-sym\">α = 0° ⇒ \sin α = 0 ⇒ F = 0</span> (lực từ bằng 0).<br>• <b>Ý d: ĐÚNG.</b> Đổi dấu hai lần thì tích có hướng giữ nguyên chiều."
+      "exp": "• <b>Ý a: ĐÚNG.</b> Nội dung chuẩn quy tắc bàn tay trái.<br>• <b>Ý b: ĐÚNG.</b> Vectơ <span class=\"math-sym\">F ⊥ (I, B)</span>.<br>• <b>Ý c: SAI.</b> Khi song song thì <span class=\"math-sym\">α = 0° ⇒ sin α = 0 ⇒ F = 0</span> (lực từ bằng 0).<br>• <b>Ý d: ĐÚNG.</b> Đổi dấu hai lần thì tích có hướng giữ nguyên chiều."
     },
     {
       "type": "match",
@@ -2445,7 +2445,7 @@ const lessonsData = {
       ],
       "ans": 0,
       "correctText": "Đáp án A",
-      "exp": "• <b>Định nghĩa từ thông:</b> <span class=\"math-sym\">Φ = B · S · \cos α</span>.<br>• Trong đó <span class=\"math-sym\">α = (n, B)</span>. Từ thông có đơn vị là <b>Weber (Wb)</b>."
+      "exp": "• <b>Định nghĩa từ thông:</b> <span class=\"math-sym\">Φ = B · S · cos α</span>.<br>• Trong đó <span class=\"math-sym\">α = (n, B)</span>. Từ thông có đơn vị là <b>Weber (Wb)</b>."
     },
     {
       "type": "mcq",
@@ -2612,14 +2612,14 @@ const lessonsData = {
       "type": "mcq",
       "q": "Mối quan hệ giữa giá trị hiệu dụng U và giá trị cực đại (biên độ) U₀ của điện áp xoay chiều hình sin là:",
       "opts": [
-        "U = <span class=\"fraction\"><span class=\"numerator\">U₀</span><span class=\"denominator\">√2</span></span>.",
-        "U = U₀ · √2.",
+        "U = <span class=\"fraction\"><span class=\"numerator\">U₀</span><span class=\"denominator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></span></span>.",
+        "U = U₀ · <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>.",
         "U = 2 · U₀.",
         "U = <span class=\"fraction\"><span class=\"numerator\">U₀</span><span class=\"denominator\">2</span></span>."
       ],
       "ans": 0,
       "correctText": "Đáp án A",
-      "exp": "• <b>Giá trị hiệu dụng:</b> <span class=\"math-sym\">U</span> = <span class=\"fraction\"><span class=\"numerator\">U₀</span><span class=\"denominator\">√2</span></span> ≈ 0,707 <span class=\"math-sym\">U</span><sub>0</sub>."
+      "exp": "• <b>Giá trị hiệu dụng:</b> <span class=\"math-sym\">U</span> = <span class=\"fraction\"><span class=\"numerator\">U₀</span><span class=\"denominator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></span></span> ≈ 0,707 <span class=\"math-sym\">U</span><sub>0</sub>."
     },
     {
       "type": "mcq",
@@ -2632,7 +2632,7 @@ const lessonsData = {
       ],
       "ans": 0,
       "correctText": "Đáp án A",
-      "exp": "• <span class=\"math-sym\">U</span><sub>0</sub> = <span class=\"math-sym\">U · √2</span> = 220 × 1,414 ≈ <b>311 V</b>."
+      "exp": "• <span class=\"math-sym\">U</span><sub>0</sub> = <span class=\"math-sym\">U · <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></span> = 220 × 1,414 ≈ <b>311 V</b>."
     },
     {
       "type": "tf",
@@ -2724,7 +2724,7 @@ const lessonsData = {
     },
     {
       "type": "tf",
-      "svgGraph": "<svg viewBox=\"0 0 540 280\" xmlns=\"http://www.w3.org/2000/svg\">\n  <defs>\n    <marker id=\"arr17\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">\n      <path d=\"M 0 1 L 10 5 L 0 9 z\" fill=\"#94a3b8\"/>\n    </marker>\n  </defs>\n  <rect width=\"540\" height=\"280\" rx=\"14\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.5\"/>\n  <text x=\"270\" y=\"26\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">ĐỒ THỊ DAO ĐỘNG HÌNH SIN CỦA ĐIỆN ÁP XOAY CHIỀU</text>\n\n  <!-- Hệ trục u(t) -->\n  <line x1=\"50\" y1=\"140\" x2=\"490\" y2=\"140\" stroke=\"#94a3b8\" stroke-width=\"1.8\" marker-end=\"url(#arr17)\"/>\n  <line x1=\"70\" y1=\"240\" x2=\"70\" y2=\"40\" stroke=\"#94a3b8\" stroke-width=\"1.8\" marker-end=\"url(#arr17)\"/>\n  <text x=\"475\" y=\"160\" fill=\"#94a3b8\" font-size=\"12\">Thời gian t (s)</text>\n  <text x=\"25\" y=\"45\" fill=\"#38bdf8\" font-size=\"13\">u (V)</text>\n  <text x=\"55\" y=\"155\" fill=\"#94a3b8\" font-size=\"12\">O</text>\n\n  <!-- Đường sóng sin u = U0 cos(wt) -->\n  <path d=\"M 70,70 C 120,70 120,210 170,210 C 220,210 220,70 270,70 C 320,70 320,210 370,210 C 420,210 420,70 470,70\" fill=\"none\" stroke=\"#38bdf8\" stroke-width=\"3\"/>\n\n  <!-- Gióng biên độ U0 và -U0 -->\n  <line x1=\"70\" y1=\"70\" x2=\"470\" y2=\"70\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"4,4\"/>\n  <line x1=\"70\" y1=\"210\" x2=\"470\" y2=\"210\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"4,4\"/>\n  <text x=\"35\" y=\"75\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\">+U₀</text>\n  <text x=\"35\" y=\"215\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\">-U₀</text>\n\n  <!-- Mức hiệu dụng U = U0 / sqrt(2) -->\n  <line x1=\"70\" y1=\"90\" x2=\"470\" y2=\"90\" stroke=\"#f59e0b\" stroke-width=\"1.2\" stroke-dasharray=\"3,3\"/>\n  <text x=\"20\" y=\"95\" fill=\"#f59e0b\" font-size=\"11\">U = U₀/√2</text>\n\n  <!-- Đánh dấu chu kỳ T -->\n  <line x1=\"270\" y1=\"70\" x2=\"270\" y2=\"140\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"3,3\"/>\n  <text x=\"265\" y=\"158\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"bold\">T</text>\n\n  <line x1=\"470\" y1=\"70\" x2=\"470\" y2=\"140\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"3,3\"/>\n  <text x=\"460\" y=\"158\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"bold\">2T</text>\n\n  <text x=\"270\" y=\"260\" fill=\"#facc15\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Điện áp tức thời: u = U₀·cos(ωt + φ) • Giá trị hiệu dụng: U = U₀ / √2</text>\n</svg>",
+      "svgGraph": "<svg viewBox=\"0 0 540 280\" xmlns=\"http://www.w3.org/2000/svg\">\n  <defs>\n    <marker id=\"arr17\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">\n      <path d=\"M 0 1 L 10 5 L 0 9 z\" fill=\"#94a3b8\"/>\n    </marker>\n  </defs>\n  <rect width=\"540\" height=\"280\" rx=\"14\" fill=\"#0f172a\" stroke=\"#334155\" stroke-width=\"1.5\"/>\n  <text x=\"270\" y=\"26\" fill=\"#38bdf8\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">ĐỒ THỊ DAO ĐỘNG HÌNH SIN CỦA ĐIỆN ÁP XOAY CHIỀU</text>\n\n  <!-- Hệ trục u(t) -->\n  <line x1=\"50\" y1=\"140\" x2=\"490\" y2=\"140\" stroke=\"#94a3b8\" stroke-width=\"1.8\" marker-end=\"url(#arr17)\"/>\n  <line x1=\"70\" y1=\"240\" x2=\"70\" y2=\"40\" stroke=\"#94a3b8\" stroke-width=\"1.8\" marker-end=\"url(#arr17)\"/>\n  <text x=\"475\" y=\"160\" fill=\"#94a3b8\" font-size=\"12\">Thời gian t (s)</text>\n  <text x=\"25\" y=\"45\" fill=\"#38bdf8\" font-size=\"13\">u (V)</text>\n  <text x=\"55\" y=\"155\" fill=\"#94a3b8\" font-size=\"12\">O</text>\n\n  <!-- Đường sóng sin u = U0 cos(wt) -->\n  <path d=\"M 70,70 C 120,70 120,210 170,210 C 220,210 220,70 270,70 C 320,70 320,210 370,210 C 420,210 420,70 470,70\" fill=\"none\" stroke=\"#38bdf8\" stroke-width=\"3\"/>\n\n  <!-- Gióng biên độ U0 và -U0 -->\n  <line x1=\"70\" y1=\"70\" x2=\"470\" y2=\"70\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"4,4\"/>\n  <line x1=\"70\" y1=\"210\" x2=\"470\" y2=\"210\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"4,4\"/>\n  <text x=\"35\" y=\"75\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\">+U₀</text>\n  <text x=\"35\" y=\"215\" fill=\"#f43f5e\" font-size=\"13\" font-weight=\"bold\">-U₀</text>\n\n  <!-- Mức hiệu dụng U = U0 / sqrt(2) -->\n  <line x1=\"70\" y1=\"90\" x2=\"470\" y2=\"90\" stroke=\"#f59e0b\" stroke-width=\"1.2\" stroke-dasharray=\"3,3\"/>\n  <text x=\"20\" y=\"95\" fill=\"#f59e0b\" font-size=\"11\">U = U₀/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></text>\n\n  <!-- Đánh dấu chu kỳ T -->\n  <line x1=\"270\" y1=\"70\" x2=\"270\" y2=\"140\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"3,3\"/>\n  <text x=\"265\" y=\"158\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"bold\">T</text>\n\n  <line x1=\"470\" y1=\"70\" x2=\"470\" y2=\"140\" stroke=\"#475569\" stroke-width=\"1\" stroke-dasharray=\"3,3\"/>\n  <text x=\"460\" y=\"158\" fill=\"#38bdf8\" font-size=\"12\" font-weight=\"bold\">2T</text>\n\n  <text x=\"270\" y=\"260\" fill=\"#facc15\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Điện áp tức thời: u = U₀·cos(ωt + φ) • Giá trị hiệu dụng: U = U₀ / <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></text>\n</svg>",
       "q": "Quan sát đồ thị biến thiên điều hòa của điện áp xoay chiều u(t) hình bên. Đánh giá tính Đúng/Sai của các mệnh đề sau:",
       "stmts": [
         "Tại thời điểm t = 0, điện áp đạt giá trị cực đại tức thời u = +U₀.",
@@ -2739,7 +2739,7 @@ const lessonsData = {
         true
       ],
       "correctText": "a) ĐÚNG | b) ĐÚNG | c) SAI | d) ĐÚNG",
-      "exp": "• <b>Ý a: ĐÚNG.</b> Đồ thị bắt đầu từ đỉnh <span class=\"math-sym\">u(0) = +U₀</span>.<br>• <b>Ý b: ĐÚNG.</b> Định nghĩa chu kỳ T.<br>• <b>Ý c: SAI.</b> <span class=\"math-sym\">U = U₀ / √2 ≈ 0,707 U₀ < U₀</span>.<br>• <b>Ý d: ĐÚNG.</b> Đổi chiều tại các thời điểm qua vị trí cân bằng (u = 0)."
+      "exp": "• <b>Ý a: ĐÚNG.</b> Đồ thị bắt đầu từ đỉnh <span class=\"math-sym\">u(0) = +U₀</span>.<br>• <b>Ý b: ĐÚNG.</b> Định nghĩa chu kỳ T.<br>• <b>Ý c: SAI.</b> <span class=\"math-sym\">U = U₀ / <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> ≈ 0,707 U₀ < U₀</span>.<br>• <b>Ý d: ĐÚNG.</b> Đổi chiều tại các thời điểm qua vị trí cân bằng (u = 0)."
     },
     {
       "type": "mcq",
@@ -3204,7 +3204,7 @@ const lessonsData = {
       ],
       "ans": 0,
       "correctText": "Đáp án A",
-      "exp": "• Vì hao phí tỉ lệ nghịch với <span class=\"math-sym\">U²</span>: <span class=\"fraction\"><span class=\"numerator\">ΔP₁</span><span class=\"denominator\">ΔP₂</span></span> = <span class=\"fraction\"><span class=\"numerator\">U₂²</span><span class=\"denominator\">U₁²</span></span> = 64 ⇒ <span class=\"fraction\"><span class=\"numerator\">U₂</span><span class=\"denominator\">U₁</span></span> = √64 = <b>8 lần</b>."
+      "exp": "• Vì hao phí tỉ lệ nghịch với <span class=\"math-sym\">U²</span>: <span class=\"fraction\"><span class=\"numerator\">ΔP₁</span><span class=\"denominator\">ΔP₂</span></span> = <span class=\"fraction\"><span class=\"numerator\">U₂²</span><span class=\"denominator\">U₁²</span></span> = 64 ⇒ <span class=\"fraction\"><span class=\"numerator\">U₂</span><span class=\"denominator\">U₁</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">64</span></span> = <b>8 lần</b>."
     },
     {
       "type": "tf",

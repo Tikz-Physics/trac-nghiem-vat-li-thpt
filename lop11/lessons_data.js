@@ -150,7 +150,7 @@ const lessonsData = {
         true
       ],
       "correctText": "a) Sai | b) Đúng | c) Sai | d) Đúng",
-      "exp": "• <b>Ý a [Sai]:</b> Chu kì của con lắc lò xo T = 2π√(m/k) không phụ thuộc vào biên độ dao động A.<br>• <b>Ý b [Đúng]:</b> Vật chuyển động từ -A đến +A nên chiều dài quỹ đạo là L = 2A.<br>• <b>Ý c [Sai]:</b> Gốc thời gian t = 0 có thể chọn tùy ý tại bất kì vị trí và thời điểm nào.<br>• <b>Ý d [Đúng]:</b> Tại hai biên, |x| = A là giá trị cực đại."
+      "exp": "• <b>Ý a [Sai]:</b> Chu kì của con lắc lò xo T = 2π<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">m/k</span></span> không phụ thuộc vào biên độ dao động A.<br>• <b>Ý b [Đúng]:</b> Vật chuyển động từ -A đến +A nên chiều dài quỹ đạo là L = 2A.<br>• <b>Ý c [Sai]:</b> Gốc thời gian t = 0 có thể chọn tùy ý tại bất kì vị trí và thời điểm nào.<br>• <b>Ý d [Đúng]:</b> Tại hai biên, |x| = A là giá trị cực đại."
     },
     {
       "type": "mcq",
@@ -292,14 +292,14 @@ const lessonsData = {
       "type": "mcq",
       "q": "Một vật dao động điều hoà theo phương trình x = 5·cos(10t + π/4) (cm). Độ dịch chuyển (li độ) của vật tại thời điểm t = 0 là:",
       "opts": [
-        "2,5√2 cm.",
+        "2,5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.",
         "5 cm.",
         "2,5 cm.",
         "0 cm."
       ],
       "ans": "A",
-      "correctText": "Đáp án A (2,5√2 cm.)",
-      "exp": "• Tại t = 0: x = 5·cos(π/4) = 5 · <span class=\"fraction\"><span class=\"numerator\">√2</span><span class=\"denominator\">2</span></span> = 2,5√2 cm (≈ 3,54 cm).",
+      "correctText": "Đáp án A (2,5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.)",
+      "exp": "• Tại t = 0: x = 5·cos(π/4) = 5 · <span class=\"fraction\"><span class=\"numerator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></span><span class=\"denominator\">2</span></span> = 2,5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm (≈ 3,54 cm).",
       "svgGraph": ""
     },
     {
@@ -403,13 +403,13 @@ const lessonsData = {
         "Vị trí cân bằng (x = 0)",
         "Vị trí biên dương hoặc biên âm (x = ±A)",
         "Vị trí có li độ x = ±A/2",
-        "Vị trí có li độ x = ±A/√2"
+        "Vị trí có li độ x = ±A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>"
       ],
       "colB": [
-        "Độ lớn vận tốc v = v<sub>max</sub>·√3/2 và gia tốc |a| = a<sub>max</sub>/2",
+        "Độ lớn vận tốc v = v<sub>max</sub>·<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2 và gia tốc |a| = a<sub>max</sub>/2",
         "Tốc độ triệt tiêu (v = 0) và độ lớn gia tốc cực đại (|a| = ω²A)",
         "Tốc độ cực đại (v = ωA) và gia tốc triệt tiêu (a = 0)",
-        "Độ lớn vận tốc v = v<sub>max</sub>/√2 và gia tốc |a| = a<sub>max</sub>/√2"
+        "Độ lớn vận tốc v = v<sub>max</sub>/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> và gia tốc |a| = a<sub>max</sub>/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>"
       ],
       "ans": [
         2,
@@ -418,7 +418,7 @@ const lessonsData = {
         3
       ],
       "correctText": "1 - C | 2 - B | 3 - A | 4 - D",
-      "exp": "• <b>1 - C:</b> Tại VCB: v đạt cực đại v<sub>max</sub> = ωA, gia tốc a = 0.<br>• <b>2 - B:</b> Tại biên: v = 0, |a| đạt cực đại |a<sub>max</sub>| = ω²A.<br>• <b>3 - A:</b> Tại x = ±A/2: |a| = a<sub>max</sub>/2, v = v<sub>max</sub>·√3/2.<br>• <b>4 - D:</b> Tại x = ±A/√2: v = v<sub>max</sub>/√2, |a| = a<sub>max</sub>/√2."
+      "exp": "• <b>1 - C:</b> Tại VCB: v đạt cực đại v<sub>max</sub> = ωA, gia tốc a = 0.<br>• <b>2 - B:</b> Tại biên: v = 0, |a| đạt cực đại |a<sub>max</sub>| = ω²A.<br>• <b>3 - A:</b> Tại x = ±A/2: |a| = a<sub>max</sub>/2, v = v<sub>max</sub>·<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2.<br>• <b>4 - D:</b> Tại x = ±A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>: v = v<sub>max</sub>/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>, |a| = a<sub>max</sub>/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>."
     },
     {
       "type": "drag",
@@ -486,7 +486,7 @@ const lessonsData = {
         false
       ],
       "correctText": "a) Đúng | b) Đúng | c) Sai | d) Sai",
-      "exp": "• <b>Ý a [Đúng]:</b> Áp dụng x² + v²/ω² = A² ⇒ v = +ω√(A² - x²) = 10√(100 - 36) = +80 cm/s.<br>• <b>Ý b [Đúng]:</b> a = -ω²x = -10² · 6 = -600 cm/s².<br>• <b>Ý c [Sai]:</b> Vật ở x = 6 > 0 đang đi ra biên dương (v > 0) nên là chuyển động chậm dần (a và v trái dấu).<br>• <b>Ý d [Sai]:</b> Lực kéo về hướng về O ngược chiều chuyển động nên cản trở, làm giảm tốc độ."
+      "exp": "• <b>Ý a [Đúng]:</b> Áp dụng x² + v²/ω² = A² ⇒ v = +ω<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">A² - x²</span></span> = 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">100 - 36</span></span> = +80 cm/s.<br>• <b>Ý b [Đúng]:</b> a = -ω²x = -10² · 6 = -600 cm/s².<br>• <b>Ý c [Sai]:</b> Vật ở x = 6 > 0 đang đi ra biên dương (v > 0) nên là chuyển động chậm dần (a và v trái dấu).<br>• <b>Ý d [Sai]:</b> Lực kéo về hướng về O ngược chiều chuyển động nên cản trở, làm giảm tốc độ."
     },
     {
       "type": "mcq",
@@ -569,8 +569,8 @@ const lessonsData = {
       "q": "Ghép khoảng thời gian ngắn nhất chuyển động của vật dao động điều hoà ở Cột A với phân số chu kì tương ứng ở Cột B:",
       "colA": [
         "Từ VCB (x = 0) đến vị trí x = A/2",
-        "Từ VCB (x = 0) đến vị trí x = A/√2",
-        "Từ VCB (x = 0) đến vị trí x = A·√3/2",
+        "Từ VCB (x = 0) đến vị trí x = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>",
+        "Từ VCB (x = 0) đến vị trí x = A·<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2",
         "Từ VCB (x = 0) đến vị trí biên x = A"
       ],
       "colB": [
@@ -586,7 +586,7 @@ const lessonsData = {
         2
       ],
       "correctText": "1 - D | 2 - A | 3 - B | 4 - C",
-      "exp": "• <b>1 - D:</b> Từ 0 đến A/2: góc quét π/6 ⇒ Δt = T/12.<br>• <b>2 - A:</b> Từ 0 đến A/√2: góc quét π/4 ⇒ Δt = T/8.<br>• <b>3 - B:</b> Từ 0 đến A√3/2: góc quét π/3 ⇒ Δt = T/6.<br>• <b>4 - C:</b> Từ 0 đến A: góc quét π/2 ⇒ Δt = T/4."
+      "exp": "• <b>1 - D:</b> Từ 0 đến A/2: góc quét π/6 ⇒ Δt = T/12.<br>• <b>2 - A:</b> Từ 0 đến A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>: góc quét π/4 ⇒ Δt = T/8.<br>• <b>3 - B:</b> Từ 0 đến A<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2: góc quét π/3 ⇒ Δt = T/6.<br>• <b>4 - C:</b> Từ 0 đến A: góc quét π/2 ⇒ Δt = T/4."
     },
     {
       "type": "drag",
@@ -621,7 +621,7 @@ const lessonsData = {
       ],
       "ans": "A",
       "correctText": "Đáp án A (5 cm.)",
-      "exp": "• Áp dụng hệ thức độc lập: A = √(x² + v²/ω²).<br>• Thay số: A = √(4² + (15/5)²) = √(16 + 9) = √25 = 5 cm.",
+      "exp": "• Áp dụng hệ thức độc lập: A = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">x² + v²/ω²</span></span>.<br>• Thay số: A = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">4² + (15/5)²</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">16 + 9</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">25</span></span> = 5 cm.",
       "svgGraph": ""
     },
     {
@@ -630,7 +630,7 @@ const lessonsData = {
       "opts": [
         "10 cm.",
         "5 cm.",
-        "5√2 cm.",
+        "5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.",
         "15 cm."
       ],
       "ans": "A",
@@ -642,9 +642,9 @@ const lessonsData = {
       "type": "tf",
       "q": "Một con lắc lò xo dao động điều hoà theo phương ngang với biên độ 10 cm và chu kì 1 s. Xét tính Đúng / Sai của các mệnh đề sau:",
       "stmts": [
-        "Quãng đường lớn nhất vật đi được trong khoảng thời gian 0,25 s (T/4) là 10√2 cm.",
-        "Quãng đường nhỏ nhất vật đi được trong khoảng thời gian 0,25 s (T/4) là 20 - 10√2 cm.",
-        "Tốc độ của vật khi đi qua vị trí x = 5√2 cm bằng một nửa tốc độ cực đại.",
+        "Quãng đường lớn nhất vật đi được trong khoảng thời gian 0,25 s (T/4) là 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.",
+        "Quãng đường nhỏ nhất vật đi được trong khoảng thời gian 0,25 s (T/4) là 20 - 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.",
+        "Tốc độ của vật khi đi qua vị trí x = 5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm bằng một nửa tốc độ cực đại.",
         "Thời gian vật chuyển động nhanh dần trong mỗi chu kì là 0,5 s."
       ],
       "ans": [
@@ -654,7 +654,7 @@ const lessonsData = {
         true
       ],
       "correctText": "a) Đúng | b) Đúng | c) Sai | d) Đúng",
-      "exp": "• <b>Ý a [Đúng]:</b> S<sub>max</sub> trong T/4 = 2A·sin(Δφ/2) = 2 · 10 · sin(π/4) = 10√2 cm.<br>• <b>Ý b [Đúng]:</b> S<sub>min</sub> trong T/4 = 2A(1 - cos(Δφ/2)) = 20(1 - cos(π/4)) = 20 - 10√2 cm.<br>• <b>Ý c [Sai]:</b> x = A/√2 ⇒ v = v<sub>max</sub>/√2 ≈ 0,707 v<sub>max</sub> (không phải một nửa).<br>• <b>Ý d [Đúng]:</b> Nhanh dần khi đi từ biên về VCB (2 lần mỗi chu kì, mỗi lần T/4), tổng thời gian là T/2 = 0,5 s."
+      "exp": "• <b>Ý a [Đúng]:</b> S<sub>max</sub> trong T/4 = 2A·sin(Δφ/2) = 2 · 10 · sin(π/4) = 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.<br>• <b>Ý b [Đúng]:</b> S<sub>min</sub> trong T/4 = 2A(1 - cos(Δφ/2)) = 20(1 - cos(π/4)) = 20 - 10<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.<br>• <b>Ý c [Sai]:</b> x = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> ⇒ v = v<sub>max</sub>/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> ≈ 0,707 v<sub>max</sub> (không phải một nửa).<br>• <b>Ý d [Đúng]:</b> Nhanh dần khi đi từ biên về VCB (2 lần mỗi chu kì, mỗi lần T/4), tổng thời gian là T/2 = 0,5 s."
     },
     {
       "type": "mcq",
@@ -721,7 +721,7 @@ const lessonsData = {
         "Khi vật chuyển động từ vị trí cân bằng ra vị trí biên thì động năng giảm dần và chuyển hoá thành thế năng.",
         "Tại vị trí cân bằng, thế năng triệt tiêu và động năng của vật đạt giá trị cực đại bằng cơ năng.",
         "Nếu tăng biên độ dao động lên gấp đôi thì cơ năng của hệ dao động cũng tăng lên gấp đôi.",
-        "Tại vị trí li độ x = ±A/√2 thì động năng của vật bằng thế năng của vật."
+        "Tại vị trí li độ x = ±A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> thì động năng của vật bằng thế năng của vật."
       ],
       "ans": [
         true,
@@ -730,15 +730,15 @@ const lessonsData = {
         true
       ],
       "correctText": "a) Đúng | b) Đúng | c) Sai | d) Đúng",
-      "exp": "• <b>Ý a [Đúng]:</b> Từ VCB ra biên tốc độ giảm dần nên W<sub>đ</sub> giảm, W<sub>t</sub> tăng.<br>• <b>Ý b [Đúng]:</b> Tại x = 0, W<sub>t</sub> = 0 và W<sub>đ</sub> = W<sub>đ</sub>,max = W.<br>• <b>Ý c [Sai]:</b> Cơ năng tỉ lệ thuận với bình phương biên độ (W ∝ A²), nên khi A tăng gấp đôi thì W tăng gấp 4 lần.<br>• <b>Ý d [Đúng]:</b> W<sub>t</sub> = 0,5mω²(A/√2)² = 0,25mω²A² = W/2 ⇒ W<sub>đ</sub> = W - W<sub>t</sub> = W/2 (động năng bằng thế năng)."
+      "exp": "• <b>Ý a [Đúng]:</b> Từ VCB ra biên tốc độ giảm dần nên W<sub>đ</sub> giảm, W<sub>t</sub> tăng.<br>• <b>Ý b [Đúng]:</b> Tại x = 0, W<sub>t</sub> = 0 và W<sub>đ</sub> = W<sub>đ</sub>,max = W.<br>• <b>Ý c [Sai]:</b> Cơ năng tỉ lệ thuận với bình phương biên độ (W ∝ A²), nên khi A tăng gấp đôi thì W tăng gấp 4 lần.<br>• <b>Ý d [Đúng]:</b> W<sub>t</sub> = 0,5mω²(A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>)² = 0,25mω²A² = W/2 ⇒ W<sub>đ</sub> = W - W<sub>t</sub> = W/2 (động năng bằng thế năng)."
     },
     {
       "type": "match",
       "q": "Ghép các vị trí li độ x ở Cột A với mối quan hệ giữa động năng (W<sub>đ</sub>) và thế năng (W<sub>t</sub>) ở Cột B:",
       "colA": [
-        "Vị trí li độ x = ±A/√2",
+        "Vị trí li độ x = ±A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>",
         "Vị trí li độ x = ±A/2",
-        "Vị trí li độ x = ±A·√3/2",
+        "Vị trí li độ x = ±A·<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2",
         "Vị trí li độ x = 0 (vị trí cân bằng)"
       ],
       "colB": [
@@ -754,7 +754,7 @@ const lessonsData = {
         2
       ],
       "correctText": "1 - D | 2 - A | 3 - B | 4 - C",
-      "exp": "• <b>1 - D:</b> x = ±A/√2 ⇒ W<sub>t</sub> = W/2 ⇒ W<sub>đ</sub> = W<sub>t</sub>.<br>• <b>2 - A:</b> x = ±A/2 ⇒ W<sub>t</sub> = W/4 ⇒ W<sub>đ</sub> = 3W/4 = 3W<sub>t</sub>.<br>• <b>3 - B:</b> x = ±A√3/2 ⇒ W<sub>t</sub> = 3W/4 ⇒ W<sub>đ</sub> = W/4 ⇒ W<sub>t</sub> = 3W<sub>đ</sub>.<br>• <b>4 - C:</b> x = 0 ⇒ W<sub>t</sub> = 0, W<sub>đ</sub> = W."
+      "exp": "• <b>1 - D:</b> x = ±A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> ⇒ W<sub>t</sub> = W/2 ⇒ W<sub>đ</sub> = W<sub>t</sub>.<br>• <b>2 - A:</b> x = ±A/2 ⇒ W<sub>t</sub> = W/4 ⇒ W<sub>đ</sub> = 3W/4 = 3W<sub>t</sub>.<br>• <b>3 - B:</b> x = ±A<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2 ⇒ W<sub>t</sub> = 3W/4 ⇒ W<sub>đ</sub> = W/4 ⇒ W<sub>t</sub> = 3W<sub>đ</sub>.<br>• <b>4 - C:</b> x = 0 ⇒ W<sub>t</sub> = 0, W<sub>đ</sub> = W."
     },
     {
       "type": "drag",
@@ -822,20 +822,20 @@ const lessonsData = {
         true
       ],
       "correctText": "a) Đúng | b) Đúng | c) Sai | d) Đúng",
-      "exp": "• <b>Ý a [Đúng]:</b> Tại x = A/2 ⇒ W<sub>t</sub> = (1/4)W = 40/4 = 10 mJ.<br>• <b>Ý b [Đúng]:</b> W<sub>đ</sub> = W - W<sub>t</sub> = 40 - 10 = 30 mJ.<br>• <b>Ý c [Sai]:</b> x = A/2 ⇒ v = v<sub>max</sub>·√3/2 ≈ 0,866 v<sub>max</sub> (không phải 0,5 v<sub>max</sub>).<br>• <b>Ý d [Đúng]:</b> Tại VCB W<sub>đ</sub> = 40 mJ, nên tăng thêm 40 - 30 = 10 mJ."
+      "exp": "• <b>Ý a [Đúng]:</b> Tại x = A/2 ⇒ W<sub>t</sub> = (1/4)W = 40/4 = 10 mJ.<br>• <b>Ý b [Đúng]:</b> W<sub>đ</sub> = W - W<sub>t</sub> = 40 - 10 = 30 mJ.<br>• <b>Ý c [Sai]:</b> x = A/2 ⇒ v = v<sub>max</sub>·<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2 ≈ 0,866 v<sub>max</sub> (không phải 0,5 v<sub>max</sub>).<br>• <b>Ý d [Đúng]:</b> Tại VCB W<sub>đ</sub> = 40 mJ, nên tăng thêm 40 - 30 = 10 mJ."
     },
     {
       "type": "mcq",
       "q": "Khi vật dao động điều hoà đi qua vị trí có động năng bằng thế năng (W<sub>đ</sub> = W<sub>t</sub>) thì độ lớn li độ của vật là:",
       "opts": [
-        "|x| = <span class=\"fraction\"><span class=\"numerator\">A</span><span class=\"denominator\">√2</span></span>.",
+        "|x| = <span class=\"fraction\"><span class=\"numerator\">A</span><span class=\"denominator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></span></span>.",
         "|x| = <span class=\"fraction\"><span class=\"numerator\">A</span><span class=\"denominator\">2</span></span>.",
-        "|x| = <span class=\"fraction\"><span class=\"numerator\">A√3</span><span class=\"denominator\">2</span></span>.",
+        "|x| = <span class=\"fraction\"><span class=\"numerator\">A<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span></span><span class=\"denominator\">2</span></span>.",
         "|x| = <span class=\"fraction\"><span class=\"numerator\">A</span><span class=\"denominator\">4</span></span>."
       ],
       "ans": "A",
-      "correctText": "Đáp án A (|x| = <span class=\"fraction\"><span class=\"numerator\">A</span><span class=\"denominator\">√2</span></span>.)",
-      "exp": "• Khi W<sub>đ</sub> = W<sub>t</sub> ⇒ W = W<sub>đ</sub> + W<sub>t</sub> = 2W<sub>t</sub>.<br>• <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>mω²A² = 2 · (<span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>mω²x²) ⇒ x² = <span class=\"fraction\"><span class=\"numerator\">A²</span><span class=\"denominator\">2</span></span> ⇒ |x| = <span class=\"fraction\"><span class=\"numerator\">A</span><span class=\"denominator\">√2</span></span>.",
+      "correctText": "Đáp án A (|x| = <span class=\"fraction\"><span class=\"numerator\">A</span><span class=\"denominator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></span></span>.)",
+      "exp": "• Khi W<sub>đ</sub> = W<sub>t</sub> ⇒ W = W<sub>đ</sub> + W<sub>t</sub> = 2W<sub>t</sub>.<br>• <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>mω²A² = 2 · (<span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>mω²x²) ⇒ x² = <span class=\"fraction\"><span class=\"numerator\">A²</span><span class=\"denominator\">2</span></span> ⇒ |x| = <span class=\"fraction\"><span class=\"numerator\">A</span><span class=\"denominator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span></span></span>.",
       "svgGraph": ""
     }
   ],
@@ -1026,14 +1026,14 @@ const lessonsData = {
       "type": "mcq",
       "q": "Một chất điểm dao động điều hoà với biên độ A = 10 cm. Vị trí có thế năng bằng 3 lần động năng (W<sub>t</sub> = 3W<sub>đ</sub>) cách vị trí cân bằng một khoảng là:",
       "opts": [
-        "5√3 cm.",
+        "5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> cm.",
         "5 cm.",
-        "5√2 cm.",
+        "5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm.",
         "2,5 cm."
       ],
       "ans": "A",
-      "correctText": "Đáp án A (5√3 cm.)",
-      "exp": "• Ta có: W<sub>t</sub> = 3W<sub>đ</sub> ⇒ W<sub>đ</sub> = W<sub>t</sub> / 3.<br>• Cơ năng: W = W<sub>đ</sub> + W<sub>t</sub> = W<sub>t</sub>/3 + W<sub>t</sub> = <span class=\"fraction\"><span class=\"numerator\">4</span><span class=\"denominator\">3</span></span>W<sub>t</sub> ⇒ W<sub>t</sub> = <span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">4</span></span>W.<br>• Do W<sub>t</sub> ∝ x² và W ∝ A² nên: x² = <span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">4</span></span>A² ⇒ |x| = A·<span class=\"fraction\"><span class=\"numerator\">√3</span><span class=\"denominator\">2</span></span> = 10 · <span class=\"fraction\"><span class=\"numerator\">√3</span><span class=\"denominator\">2</span></span> = 5√3 cm.",
+      "correctText": "Đáp án A (5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> cm.)",
+      "exp": "• Ta có: W<sub>t</sub> = 3W<sub>đ</sub> ⇒ W<sub>đ</sub> = W<sub>t</sub> / 3.<br>• Cơ năng: W = W<sub>đ</sub> + W<sub>t</sub> = W<sub>t</sub>/3 + W<sub>t</sub> = <span class=\"fraction\"><span class=\"numerator\">4</span><span class=\"denominator\">3</span></span>W<sub>t</sub> ⇒ W<sub>t</sub> = <span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">4</span></span>W.<br>• Do W<sub>t</sub> ∝ x² và W ∝ A² nên: x² = <span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">4</span></span>A² ⇒ |x| = A·<span class=\"fraction\"><span class=\"numerator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span></span><span class=\"denominator\">2</span></span> = 10 · <span class=\"fraction\"><span class=\"numerator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span></span><span class=\"denominator\">2</span></span> = 5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span> cm.",
       "svgGraph": ""
     },
     {
@@ -1055,7 +1055,7 @@ const lessonsData = {
       "q": "Một con lắc lò xo gồm lò xo có độ cứng k = 50 N/m và vật nhỏ khối lượng m = 200 g dao động điều hoà trên trục Ox nằm ngang với biên độ A = 6 cm. Xét tính Đúng / Sai của các mệnh đề sau:",
       "stmts": [
         "Cơ năng toàn phần của con lắc là W = 0,09 J.",
-        "Tốc độ cực đại của vật khi đi qua vị trí cân bằng là 30√10 cm/s.",
+        "Tốc độ cực đại của vật khi đi qua vị trí cân bằng là 30<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">10</span></span> cm/s.",
         "Khi vật ở vị trí có li độ x = 3 cm thì động năng của vật lớn hơn thế năng.",
         "Khi vật chuyển động từ biên về vị trí cân bằng thì thế năng chuyển hoá hoàn toàn thành động năng."
       ],
@@ -1066,7 +1066,7 @@ const lessonsData = {
         true
       ],
       "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Đúng",
-      "exp": "• <b>Ý a [Đúng]:</b> W = 0,5·k·A² = 0,5 · 50 · (0,06)² = 0,09 J (90 mJ).<br>• <b>Ý b [Đúng]:</b> ω = √(k/m) = √(50/0,2) = √250 = 5√10 rad/s ⇒ v<sub>max</sub> = ωA = 5√10 · 6 = 30√10 cm/s.<br>• <b>Ý c [Đúng]:</b> x = 3 cm = A/2 ⇒ W<sub>t</sub> = W/4 ⇒ W<sub>đ</sub> = 3W/4 > W<sub>t</sub>.<br>• <b>Ý d [Đúng]:</b> Tại biên W<sub>t</sub> = W và W<sub>đ</sub> = 0; tại VCB W<sub>t</sub> = 0 và W<sub>đ</sub> = W."
+      "exp": "• <b>Ý a [Đúng]:</b> W = 0,5·k·A² = 0,5 · 50 · (0,06)² = 0,09 J (90 mJ).<br>• <b>Ý b [Đúng]:</b> ω = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">k/m</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">50/0,2</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">250</span></span> = 5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">10</span></span> rad/s ⇒ v<sub>max</sub> = ωA = 5<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">10</span></span> · 6 = 30<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">10</span></span> cm/s.<br>• <b>Ý c [Đúng]:</b> x = 3 cm = A/2 ⇒ W<sub>t</sub> = W/4 ⇒ W<sub>đ</sub> = 3W/4 > W<sub>t</sub>.<br>• <b>Ý d [Đúng]:</b> Tại biên W<sub>t</sub> = W và W<sub>đ</sub> = 0; tại VCB W<sub>t</sub> = 0 và W<sub>đ</sub> = W."
     },
     {
       "type": "match",
@@ -1080,8 +1080,8 @@ const lessonsData = {
       "colB": [
         "Li độ |x| = A/3",
         "Li độ |x| = A/2",
-        "Li độ |x| = A√3/2",
-        "Li độ |x| = A/√2"
+        "Li độ |x| = A<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2",
+        "Li độ |x| = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>"
       ],
       "ans": [
         3,
@@ -1090,7 +1090,7 @@ const lessonsData = {
         0
       ],
       "correctText": "1 - D | 2 - B | 3 - C | 4 - A",
-      "exp": "• <b>Công thức tổng quát:</b> W<sub>đ</sub> = n·W<sub>t</sub> ⇒ |x| = A / √(n+1).<br>• <b>1 - D:</b> n = 1 ⇒ |x| = A/√2.<br>• <b>2 - B:</b> n = 3 ⇒ |x| = A/√4 = A/2.<br>• <b>3 - C:</b> W<sub>t</sub> = 3W<sub>đ</sub> ⇒ n = 1/3 ⇒ |x| = A / √(4/3) = A√3/2.<br>• <b>4 - A:</b> n = 8 ⇒ |x| = A/√9 = A/3."
+      "exp": "• <b>Công thức tổng quát:</b> W<sub>đ</sub> = n·W<sub>t</sub> ⇒ |x| = A / <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">n+1</span></span>.<br>• <b>1 - D:</b> n = 1 ⇒ |x| = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>.<br>• <b>2 - B:</b> n = 3 ⇒ |x| = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">4</span></span> = A/2.<br>• <b>3 - C:</b> W<sub>t</sub> = 3W<sub>đ</sub> ⇒ n = 1/3 ⇒ |x| = A / <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">4/3</span></span> = A<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2.<br>• <b>4 - A:</b> n = 8 ⇒ |x| = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">9</span></span> = A/3."
     },
     {
       "type": "drag",
@@ -1099,7 +1099,7 @@ const lessonsData = {
       "words": [
         "25%",
         "75%",
-        "√3/2",
+        "<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2",
         "2 lần",
         "50%",
         "1/2",
@@ -1111,8 +1111,8 @@ const lessonsData = {
         2,
         3
       ],
-      "correctText": "1: 25% | 2: 75% | 3: √3/2 | 4: 2 lần",
-      "exp": "• x = A/2 ⇒ W<sub>t</sub> = (1/4)W = 25% cơ năng.<br>• Động năng W<sub>đ</sub> = 75% cơ năng.<br>• v = v<sub>max</sub> · √3/2.<br>• ω' = 2ω (gấp 2 lần)."
+      "correctText": "1: 25% | 2: 75% | 3: <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2 | 4: 2 lần",
+      "exp": "• x = A/2 ⇒ W<sub>t</sub> = (1/4)W = 25% cơ năng.<br>• Động năng W<sub>đ</sub> = 75% cơ năng.<br>• v = v<sub>max</sub> · <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span>/2.<br>• ω' = 2ω (gấp 2 lần)."
     },
     {
       "type": "mcq",
@@ -1130,7 +1130,7 @@ const lessonsData = {
     },
     {
       "type": "mcq",
-      "q": "Một con lắc lò xo dao động điều hoà với biên độ A. Khi vật đi từ vị trí cân bằng x = 0 đến vị trí có li độ x = A/√2 thì tỉ lệ thế năng tăng thêm so với cơ năng là:",
+      "q": "Một con lắc lò xo dao động điều hoà với biên độ A. Khi vật đi từ vị trí cân bằng x = 0 đến vị trí có li độ x = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> thì tỉ lệ thế năng tăng thêm so với cơ năng là:",
       "opts": [
         "50%.",
         "25%.",
@@ -1139,7 +1139,7 @@ const lessonsData = {
       ],
       "ans": "A",
       "correctText": "Đáp án A (50%.)",
-      "exp": "• Tại x = 0 thì W<sub>t</sub> = 0.<br>• Tại x = A/√2 thì W<sub>t</sub> = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>mω²(A/√2)² = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">4</span></span>mω²A² = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>W = 50%W.<br>• Như vậy thế năng đã tăng thêm 50% cơ năng.",
+      "exp": "• Tại x = 0 thì W<sub>t</sub> = 0.<br>• Tại x = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> thì W<sub>t</sub> = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>mω²(A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span>)² = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">4</span></span>mω²A² = <span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>W = 50%W.<br>• Như vậy thế năng đã tăng thêm 50% cơ năng.",
       "svgGraph": ""
     },
     {
@@ -1147,7 +1147,7 @@ const lessonsData = {
       "q": "Một chất điểm dao động điều hoà có cơ năng W = 0,18 J và biên độ A = 6 cm. Xét tính Đúng / Sai của các nhận định sau:",
       "stmts": [
         "Độ cứng tương đương của hệ dao động là k = 100 N/m.",
-        "Khi vật đi qua vị trí có li độ x = 3√2 cm thì động năng của vật là 0,09 J.",
+        "Khi vật đi qua vị trí có li độ x = 3<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm thì động năng của vật là 0,09 J.",
         "Thế năng của vật đạt cực đại khi vật có gia tốc bằng 0.",
         "Trong một chu kì dao động, có 4 thời điểm động năng bằng thế năng."
       ],
@@ -1158,7 +1158,7 @@ const lessonsData = {
         true
       ],
       "correctText": "a) Đúng | b) Đúng | c) Sai | d) Đúng",
-      "exp": "• <b>Ý a [Đúng]:</b> W = 0,5 k A² ⇒ k = 2W / A² = 2 · 0,18 / (0,06)² = 0,36 / 0,0036 = 100 N/m.<br>• <b>Ý b [Đúng]:</b> x = 3√2 cm = A/√2 ⇒ W<sub>đ</sub> = W<sub>t</sub> = W/2 = 0,18/2 = 0,09 J.<br>• <b>Ý c [Sai]:</b> Gia tốc bằng 0 tại VCB x = 0, lúc đó thế năng bằng 0 (triệt tiêu), không phải cực đại.<br>• <b>Ý d [Đúng]:</b> Vị trí x = ±A/√2 có 4 lần qua trong 1 chu kì, tại đó W<sub>đ</sub> = W<sub>t</sub>."
+      "exp": "• <b>Ý a [Đúng]:</b> W = 0,5 k A² ⇒ k = 2W / A² = 2 · 0,18 / (0,06)² = 0,36 / 0,0036 = 100 N/m.<br>• <b>Ý b [Đúng]:</b> x = 3<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> cm = A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> ⇒ W<sub>đ</sub> = W<sub>t</sub> = W/2 = 0,18/2 = 0,09 J.<br>• <b>Ý c [Sai]:</b> Gia tốc bằng 0 tại VCB x = 0, lúc đó thế năng bằng 0 (triệt tiêu), không phải cực đại.<br>• <b>Ý d [Đúng]:</b> Vị trí x = ±A/<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2</span></span> có 4 lần qua trong 1 chu kì, tại đó W<sub>đ</sub> = W<sub>t</sub>."
     },
     {
       "type": "mcq",
@@ -1167,7 +1167,7 @@ const lessonsData = {
         "<span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">4</span></span>W.",
         "<span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">4</span></span>W.",
         "<span class=\"fraction\"><span class=\"numerator\">1</span><span class=\"denominator\">2</span></span>W.",
-        "<span class=\"fraction\"><span class=\"numerator\">√3</span><span class=\"denominator\">2</span></span>W."
+        "<span class=\"fraction\"><span class=\"numerator\"><span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">3</span></span></span><span class=\"denominator\">2</span></span>W."
       ],
       "ans": "A",
       "correctText": "Đáp án A (<span class=\"fraction\"><span class=\"numerator\">3</span><span class=\"denominator\">4</span></span>W.)",
@@ -2666,7 +2666,7 @@ const lessonsData = {
         true
       ],
       "correctText": "a) Đúng | b) Đúng | c) Sai | d) Đúng",
-      "exp": "• <b>Ý a [Đúng]:</b> Vì q₁ và q₂ cùng dấu nên điểm M nằm giữa A và B.<br>• <b>Ý b [Đúng]:</b> E₁ = E₂ ⇒ q₁/r₁² = q₂/r₂² ⇒ r₂/r₁ = √(q₂/q₁) = √(12/3) = 2 ⇒ r₂ = 2r₁. Mà r₁ + r₂ = 30 cm ⇒ 3r₁ = 30 ⇒ r₁ = 10 cm.<br>• <b>Ý c [Sai]:</b> Vị trí cân bằng chỉ phụ thuộc vào q₁, q₂ và khoảng cách AB, hoàn toàn độc lập với q₀.<br>• <b>Ý d [Đúng]:</b> F<sub>hl</sub> = F₁ + F₂ = 0 ⇒ F₁ = -F₂ (hai lực trực đối)."
+      "exp": "• <b>Ý a [Đúng]:</b> Vì q₁ và q₂ cùng dấu nên điểm M nằm giữa A và B.<br>• <b>Ý b [Đúng]:</b> E₁ = E₂ ⇒ q₁/r₁² = q₂/r₂² ⇒ r₂/r₁ = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">q₂/q₁</span></span> = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">12/3</span></span> = 2 ⇒ r₂ = 2r₁. Mà r₁ + r₂ = 30 cm ⇒ 3r₁ = 30 ⇒ r₁ = 10 cm.<br>• <b>Ý c [Sai]:</b> Vị trí cân bằng chỉ phụ thuộc vào q₁, q₂ và khoảng cách AB, hoàn toàn độc lập với q₀.<br>• <b>Ý d [Đúng]:</b> F<sub>hl</sub> = F₁ + F₂ = 0 ⇒ F₁ = -F₂ (hai lực trực đối)."
     },
     {
       "type": "mcq",
@@ -2776,7 +2776,7 @@ const lessonsData = {
         "tổng vectơ",
         "E₁ + E₂",
         "|E₁ - E₂|",
-        "căn bậc hai: √(E₁² + E₂²)",
+        "căn bậc hai: <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">E₁² + E₂²</span></span>",
         "hiệu vectơ",
         "tích đại số"
       ],
@@ -2786,8 +2786,8 @@ const lessonsData = {
         2,
         3
       ],
-      "correctText": "1: tổng vectơ | 2: E₁ + E₂ | 3: |E₁ - E₂| | 4: căn bậc hai: √(E₁² + E₂²)",
-      "exp": "<b>Nguyên lí chồng chất điện trường:</b><br>• E = E₁ + E₂ + ...<br>• Cùng chiều: E = E₁ + E₂.<br>• Ngược chiều: E = |E₁ - E₂|.<br>• Vuông góc: E = √(E₁² + E₂²)."
+      "correctText": "1: tổng vectơ | 2: E₁ + E₂ | 3: |E₁ - E₂| | 4: căn bậc hai: <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">E₁² + E₂²</span></span>",
+      "exp": "<b>Nguyên lí chồng chất điện trường:</b><br>• E = E₁ + E₂ + ...<br>• Cùng chiều: E = E₁ + E₂.<br>• Ngược chiều: E = |E₁ - E₂|.<br>• Vuông góc: E = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">E₁² + E₂²</span></span>."
     },
     {
       "type": "mcq",
@@ -3167,7 +3167,7 @@ const lessonsData = {
         false
       ],
       "correctText": "a) Đúng | b) Đúng | c) Đúng | d) Sai",
-      "exp": "• <b>Ý a [Đúng]:</b> Lực tác dụng F = qE ngược chiều E (hướng từ nơi thế cao về nơi thế thấp) ⇒ ion âm bay về phía nơi điện thế cao.<br>• <b>Ý b [Đúng]:</b> Dưới tác dụng lực thế tự do, thế năng luôn giảm (W<sub>t</sub> giảm).<br>• <b>Ý c [Đúng]:</b> Lực điện sinh công dương làm động năng tăng (W<sub>đ</sub> tăng).<br>• <b>Ý d [Sai]:</b> v = √(2qU/m) tỉ lệ nghịch với căn bậc hai của khối lượng (√m) chứ không phải tỉ lệ nghịch với m."
+      "exp": "• <b>Ý a [Đúng]:</b> Lực tác dụng F = qE ngược chiều E (hướng từ nơi thế cao về nơi thế thấp) ⇒ ion âm bay về phía nơi điện thế cao.<br>• <b>Ý b [Đúng]:</b> Dưới tác dụng lực thế tự do, thế năng luôn giảm (W<sub>t</sub> giảm).<br>• <b>Ý c [Đúng]:</b> Lực điện sinh công dương làm động năng tăng (W<sub>đ</sub> tăng).<br>• <b>Ý d [Sai]:</b> v = <span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">2qU/m</span></span> tỉ lệ nghịch với căn bậc hai của khối lượng (<span class=\"sqrt\"><span class=\"rad\">√</span><span class=\"radicand\">m</span></span>) chứ không phải tỉ lệ nghịch với m."
     },
     {
       "type": "mcq",
