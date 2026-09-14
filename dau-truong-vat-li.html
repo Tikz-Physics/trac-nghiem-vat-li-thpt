@@ -596,6 +596,10 @@
       opacity: 0.6;
     }
     .option-btn.wrong .option-prefix { background: #ef4444; color: #ffffff; }
+    .option-btn.disabled {
+      cursor: default !important;
+      pointer-events: none !important;
+    }
 
     /* Buzzer Notification Banner */
     .buzzer-alert {
@@ -801,6 +805,32 @@
       align-items: center;
       justify-content: center;
       gap: 4px;
+      transition: all 0.2s;
+    }
+    .btn-buzzer-team.armed {
+      background: radial-gradient(circle at center, #f59e0b, #b45309) !important;
+      border-color: #fbbf24 !important;
+      color: #ffffff !important;
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.7);
+      animation: pulseBuzzerHost 0.9s infinite alternate;
+    }
+    @keyframes pulseBuzzerHost {
+      from { transform: scale(1); }
+      to { transform: scale(1.02); }
+    }
+    .btn-buzzer-team.failed {
+      background: rgba(239, 68, 68, 0.15) !important;
+      border-color: #ef4444 !important;
+      color: #fca5a5 !important;
+      cursor: not-allowed !important;
+      opacity: 0.6;
+    }
+    .btn-buzzer-team.disabled {
+      background: rgba(255, 255, 255, 0.04) !important;
+      border-color: rgba(255, 255, 255, 0.1) !important;
+      color: #64748b !important;
+      cursor: not-allowed !important;
+      opacity: 0.6;
     }
 
     /* ==========================================================================
@@ -1086,6 +1116,11 @@
             <div class="status-chip" id="setupStatus3"><span>⚡</span> Tổ 3: ⚪ Chờ</div>
             <div class="status-chip" id="setupStatus4"><span>🧪</span> Tổ 4: ⚪ Chờ</div>
           </div>
+          <div style="margin-top: 12px; display: flex; justify-content: center;">
+            <div class="setup-net-status" id="setupNetStatus" style="font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; padding: 4px 14px; border-radius: 20px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399;">
+              <span class="net-dot">🟢</span> Máy chủ chuông: Trực Tuyến
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1101,6 +1136,9 @@
         <span style="font-size: 0.8rem; color: #f59e0b; margin-left: 6px;" id="arenaBattleSubTitle">Vật Lí 12</span>
       </div>
       <div style="display: flex; gap: 8px; align-items: center;">
+        <div class="net-status-badge" id="netStatusBadge" style="font-size: 0.78rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399; display: flex; align-items: center; gap: 4px;">
+          <span>🟢</span> Online
+        </div>
         <button class="btn-header" onclick="backToSetupView()">
           <span>⚙️</span> Đổi Bài Học
         </button>
@@ -1177,8 +1215,11 @@
               <span>🎁</span> Hộp Quà Bí Mật
             </button>
           </div>
-          <div>
-            <button class="btn-action primary" onclick="nextQuestion()">
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-action" onclick="prevQuestion()" title="Lùi về câu trước (ArrowLeft)">
+              <span>⬅️</span> Câu Trước
+            </button>
+            <button class="btn-action primary" onclick="nextQuestion()" title="Sang câu tiếp theo (ArrowRight)">
               <span>➡️</span> Câu Tiếp Theo
             </button>
           </div>
@@ -1632,42 +1673,161 @@
     const bc = ('BroadcastChannel' in window) ? new BroadcastChannel('vatli_arena_' + roomCode) : null;
     let mqttClient = null;
 
+    // Redundant MQTT Brokers for bulletproof school network failover
+    const MQTT_BROKERS = [
+      'wss://broker.emqx.io:8084/mqtt',
+      'wss://broker.hivemq.com:8884/mqtt',
+      'wss://test.mosquitto.org:8081/mqtt'
+    ];
+    let currentBrokerIdx = 0;
+    let reconnectTimeout = null;
+
     function generateRoomCode() {
       const num = Math.floor(1000 + Math.random() * 9000);
       return 'VT' + num;
     }
 
-    function initRealtime() {
-      try {
-        if (typeof mqtt !== 'undefined') {
-          mqttClient = mqtt.connect('wss://broker.emqx.io:8084/mqtt', {
-            clientId: 'arena_' + (isClientBuzzer ? 'c_' : 'h_') + Math.random().toString(16).substring(2, 8),
-            clean: true,
-            connectTimeout: 4000
-          });
-
-          mqttClient.on('connect', () => {
-            mqttClient.subscribe(topic);
-          });
-
-          mqttClient.on('message', (t, msg) => {
-            try {
-              const data = JSON.parse(msg.toString());
-              handleIncomingMessage(data);
-            } catch(e) {}
-          });
+    function updateNetStatusUI(status, label) {
+      // Setup Screen Indicator
+      const setupNet = document.getElementById('setupNetStatus');
+      if (setupNet) {
+        if (status === 'online') {
+          setupNet.style.background = 'rgba(16, 185, 129, 0.15)';
+          setupNet.style.borderColor = '#10b981';
+          setupNet.style.color = '#34d399';
+          setupNet.innerHTML = `<span class="net-dot">🟢</span> Máy chủ chuông: Trực Tuyến (${label})`;
+        } else if (status === 'connecting') {
+          setupNet.style.background = 'rgba(245, 158, 11, 0.15)';
+          setupNet.style.borderColor = '#f59e0b';
+          setupNet.style.color = '#fbbf24';
+          setupNet.innerHTML = `<span class="net-dot">🟡</span> Đang kết nối máy chủ (${label})...`;
+        } else {
+          setupNet.style.background = 'rgba(239, 68, 68, 0.15)';
+          setupNet.style.borderColor = '#ef4444';
+          setupNet.style.color = '#fca5a5';
+          setupNet.innerHTML = `<span class="net-dot">🔴</span> Ngoại tuyến (${label})`;
         }
-      } catch(e) {}
+      }
 
+      // Battle View Header Indicator
+      const battleNet = document.getElementById('netStatusBadge');
+      if (battleNet) {
+        if (status === 'online') {
+          battleNet.style.background = 'rgba(16, 185, 129, 0.15)';
+          battleNet.style.borderColor = '#10b981';
+          battleNet.style.color = '#34d399';
+          battleNet.innerHTML = `<span>🟢</span> Online`;
+        } else if (status === 'connecting') {
+          battleNet.style.background = 'rgba(245, 158, 11, 0.15)';
+          battleNet.style.borderColor = '#f59e0b';
+          battleNet.style.color = '#fbbf24';
+          battleNet.innerHTML = `<span>🟡</span> Connecting...`;
+        } else {
+          battleNet.style.background = 'rgba(239, 68, 68, 0.15)';
+          battleNet.style.borderColor = '#ef4444';
+          battleNet.style.color = '#fca5a5';
+          battleNet.innerHTML = `<span>🔴</span> Offline`;
+        }
+      }
+
+      // Mobile Client Indicator
+      const clientNet = document.querySelector('.client-status-badge');
+      if (clientNet) {
+        if (status === 'online') {
+          clientNet.style.background = 'rgba(16, 185, 129, 0.2)';
+          clientNet.style.borderColor = '#10b981';
+          clientNet.style.color = '#34d399';
+          clientNet.innerHTML = `<span>🟢</span> Đã Kết Nối Máy Chiếu`;
+        } else if (status === 'connecting') {
+          clientNet.style.background = 'rgba(245, 158, 11, 0.2)';
+          clientNet.style.borderColor = '#f59e0b';
+          clientNet.style.color = '#fbbf24';
+          clientNet.innerHTML = `<span>🟡</span> Đang Kết Nối Lại...`;
+        } else {
+          clientNet.style.background = 'rgba(239, 68, 68, 0.2)';
+          clientNet.style.borderColor = '#ef4444';
+          clientNet.style.color = '#fca5a5';
+          clientNet.innerHTML = `<span>🔴</span> Mất Kết Nối`;
+        }
+      }
+    }
+
+    function initRealtime() {
+      connectMqttBroker(0);
       if (bc) {
         bc.onmessage = e => handleIncomingMessage(e.data);
       }
     }
 
+    function connectMqttBroker(idx) {
+      if (typeof mqtt === 'undefined') {
+        updateNetStatusUI('online', 'Kênh Nội Bộ');
+        return;
+      }
+      currentBrokerIdx = idx % MQTT_BROKERS.length;
+      const brokerUrl = MQTT_BROKERS[currentBrokerIdx];
+      let brokerHost = 'Server';
+      try { brokerHost = brokerUrl.split('/')[2].split(':')[0]; } catch(e) {}
+      updateNetStatusUI('connecting', brokerHost);
+
+      try {
+        if (mqttClient) {
+          try { mqttClient.end(true); } catch(e) {}
+        }
+
+        mqttClient = mqtt.connect(brokerUrl, {
+          clientId: 'arena_' + (isClientBuzzer ? 'c_' : 'h_') + Math.random().toString(16).substring(2, 8),
+          clean: true,
+          connectTimeout: 5000,
+          reconnectPeriod: 0
+        });
+
+        mqttClient.on('connect', () => {
+          clearTimeout(reconnectTimeout);
+          updateNetStatusUI('online', brokerHost);
+          mqttClient.subscribe(topic);
+        });
+
+        mqttClient.on('error', () => {
+          scheduleBrokerFailover();
+        });
+
+        mqttClient.on('close', () => {
+          scheduleBrokerFailover();
+        });
+
+        mqttClient.on('message', (t, msg) => {
+          try {
+            const data = JSON.parse(msg.toString());
+            handleIncomingMessage(data);
+          } catch(e) {}
+        });
+
+        clearTimeout(reconnectTimeout);
+        reconnectTimeout = setTimeout(() => {
+          if (!mqttClient || !mqttClient.connected) {
+            scheduleBrokerFailover();
+          }
+        }, 6000);
+
+      } catch(e) {
+        scheduleBrokerFailover();
+      }
+    }
+
+    function scheduleBrokerFailover() {
+      clearTimeout(reconnectTimeout);
+      reconnectTimeout = setTimeout(() => {
+        connectMqttBroker(currentBrokerIdx + 1);
+      }, 3000);
+    }
+
     function broadcastMsg(data) {
       if (bc) bc.postMessage(data);
       if (mqttClient && mqttClient.connected) {
-        mqttClient.publish(topic, JSON.stringify(data));
+        try {
+          mqttClient.publish(topic, JSON.stringify(data));
+        } catch(e) {}
       }
     }
 
@@ -1677,10 +1837,22 @@
         if (data.action === 'ARM_BUZZER') clientOnBuzzerArmed(data.excluded || []);
         else if (data.action === 'LOCK_BUZZER') clientOnBuzzerLocked(data.winnerId, data.winnerName);
         else if (data.action === 'RESET_BUZZER') clientOnBuzzerReset();
+        else if (data.action === 'SYNC_STATE') clientOnSyncState(data);
       } else {
         if (data.action === 'CLIENT_JOIN') hostOnClientJoin(data.teamId);
         else if (data.action === 'CLIENT_BUZZ') hostOnClientBuzz(data.teamId, data.teamName);
       }
+    }
+
+    function getBuzzerUrl() {
+      const isLocalFile = window.location.protocol === 'file:' || !window.location.origin || window.location.origin === 'null';
+      let base = '';
+      if (isLocalFile) {
+        base = 'https://tikz-physics.github.io/trac-nghiem-vat-li-thpt/dau-truong-vat-li.html';
+      } else {
+        base = window.location.origin + window.location.pathname;
+      }
+      return base + '?role=buzzer&room=' + roomCode;
     }
 
     /* ==========================================================================
@@ -1695,8 +1867,8 @@
       document.getElementById('modalRoomCode').innerText = roomCode;
       document.getElementById('roomCodeDisplay').innerText = roomCode;
 
-      // QR Image URL
-      const buzzerUrl = window.location.origin + window.location.pathname + '?role=buzzer&room=' + roomCode;
+      // QR Image URL with local file fallback
+      const buzzerUrl = getBuzzerUrl();
       const qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=' + encodeURIComponent(buzzerUrl);
       document.getElementById('setupQrImg').src = qrApiUrl;
       document.getElementById('qrImg').src = qrApiUrl;
@@ -1760,7 +1932,6 @@
       if (!container) return;
 
       if (selectedLessonId !== 'all') {
-        // Single lesson selected: exactly 10 questions SGK!
         if (selectedQCount > 10) selectedQCount = 10;
         if (selectedQCount !== 5 && selectedQCount !== 10) selectedQCount = 10;
 
@@ -1772,7 +1943,6 @@
           badge.innerHTML = `💡 <span>Bài học này có <b>10 câu hỏi</b> chuẩn SGK. Đã tự động giới hạn số câu để không bị chọn nhầm vượt quá.</span>`;
         }
       } else {
-        // Multiple lessons / whole grade / all 3 grades
         if (![5, 10, 15, 20, 30].includes(selectedQCount)) selectedQCount = 10;
 
         const totalAvail = selectedGrade === 'all' ? 850 : (selectedGrade === 10 ? 340 : (selectedGrade === 11 ? 260 : 250));
@@ -1837,6 +2007,8 @@
     let isTimerRunning = false;
     let isBuzzerArmed = false;
     let buzzedTeamId = null;
+    let isQuestionAnswered = false;
+    let failedTeamsThisQuestion = [];
 
     let teams = [
       { id: 1, name: "TỔ 1 (EINSTEIN)", score: 100, avatar: "⚛️", color: "#38bdf8", isOnline: false, hasShield: false, hasStar: false },
@@ -1851,6 +2023,26 @@
       { text: "⚡ Tia Sét Tri Thức: Nhận ngay +30 điểm thưởng trực tiếp!", effect: t => t.score += 30 },
       { text: "🎁 Quà May Mắn: Nhận ngay +20 điểm thưởng!", effect: t => t.score += 20 }
     ];
+
+    // Helper functions: unified point & round definition across 5, 10, 15, 20, 30 questions
+    function getQuestionRound(idx, total = battleQuestions.length) {
+      if (total <= 0) return 1;
+      const r1End = Math.ceil(total * 0.3);
+      const r2End = Math.ceil(total * 0.7);
+      if (idx < r1End) return 1;
+      if (idx < r2End) return 2;
+      return 3;
+    }
+
+    function getQuestionPoints(idx, total = battleQuestions.length) {
+      const r = getQuestionRound(idx, total);
+      return r === 1 ? 20 : (r === 2 ? 30 : 40);
+    }
+
+    function getQuestionTime(idx, total = battleQuestions.length) {
+      const r = getQuestionRound(idx, total);
+      return r === 1 ? 20 : (r === 2 ? 15 : 30);
+    }
 
     function loadQuestionsForBattle(grade, lessonKey, count) {
       battleQuestions = [];
@@ -1905,6 +2097,25 @@
         card.id = `teamCard_${team.id}`;
         if (buzzedTeamId === team.id) card.classList.add('buzzed');
 
+        const isFailed = failedTeamsThisQuestion.includes(team.id);
+        const canBuzz = isBuzzerArmed && !buzzedTeamId && !isQuestionAnswered && !isFailed;
+
+        let buzzerBtnClass = 'btn-buzzer-team';
+        let buzzerBtnText = `🔔 Giành Chuông (Phím ${team.id})`;
+        if (isFailed) {
+          buzzerBtnClass += ' failed';
+          buzzerBtnText = `❌ Đã Trả Lời Sai`;
+        } else if (buzzedTeamId === team.id) {
+          buzzerBtnClass += ' armed';
+          buzzerBtnText = `🎯 Đang Giành Quyền!`;
+        } else if (canBuzz) {
+          buzzerBtnClass += ' armed';
+          buzzerBtnText = `🔔 BẤM CHUÔNG (Phím ${team.id})`;
+        } else {
+          buzzerBtnClass += ' disabled';
+          buzzerBtnText = isQuestionAnswered ? `🔒 Đã Hiện Đáp Án` : `⏳ Chờ Mở Chuông`;
+        }
+
         card.innerHTML = `
           <div>
             <div class="team-header">
@@ -1931,8 +2142,8 @@
               <button class="btn-team-score btn-plus" onclick="adjustScore(${team.id}, 20)">+20</button>
               <button class="btn-team-score btn-minus" onclick="adjustScore(${team.id}, -10)">-10</button>
             </div>
-            <button class="btn-buzzer-team" onclick="triggerBuzzer(${team.id})">
-              🔔 Giành Chuông (Phím ${team.id})
+            <button class="${buzzerBtnClass}" onclick="triggerBuzzer(${team.id})">
+              ${buzzerBtnText}
             </button>
           </div>
         `;
@@ -1945,26 +2156,30 @@
         openVictoryPodium();
         return;
       }
-      currentQIdx = idx;
-      const q = battleQuestions[idx];
+      currentQIdx = Math.max(0, idx);
+      const q = battleQuestions[currentQIdx];
 
+      // Reset question cycle states
+      isQuestionAnswered = false;
+      failedTeamsThisQuestion = [];
       isBuzzerArmed = false;
       buzzedTeamId = null;
+
       document.getElementById('buzzerAlert').classList.remove('show');
       document.getElementById('explanationBox').classList.remove('show');
       stopTimer();
 
       broadcastMsg({ action: 'RESET_BUZZER' });
 
-      const round = idx < Math.ceil(battleQuestions.length * 0.3) ? 1 : (idx < Math.ceil(battleQuestions.length * 0.7) ? 2 : 3);
-      const points = round === 1 ? 20 : (round === 2 ? 30 : 40);
+      const round = getQuestionRound(currentQIdx);
+      const points = getQuestionPoints(currentQIdx);
 
       const roundTag = document.getElementById('roundTag');
       roundTag.className = `round-tag round-${round}`;
       roundTag.innerHTML = `<span>⚡</span> VÒNG ${round}: ${round === 1 ? 'KHỞI ĐỘNG' : (round === 2 ? 'TĂNG TỐC' : 'VỀ ĐÍCH')}`;
 
       document.getElementById('qPointBadge').innerText = `+${points} ĐIỂM`;
-      document.getElementById('qTitle').innerText = `Câu ${idx + 1}/${battleQuestions.length}: ${q.q}`;
+      document.getElementById('qTitle').innerHTML = `Câu ${currentQIdx + 1}/${battleQuestions.length}: ${q.q}`;
 
       const imgWrap = document.getElementById('qImgWrap');
       if (q.svgGraph) {
@@ -1989,68 +2204,83 @@
         grid.appendChild(btn);
       });
 
-      timeLeft = round === 1 ? 20 : (round === 2 ? 15 : 30);
+      timeLeft = getQuestionTime(currentQIdx);
       updateTimerDisplay();
       renderTeams();
     }
 
     function selectOption(oIdx) {
+      if (isQuestionAnswered) return;
       const q = battleQuestions[currentQIdx];
       const optBtn = document.getElementById(`optBtn_${oIdx}`);
-      if (!optBtn) return;
+      const isCorrect = (oIdx === q.ans);
 
-      if (oIdx === q.ans) {
-        optBtn.classList.add('correct');
-        playVictoryFanfare5s(); // 5+ SECONDS VICTORY SOUND
+      if (optBtn) {
+        optBtn.classList.add(isCorrect ? 'correct' : 'wrong');
+      }
+
+      // If a team is currently buzzing, delegate to judgeBuzzedTeam
+      if (buzzedTeamId !== null) {
+        judgeBuzzedTeam(isCorrect);
+        return;
+      }
+
+      // If no team buzzed: teacher directly selects answer to demonstrate/reveal
+      if (isCorrect) {
+        playVictoryFanfare5s();
         triggerConfetti(60);
-        if (buzzedTeamId) {
-          const team = teams.find(t => t.id === buzzedTeamId);
-          const pts = currentQIdx < 3 ? 20 : (currentQIdx < 7 ? 30 : 40);
-          let earned = pts;
-          if (team.hasStar) { earned *= 2; team.hasStar = false; }
-          team.score += earned;
-          renderTeams();
-        }
       } else {
-        optBtn.classList.add('wrong');
         soundWrong();
-        if (buzzedTeamId) {
-          const team = teams.find(t => t.id === buzzedTeamId);
-          const pts = currentQIdx < 3 ? 20 : (currentQIdx < 7 ? 30 : 40);
-          if (!team.hasShield) {
-            team.score = Math.max(0, team.score - Math.floor(pts / 2));
-          } else {
-            team.hasShield = false;
-          }
-          renderTeams();
-        }
       }
       revealAnswer();
     }
 
     function revealAnswer() {
+      if (currentQIdx >= battleQuestions.length) return;
       const q = battleQuestions[currentQIdx];
+      isQuestionAnswered = true;
+      isBuzzerArmed = false;
+      stopTimer();
+
+      // Highlight correct button
       const correctBtn = document.getElementById(`optBtn_${q.ans}`);
       if (correctBtn) correctBtn.classList.add('correct');
 
+      // Disable all options so they cannot be clicked repeatedly
+      document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.classList.add('disabled');
+        btn.style.pointerEvents = 'none';
+      });
+
+      // Hide buzzer alert
+      document.getElementById('buzzerAlert').classList.remove('show');
+
+      // Show explanation
       const expBox = document.getElementById('explanationBox');
       document.getElementById('explanationContent').innerHTML = q.exp || 'Đã xác nhận kết quả!';
       expBox.classList.add('show');
-      stopTimer();
+
+      // Inform all mobile clients that question is completed
+      broadcastMsg({ action: 'LOCK_BUZZER', winnerId: buzzedTeamId || 0, winnerName: 'ĐÃ HIỆN ĐÁP ÁN' });
+      renderTeams();
     }
 
     function activateBuzzer() {
+      if (isQuestionAnswered) return;
       isBuzzerArmed = true;
       buzzedTeamId = null;
       document.getElementById('buzzerAlert').classList.remove('show');
       renderTeams();
       startTimer();
 
-      broadcastMsg({ action: 'ARM_BUZZER' });
+      broadcastMsg({ action: 'ARM_BUZZER', excluded: failedTeamsThisQuestion });
     }
 
     function triggerBuzzer(teamId) {
-      if (buzzedTeamId !== null) return;
+      // Must be armed, no other team buzzing, question not answered, and team hasn't already failed
+      if (!isBuzzerArmed || buzzedTeamId !== null || isQuestionAnswered) return;
+      if (failedTeamsThisQuestion.includes(teamId)) return;
+
       buzzedTeamId = teamId;
       isBuzzerArmed = false;
       stopTimer();
@@ -2059,40 +2289,70 @@
       soundExtremeBuzzer();
 
       const team = teams.find(t => t.id === teamId);
-      document.getElementById('buzzerTeamName').innerText = team.name;
-      document.getElementById('buzzerAlert').classList.add('show');
-      renderTeams();
-
-      broadcastMsg({ action: 'LOCK_BUZZER', winnerId: team.id, winnerName: team.name });
+      if (team) {
+        document.getElementById('buzzerTeamName').innerText = team.name;
+        document.getElementById('buzzerAlert').classList.add('show');
+        renderTeams();
+        broadcastMsg({ action: 'LOCK_BUZZER', winnerId: team.id, winnerName: team.name });
+      }
     }
 
     function judgeBuzzedTeam(isCorrect) {
-      const pts = currentQIdx < 3 ? 20 : (currentQIdx < 7 ? 30 : 40);
-      if (buzzedTeamId) {
-        const team = teams.find(t => t.id === buzzedTeamId);
-        if (isCorrect) {
-          let earned = pts;
-          if (team.hasStar) { earned *= 2; team.hasStar = false; }
-          team.score += earned;
-          playVictoryFanfare5s(); // 5+ SECONDS VICTORY
-          triggerConfetti(60);
-          revealAnswer();
+      if (!buzzedTeamId) return;
+      const team = teams.find(t => t.id === buzzedTeamId);
+      if (!team) return;
+
+      const pts = getQuestionPoints(currentQIdx);
+
+      if (isCorrect) {
+        if (isQuestionAnswered) return;
+        isQuestionAnswered = true;
+
+        let earned = pts;
+        if (team.hasStar) {
+          earned *= 2;
+          team.hasStar = false;
+        }
+        team.score += earned;
+
+        playVictoryFanfare5s();
+        triggerConfetti(70);
+        revealAnswer();
+      } else {
+        // Penalize wrong answer
+        if (!team.hasShield) {
+          team.score = Math.max(0, team.score - Math.floor(pts / 2));
         } else {
-          if (!team.hasShield) {
-            team.score = Math.max(0, team.score - Math.floor(pts / 2));
-          } else {
-            team.hasShield = false;
-          }
-          soundWrong();
-          document.getElementById('buzzerAlert').classList.remove('show');
-          const lastBuzzed = buzzedTeamId;
-          buzzedTeamId = null;
+          team.hasShield = false;
+        }
+        soundWrong();
+
+        if (!failedTeamsThisQuestion.includes(buzzedTeamId)) {
+          failedTeamsThisQuestion.push(buzzedTeamId);
+        }
+
+        document.getElementById('buzzerAlert').classList.remove('show');
+        buzzedTeamId = null;
+
+        // Check if all teams have failed
+        if (failedTeamsThisQuestion.length >= teams.length) {
+          isBuzzerArmed = false;
+          isQuestionAnswered = true;
+          stopTimer();
+          revealAnswer();
+          const expBox = document.getElementById('explanationBox');
+          document.getElementById('explanationContent').innerHTML = 
+            '<div style="color: #ef4444; font-weight: 700; margin-bottom: 6px;">❌ Tất cả các đội đều đã trả lời sai ở câu này!</div>' + 
+            (battleQuestions[currentQIdx].exp || '');
+          broadcastMsg({ action: 'LOCK_BUZZER', winnerId: 0, winnerName: 'TẤT CẢ ĐỀU SAI' });
+        } else {
+          // Re-arm buzzer for remaining teams!
           isBuzzerArmed = true;
           startTimer();
-          broadcastMsg({ action: 'ARM_BUZZER', excluded: [lastBuzzed] });
+          broadcastMsg({ action: 'ARM_BUZZER', excluded: failedTeamsThisQuestion });
         }
-        renderTeams();
       }
+      renderTeams();
     }
 
     function hostOnClientJoin(teamId) {
@@ -2106,10 +2366,21 @@
           chip.innerHTML = `${team.avatar} ${team.name.split(' ')[0]}: 🟢 Đã kết nối`;
         }
       }
+      // Send SYNC_STATE to sync client's buzzer state immediately
+      broadcastMsg({
+        action: 'SYNC_STATE',
+        targetTeamId: teamId,
+        isBuzzerArmed: isBuzzerArmed,
+        buzzedTeamId: buzzedTeamId,
+        buzzedTeamName: buzzedTeamId ? (teams.find(t => t.id === buzzedTeamId)?.name || '') : '',
+        excluded: failedTeamsThisQuestion,
+        isQuestionAnswered: isQuestionAnswered,
+        currentQIdx: currentQIdx
+      });
     }
 
     function hostOnClientBuzz(teamId, teamName) {
-      if (isBuzzerArmed && buzzedTeamId === null) {
+      if (isBuzzerArmed && buzzedTeamId === null && !isQuestionAnswered && !failedTeamsThisQuestion.includes(teamId)) {
         triggerBuzzer(teamId);
       }
     }
@@ -2118,27 +2389,42 @@
       if (isTimerRunning) stopTimer();
       else startTimer();
     }
+
     function startTimer() {
+      stopTimer(); // Always clear previous interval first to avoid acceleration!
       isTimerRunning = true;
-      document.getElementById('btnTimer').innerHTML = '<span>⏸️</span> Tạm Dừng (Space)';
+      const btn = document.getElementById('btnTimer');
+      if (btn) btn.innerHTML = '<span>⏸️</span> Tạm Dừng (Space)';
+
       timerInterval = setInterval(() => {
         timeLeft--;
         soundTick();
         updateTimerDisplay();
         if (timeLeft <= 0) {
           stopTimer();
+          isBuzzerArmed = false;
           soundWrong();
+          // Lock buzzer when time runs out
+          broadcastMsg({ action: 'LOCK_BUZZER', winnerId: 0, winnerName: 'HẾT GIỜ' });
+          renderTeams();
         }
       }, 1000);
     }
+
     function stopTimer() {
       isTimerRunning = false;
-      clearInterval(timerInterval);
-      document.getElementById('btnTimer').innerHTML = '<span>▶️</span> Tiếp Tục (Space)';
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      const btn = document.getElementById('btnTimer');
+      if (btn) btn.innerHTML = '<span>▶️</span> Tiếp Tục (Space)';
     }
+
     function updateTimerDisplay() {
       const timerEl = document.getElementById('timerVal');
-      timerEl.innerText = timeLeft;
+      if (!timerEl) return;
+      timerEl.innerText = Math.max(0, timeLeft);
       timerEl.className = 'timer-val';
       if (timeLeft <= 5) timerEl.classList.add('danger');
       else if (timeLeft <= 10) timerEl.classList.add('warning');
@@ -2147,7 +2433,7 @@
     function adjustScore(teamId, delta) {
       const team = teams.find(t => t.id === teamId);
       if (team) {
-        team.score += delta;
+        team.score = Math.max(0, team.score + delta);
         renderTeams();
         if (delta > 0) playTone(784, 0.2, 'triangle', 0.3);
         else soundWrong();
@@ -2156,6 +2442,12 @@
 
     function nextQuestion() {
       loadQuestion(currentQIdx + 1);
+    }
+
+    function prevQuestion() {
+      if (currentQIdx > 0) {
+        loadQuestion(currentQIdx - 1);
+      }
     }
 
     function openQrModal() { document.getElementById('qrModal').classList.add('open'); }
@@ -2188,7 +2480,7 @@
     }
 
     function openVictoryPodium() {
-      playVictoryFanfare5s(); // 5+ SECONDS VICTORY
+      playVictoryFanfare5s();
       triggerConfetti(100);
       const sorted = [...teams].sort((a, b) => b.score - a.score);
       document.getElementById('pName1').innerText = sorted[0].name;
@@ -2201,6 +2493,7 @@
     }
 
     function resetBattle() {
+      if (!confirm('Bạn có chắc chắn muốn làm mới điểm số và bắt đầu lại trận đấu từ đầu không?')) return;
       teams.forEach(t => {
         t.score = 100;
         t.hasStar = false;
@@ -2218,10 +2511,35 @@
 
     function setupKeyboardListeners() {
       window.addEventListener('keydown', e => {
-        if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); toggleTimer(); }
-        else if (e.key === 'Enter') { revealAnswer(); }
-        else if (e.key === 'b' || e.key === 'B') { activateBuzzer(); }
-        else if (['1', '2', '3', '4'].includes(e.key)) { triggerBuzzer(parseInt(e.key)); }
+        const targetTag = e.target ? e.target.tagName : '';
+        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(targetTag)) return;
+
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+          return;
+        }
+
+        if (document.querySelector('.modal-overlay.open')) return;
+
+        if (e.key === ' ' || e.code === 'Space') {
+          e.preventDefault();
+          toggleTimer();
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          revealAnswer();
+        } else if (e.key === 'b' || e.key === 'B') {
+          e.preventDefault();
+          activateBuzzer();
+        } else if (['1', '2', '3', '4'].includes(e.key)) {
+          e.preventDefault();
+          triggerBuzzer(parseInt(e.key));
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          nextQuestion();
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          prevQuestion();
+        }
       });
     }
 
@@ -2266,6 +2584,19 @@
       document.getElementById('pickTeamScreen').style.display = 'flex';
     }
 
+    function clientOnSyncState(data) {
+      if (data.targetTeamId && data.targetTeamId !== myTeamId) return;
+      if (data.isQuestionAnswered) {
+        clientOnBuzzerReset();
+      } else if (data.buzzedTeamId) {
+        clientOnBuzzerLocked(data.buzzedTeamId, data.buzzedTeamName);
+      } else if (data.isBuzzerArmed) {
+        clientOnBuzzerArmed(data.excluded || []);
+      } else {
+        clientOnBuzzerReset();
+      }
+    }
+
     function clientOnBuzzerArmed(excluded = []) {
       const btn = document.getElementById('giantBuzzerBtn');
       if (excluded.includes(myTeamId)) {
@@ -2295,10 +2626,17 @@
         playVictoryFanfare5s();
         triggerConfetti(40);
         if (navigator.vibrate) navigator.vibrate([100, 50, 150]);
+      } else if (winnerId === 0) {
+        btn.className = 'giant-buzzer-btn locked';
+        document.getElementById('buzzerIcon').innerText = '⏰';
+        document.getElementById('buzzerMainText').innerText = winnerName || 'HẾT GIỜ!';
+        document.getElementById('buzzerSubText').innerText = 'Không còn quyền bấm chuông!';
+        clientBuzzerState = 'LOCKED';
       } else {
         btn.className = 'giant-buzzer-btn locked';
         document.getElementById('buzzerIcon').innerText = '🔒';
-        document.getElementById('buzzerMainText').innerText = winnerName.split(' ')[0] + ' ĐÃ BẤM!';
+        const displayWinner = (winnerName || '').split(' ')[0] || 'ĐỐI THỦ';
+        document.getElementById('buzzerMainText').innerText = displayWinner + ' ĐÃ BẤM!';
         document.getElementById('buzzerSubText').innerText = 'Đang nghe đối thủ trả lời...';
         clientBuzzerState = 'LOST';
       }
@@ -2362,8 +2700,25 @@
       initRealtime();
       if (isClientBuzzer) {
         initClient();
+        const clientState = urlParams.get('client_state');
+        if (clientState === 'ready') {
+          setTimeout(() => {
+            clientJoinTeam(1, 'TỔ 1 (EINSTEIN)', '⚛️', '#38bdf8');
+            clientOnBuzzerArmed([]);
+          }, 150);
+        }
       } else {
         initSetupScreen();
+        const autoState = urlParams.get('state');
+        if (autoState === 'battle') {
+          setTimeout(() => launchBattleFromSetup(), 100);
+        } else if (autoState === 'armed') {
+          setTimeout(() => { launchBattleFromSetup(); activateBuzzer(); }, 100);
+        } else if (autoState === 'buzzed') {
+          setTimeout(() => { launchBattleFromSetup(); activateBuzzer(); triggerBuzzer(1); }, 100);
+        } else if (autoState === 'revealed') {
+          setTimeout(() => { launchBattleFromSetup(); activateBuzzer(); triggerBuzzer(1); judgeBuzzedTeam(true); }, 100);
+        }
       }
     });
   </script>
