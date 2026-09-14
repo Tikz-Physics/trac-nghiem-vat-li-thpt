@@ -590,12 +590,25 @@
     }
     .option-btn.correct .option-prefix { background: #10b981; color: #ffffff; }
     .option-btn.wrong {
-      background: rgba(239, 68, 68, 0.2) !important;
+      background: rgba(239, 68, 68, 0.28) !important;
       border-color: #ef4444 !important;
       color: #fecaca !important;
-      opacity: 0.6;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.5) !important;
+      animation: shakeWrong 0.3s ease;
     }
     .option-btn.wrong .option-prefix { background: #ef4444; color: #ffffff; }
+    
+    @keyframes shakeWrong {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .option-btn.eliminated {
+      display: none !important;
+      pointer-events: none !important;
+    }
+
     .option-btn.disabled {
       cursor: default !important;
       pointer-events: none !important;
@@ -611,16 +624,36 @@
       margin-bottom: 14px;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
       animation: slideDown 0.3s ease-out;
     }
     .buzzer-alert.show { display: flex; }
     .buzzer-team-text {
-      font-size: 1.18rem;
+      font-size: 1.15rem;
       font-weight: 900;
       color: #fbbf24;
       display: flex;
       align-items: center;
       gap: 10px;
+    }
+    .buzzer-guide-badge {
+      background: rgba(245, 158, 11, 0.22);
+      border: 1.5px solid #fbbf24;
+      color: #fef08a;
+      padding: 7px 16px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
+      animation: pulseGuide 1s infinite alternate;
+    }
+    @keyframes pulseGuide {
+      from { opacity: 0.88; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1.02); }
     }
 
     @keyframes slideDown {
@@ -969,11 +1002,54 @@
       text-align: center;
     }
 
+    .mystery-target-wrap {
+      margin: 12px 0 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mystery-target-label {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+    .mystery-target-chips {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .mystery-chip {
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mystery-chip:hover {
+      border-color: #38bdf8;
+      color: #ffffff;
+    }
+    .mystery-chip.selected {
+      border-color: #fbbf24;
+      background: rgba(245, 158, 11, 0.25);
+      color: #fde68a;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
+    }
+
     .boxes-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
-      margin: 20px 0;
+      margin: 16px 0;
     }
     .mystery-box-item {
       background: rgba(255, 255, 255, 0.05);
@@ -982,12 +1058,26 @@
       padding: 20px 8px;
       font-size: 2.6rem;
       cursor: pointer;
-      transition: all 0.25s;
+      transition: all 0.2s;
+      position: relative;
     }
-    .mystery-box-item:hover:not(.opened) {
+    .mystery-box-item:hover:not(.opened):not(.rolling-highlight) {
       background: rgba(245, 158, 11, 0.2);
       transform: translateY(-6px) scale(1.05);
       border-color: #f59e0b;
+    }
+    .mystery-box-item.rolling-highlight {
+      background: rgba(245, 158, 11, 0.45) !important;
+      border: 3px solid #fbbf24 !important;
+      transform: scale(1.15) translateY(-8px) !important;
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.85) !important;
+    }
+    .mystery-box-item.opened {
+      background: rgba(16, 185, 129, 0.22) !important;
+      border: 2px solid #10b981 !important;
+      transform: scale(1.08) !important;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.45) !important;
+      cursor: default;
     }
 
     .podium-box {
@@ -1172,15 +1262,10 @@
         <!-- Buzzer Alert Notification -->
         <div class="buzzer-alert" id="buzzerAlert">
           <div class="buzzer-team-text">
-            <span>🔔</span> <span id="buzzerTeamName">TỔ 1 (EINSTEIN)</span> ĐÃ BẤM CHUÔNG GIÀNH QUYỀN TRẢ LỜI!
+            <span>🔔</span> <span id="buzzerTeamName">TỔ 1 (EINSTEIN)</span> ĐÃ BẤM CHUÔNG GIÀNH QUYỀN!
           </div>
-          <div style="display: flex; gap: 8px;">
-            <button class="btn-action primary" style="padding: 6px 14px;" onclick="judgeBuzzedTeam(true)">
-              ✓ Đúng (+Điểm)
-            </button>
-            <button class="btn-action danger" style="padding: 6px 14px;" onclick="judgeBuzzedTeam(false)">
-              ✗ Sai (-Điểm & Mở Lại Chuông)
-            </button>
+          <div class="buzzer-guide-badge">
+            <span>👉</span> Thầy Cô hãy bấm vào phương án tổ chọn trên màn hình
           </div>
         </div>
 
@@ -1326,20 +1411,31 @@
 
   <div class="modal-overlay" id="mysteryModal">
     <div class="modal-box">
-      <h2 style="color: #f59e0b; margin-bottom: 8px;">🎁 HỘP QUÀ BÍ MẬT DÀNH CHO ĐỘI CHIẾN THẮNG</h2>
-      <p style="color: #94a3b8; font-size: 0.95rem;">Chọn 1 trong 4 hộp quà may mắn để nhận đặc quyền hoặc điểm thưởng!</p>
-      
+      <h2 style="color: #f59e0b; margin-bottom: 6px;">🎁 HỘP QUÀ BÍ MẬT MAY MẮN</h2>
+      <p style="color: #94a3b8; font-size: 0.92rem;">Quay ngẫu nhiên hoặc bấm trực tiếp 1 trong 4 hộp quà để nhận đặc quyền / điểm thưởng!</p>
+
+      <div class="mystery-target-wrap">
+        <div class="mystery-target-label">🎯 Đội nhận phần thưởng từ hộp quà:</div>
+        <div class="mystery-target-chips" id="mysteryTeamChips"></div>
+      </div>
+
       <div class="boxes-grid">
-        <div class="mystery-box-item" onclick="openBox(0, this)">📦</div>
-        <div class="mystery-box-item" onclick="openBox(1, this)">🎁</div>
-        <div class="mystery-box-item" onclick="openBox(2, this)">💎</div>
-        <div class="mystery-box-item" onclick="openBox(3, this)">🏆</div>
+        <div class="mystery-box-item" id="mbox_0" onclick="openBox(0, this)">📦</div>
+        <div class="mystery-box-item" id="mbox_1" onclick="openBox(1, this)">🎁</div>
+        <div class="mystery-box-item" id="mbox_2" onclick="openBox(2, this)">💎</div>
+        <div class="mystery-box-item" id="mbox_3" onclick="openBox(3, this)">🏆</div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 10px; margin: 10px 0;">
+        <button class="btn-action primary" id="btnRollMystery" style="padding: 10px 24px; font-size: 1.05rem;" onclick="rollRandomMysteryBox()">
+          <span>🎲</span> Quay Hộp Quà Ngẫu Nhiên
+        </button>
       </div>
 
       <div class="mystery-result-box" id="mysteryResult" style="display: none; background: rgba(245, 158, 11, 0.15); border: 1px solid #f59e0b; border-radius: 12px; padding: 14px; font-size: 1.1rem; font-weight: 800; color: #fde68a; margin-top: 14px;"></div>
 
-      <div style="margin-top: 20px;">
-        <button class="btn-action primary" style="margin: 0 auto;" onclick="closeModal('mysteryModal')">Đóng Hộp Quà</button>
+      <div style="margin-top: 18px;">
+        <button class="btn-action" style="margin: 0 auto;" onclick="closeModal('mysteryModal')">Đóng Hộp Quà</button>
       </div>
     </div>
   </div>
@@ -2206,33 +2302,118 @@
 
       timeLeft = getQuestionTime(currentQIdx);
       updateTimerDisplay();
-      renderTeams();
+
+      // AUTO-ARM BUZZER IMMEDIATELY ON SWITCHING TO QUESTION!
+      activateBuzzer();
     }
 
     function selectOption(oIdx) {
       if (isQuestionAnswered) return;
       const q = battleQuestions[currentQIdx];
       const optBtn = document.getElementById(`optBtn_${oIdx}`);
+      if (!optBtn || optBtn.classList.contains('eliminated') || optBtn.style.display === 'none') return;
+
       const isCorrect = (oIdx === q.ans);
 
-      if (optBtn) {
-        optBtn.classList.add(isCorrect ? 'correct' : 'wrong');
-      }
-
-      // If a team is currently buzzing, delegate to judgeBuzzedTeam
+      // SCENARIO 1: A team has buzzed and teacher clicks the team's announced option
       if (buzzedTeamId !== null) {
-        judgeBuzzedTeam(isCorrect);
+        const team = teams.find(t => t.id === buzzedTeamId);
+        const pts = getQuestionPoints(currentQIdx);
+
+        if (isCorrect) {
+          optBtn.classList.add('correct');
+          if (team) {
+            let earned = pts;
+            if (team.hasStar) {
+              earned *= 2;
+              team.hasStar = false;
+            }
+            team.score += earned;
+          }
+
+          playVictoryFanfare5s();
+          triggerConfetti(70);
+          document.getElementById('buzzerAlert').classList.remove('show');
+          revealAnswer();
+          renderTeams();
+        } else {
+          optBtn.classList.add('wrong');
+          soundWrong();
+
+          if (team) {
+            if (!team.hasShield) {
+              team.score = Math.max(0, team.score - Math.floor(pts / 2));
+            } else {
+              team.hasShield = false;
+            }
+          }
+
+          if (!failedTeamsThisQuestion.includes(buzzedTeamId)) {
+            failedTeamsThisQuestion.push(buzzedTeamId);
+          }
+
+          document.getElementById('buzzerAlert').classList.remove('show');
+          buzzedTeamId = null;
+          renderTeams();
+
+          // Hide / eliminate the wrong option after 350ms so remaining teams cannot pick it
+          setTimeout(() => {
+            optBtn.classList.add('eliminated');
+            optBtn.style.display = 'none';
+
+            const remainingOpts = Array.from(document.querySelectorAll('.option-btn'))
+              .filter(b => !b.classList.contains('eliminated') && b.style.display !== 'none');
+
+            // If all teams have failed OR only 1 option remains -> auto reveal answer
+            if (failedTeamsThisQuestion.length >= teams.length || remainingOpts.length <= 1) {
+              revealAnswer();
+              const expBox = document.getElementById('explanationBox');
+              document.getElementById('explanationContent').innerHTML = 
+                '<div style="color: #ef4444; font-weight: 700; margin-bottom: 6px;">❌ Các tổ đã bấm chuông đều trả lời sai!</div>' + 
+                (battleQuestions[currentQIdx].exp || '');
+              broadcastMsg({ action: 'LOCK_BUZZER', winnerId: 0, winnerName: 'HẾT LƯỢT TRẢ LỜI' });
+            } else {
+              // Re-arm buzzer immediately for remaining teams!
+              isBuzzerArmed = true;
+              renderTeams();
+              startTimer();
+              broadcastMsg({ action: 'ARM_BUZZER', excluded: failedTeamsThisQuestion });
+            }
+          }, 350);
+        }
         return;
       }
 
-      // If no team buzzed: teacher directly selects answer to demonstrate/reveal
+      // SCENARIO 2: No team buzzed - teacher directly clicks an option
       if (isCorrect) {
+        optBtn.classList.add('correct');
         playVictoryFanfare5s();
         triggerConfetti(60);
+        revealAnswer();
       } else {
+        optBtn.classList.add('wrong');
         soundWrong();
+        setTimeout(() => {
+          optBtn.classList.add('eliminated');
+          optBtn.style.display = 'none';
+          const remainingOpts = Array.from(document.querySelectorAll('.option-btn'))
+            .filter(b => !b.classList.contains('eliminated') && b.style.display !== 'none');
+          if (remainingOpts.length <= 1) {
+            revealAnswer();
+          }
+        }, 350);
       }
-      revealAnswer();
+    }
+
+    function judgeBuzzedTeam(isCorrect) {
+      if (!buzzedTeamId) return;
+      const q = battleQuestions[currentQIdx];
+      if (isCorrect) {
+        selectOption(q.ans);
+      } else {
+        const wrongOptIdx = [0, 1, 2, 3].find(idx => idx !== q.ans);
+        if (wrongOptIdx !== undefined) selectOption(wrongOptIdx);
+      }
     }
 
     function revealAnswer() {
@@ -2242,11 +2423,15 @@
       isBuzzerArmed = false;
       stopTimer();
 
-      // Highlight correct button
+      // Ensure correct button is visible and highlighted green
       const correctBtn = document.getElementById(`optBtn_${q.ans}`);
-      if (correctBtn) correctBtn.classList.add('correct');
+      if (correctBtn) {
+        correctBtn.style.display = 'flex';
+        correctBtn.classList.remove('eliminated');
+        correctBtn.classList.add('correct');
+      }
 
-      // Disable all options so they cannot be clicked repeatedly
+      // Disable all options
       document.querySelectorAll('.option-btn').forEach(btn => {
         btn.classList.add('disabled');
         btn.style.pointerEvents = 'none';
@@ -2295,64 +2480,6 @@
         renderTeams();
         broadcastMsg({ action: 'LOCK_BUZZER', winnerId: team.id, winnerName: team.name });
       }
-    }
-
-    function judgeBuzzedTeam(isCorrect) {
-      if (!buzzedTeamId) return;
-      const team = teams.find(t => t.id === buzzedTeamId);
-      if (!team) return;
-
-      const pts = getQuestionPoints(currentQIdx);
-
-      if (isCorrect) {
-        if (isQuestionAnswered) return;
-        isQuestionAnswered = true;
-
-        let earned = pts;
-        if (team.hasStar) {
-          earned *= 2;
-          team.hasStar = false;
-        }
-        team.score += earned;
-
-        playVictoryFanfare5s();
-        triggerConfetti(70);
-        revealAnswer();
-      } else {
-        // Penalize wrong answer
-        if (!team.hasShield) {
-          team.score = Math.max(0, team.score - Math.floor(pts / 2));
-        } else {
-          team.hasShield = false;
-        }
-        soundWrong();
-
-        if (!failedTeamsThisQuestion.includes(buzzedTeamId)) {
-          failedTeamsThisQuestion.push(buzzedTeamId);
-        }
-
-        document.getElementById('buzzerAlert').classList.remove('show');
-        buzzedTeamId = null;
-
-        // Check if all teams have failed
-        if (failedTeamsThisQuestion.length >= teams.length) {
-          isBuzzerArmed = false;
-          isQuestionAnswered = true;
-          stopTimer();
-          revealAnswer();
-          const expBox = document.getElementById('explanationBox');
-          document.getElementById('explanationContent').innerHTML = 
-            '<div style="color: #ef4444; font-weight: 700; margin-bottom: 6px;">❌ Tất cả các đội đều đã trả lời sai ở câu này!</div>' + 
-            (battleQuestions[currentQIdx].exp || '');
-          broadcastMsg({ action: 'LOCK_BUZZER', winnerId: 0, winnerName: 'TẤT CẢ ĐỀU SAI' });
-        } else {
-          // Re-arm buzzer for remaining teams!
-          isBuzzerArmed = true;
-          startTimer();
-          broadcastMsg({ action: 'ARM_BUZZER', excluded: failedTeamsThisQuestion });
-        }
-      }
-      renderTeams();
     }
 
     function hostOnClientJoin(teamId) {
@@ -2457,26 +2584,128 @@
       document.execCommand('copy');
       alert('Đã sao chép đường link!');
     }
+    let mysterySelectedTeamId = 1;
+    let isRollingMystery = false;
+
     function openMysteryBoxModal() {
+      mysterySelectedTeamId = buzzedTeamId || 1;
+      isRollingMystery = false;
+
       const resBox = document.getElementById('mysteryResult');
-      resBox.style.display = 'none';
-      document.querySelectorAll('.mystery-box-item').forEach(b => b.classList.remove('opened'));
+      if (resBox) resBox.style.display = 'none';
+
+      document.querySelectorAll('.mystery-box-item').forEach(b => {
+        b.classList.remove('opened', 'rolling-highlight');
+        b.style.pointerEvents = 'auto';
+      });
+
+      const rollBtn = document.getElementById('btnRollMystery');
+      if (rollBtn) {
+        rollBtn.disabled = false;
+        rollBtn.innerHTML = '<span>🎲</span> Quay Hộp Quà Ngẫu Nhiên';
+      }
+
+      renderMysteryTeamChips();
       document.getElementById('mysteryModal').classList.add('open');
     }
+
+    function renderMysteryTeamChips() {
+      const container = document.getElementById('mysteryTeamChips');
+      if (!container) return;
+      container.innerHTML = '';
+      teams.forEach(team => {
+        const chip = document.createElement('div');
+        chip.className = `mystery-chip ${team.id === mysterySelectedTeamId ? 'selected' : ''}`;
+        chip.innerHTML = `${team.avatar} ${team.name}`;
+        chip.onclick = () => {
+          if (isRollingMystery) return;
+          mysterySelectedTeamId = team.id;
+          renderMysteryTeamChips();
+        };
+        container.appendChild(chip);
+      });
+    }
+
+    function rollRandomMysteryBox() {
+      if (isRollingMystery) return;
+      isRollingMystery = true;
+
+      const rollBtn = document.getElementById('btnRollMystery');
+      if (rollBtn) {
+        rollBtn.disabled = true;
+        rollBtn.innerHTML = '<span>⏳</span> Đang Quay Hộp Quà...';
+      }
+
+      const resBox = document.getElementById('mysteryResult');
+      if (resBox) resBox.style.display = 'none';
+
+      const boxEls = [
+        document.getElementById('mbox_0'),
+        document.getElementById('mbox_1'),
+        document.getElementById('mbox_2'),
+        document.getElementById('mbox_3')
+      ];
+
+      boxEls.forEach(b => {
+        if (b) {
+          b.classList.remove('opened', 'rolling-highlight');
+          b.style.pointerEvents = 'none';
+        }
+      });
+
+      const finalTarget = Math.floor(Math.random() * 4);
+      let curStep = 0;
+      const totalSteps = 16 + finalTarget;
+      let curBoxIdx = 0;
+      let delay = 60;
+
+      function step() {
+        boxEls.forEach(b => { if (b) b.classList.remove('rolling-highlight'); });
+        if (boxEls[curBoxIdx]) {
+          boxEls[curBoxIdx].classList.add('rolling-highlight');
+        }
+        soundTick();
+
+        curStep++;
+        if (curStep < totalSteps) {
+          curBoxIdx = (curBoxIdx + 1) % 4;
+          if (totalSteps - curStep <= 8) {
+            delay += 25;
+          }
+          setTimeout(step, delay);
+        } else {
+          isRollingMystery = false;
+          setTimeout(() => {
+            openBox(finalTarget, boxEls[finalTarget]);
+            if (rollBtn) {
+              rollBtn.disabled = false;
+              rollBtn.innerHTML = '<span>🎲</span> Quay Lại';
+            }
+          }, 220);
+        }
+      }
+
+      step();
+    }
+
     function openBox(idx, el) {
-      if (el.classList.contains('opened')) return;
+      if (!el || el.classList.contains('opened')) return;
       el.classList.add('opened');
       playTone(880, 0.3, 'triangle', 0.4);
-      triggerConfetti();
+      triggerConfetti(65);
+
       const reward = mysteryRewards[idx % mysteryRewards.length];
-      if (buzzedTeamId) {
-        const team = teams.find(t => t.id === buzzedTeamId);
-        reward.effect(team);
+      const targetTeam = teams.find(t => t.id === mysterySelectedTeamId) || teams[0];
+      if (targetTeam) {
+        reward.effect(targetTeam);
         renderTeams();
       }
+
       const resBox = document.getElementById('mysteryResult');
-      resBox.innerHTML = `🎉 ${reward.text}`;
-      resBox.style.display = 'block';
+      if (resBox) {
+        resBox.innerHTML = `🎉 <b>${targetTeam ? targetTeam.name : 'ĐỘI MAY MẮN'}:</b> ${reward.text}`;
+        resBox.style.display = 'block';
+      }
     }
 
     function openVictoryPodium() {
@@ -2527,9 +2756,21 @@
         } else if (e.key === 'Enter') {
           e.preventDefault();
           revealAnswer();
+        } else if (buzzedTeamId !== null && (e.key === 'b' || e.key === 'B')) {
+          e.preventDefault();
+          selectOption(1);
         } else if (e.key === 'b' || e.key === 'B') {
           e.preventDefault();
           activateBuzzer();
+        } else if (['a', 'A'].includes(e.key)) {
+          e.preventDefault();
+          selectOption(0);
+        } else if (['c', 'C'].includes(e.key)) {
+          e.preventDefault();
+          selectOption(2);
+        } else if (['d', 'D'].includes(e.key)) {
+          e.preventDefault();
+          selectOption(3);
         } else if (['1', '2', '3', '4'].includes(e.key)) {
           e.preventDefault();
           triggerBuzzer(parseInt(e.key));
@@ -2713,11 +2954,38 @@
         if (autoState === 'battle') {
           setTimeout(() => launchBattleFromSetup(), 100);
         } else if (autoState === 'armed') {
-          setTimeout(() => { launchBattleFromSetup(); activateBuzzer(); }, 100);
+          setTimeout(() => launchBattleFromSetup(), 100);
         } else if (autoState === 'buzzed') {
-          setTimeout(() => { launchBattleFromSetup(); activateBuzzer(); triggerBuzzer(1); }, 100);
+          setTimeout(() => { launchBattleFromSetup(); triggerBuzzer(1); }, 150);
         } else if (autoState === 'revealed') {
-          setTimeout(() => { launchBattleFromSetup(); activateBuzzer(); triggerBuzzer(1); judgeBuzzedTeam(true); }, 100);
+          setTimeout(() => { launchBattleFromSetup(); triggerBuzzer(1); judgeBuzzedTeam(true); }, 150);
+        } else if (autoState === 'wrong_eliminated') {
+          setTimeout(() => {
+            launchBattleFromSetup();
+            triggerBuzzer(1);
+            setTimeout(() => {
+              const q = battleQuestions[currentQIdx];
+              const wrongIdx = [0, 1, 2, 3].find(i => i !== q.ans);
+              selectOption(wrongIdx);
+            }, 250);
+          }, 150);
+        } else if (autoState === 'mystery_modal') {
+          setTimeout(() => {
+            launchBattleFromSetup();
+            triggerBuzzer(1);
+            setTimeout(() => {
+              openMysteryBoxModal();
+            }, 300);
+          }, 150);
+        } else if (autoState === 'mystery_rolled') {
+          setTimeout(() => {
+            launchBattleFromSetup();
+            triggerBuzzer(1);
+            openMysteryBoxModal();
+            setTimeout(() => {
+              openBox(1, document.getElementById('mbox_1'));
+            }, 400);
+          }, 150);
         }
       }
     });
