@@ -39,7 +39,7 @@
       width: 100% !important;
       max-width: 440px !important;
       height: 100vh !important;
-      padding: 12px !important;
+      padding: 8px !important;
       margin: 0 auto !important;
       box-sizing: border-box !important;
       overflow: hidden !important;
@@ -55,6 +55,28 @@
     html.role-buzzer .btn-student-opt {
       width: 100% !important;
       box-sizing: border-box !important;
+    }
+    html.role-buzzer #studentGameScreen {
+      height: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      gap: 6px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+    html.role-buzzer .student-format-pad {
+      flex: 1 !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      display: none;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      overflow: hidden !important;
+    }
+    html.role-buzzer .student-format-pad.active {
+      display: flex !important;
     }
 
     :root {
@@ -1155,6 +1177,382 @@
       color: #fecaca;
       box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
     }
+    /* Format Tabs Switcher on Student Phone */
+    .student-format-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 3px;
+      margin: 2px 0 6px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .btn-fmt-tab {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-radius: 7px;
+      padding: 6px 1px;
+      color: #94a3b8;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-sizing: border-box;
+    }
+    .btn-fmt-tab:hover {
+      color: #f8fafc;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .btn-fmt-tab.active {
+      background: #38bdf8;
+      color: #090d16;
+      font-weight: 800;
+      box-shadow: 0 2px 10px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Format Pad Base */
+    .student-format-pad {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .student-format-pad.active {
+      display: flex !important;
+    }
+
+    /* Format 2: True/False Rows */
+    .tf-rows-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      justify-content: center;
+    }
+    .tf-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 5px 10px;
+    }
+    .tf-row-letter {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+      text-transform: lowercase;
+      flex-shrink: 0;
+    }
+    .tf-row-buttons {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+    }
+    .btn-tf-toggle {
+      flex: 1;
+      padding: 8px 4px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      border: 2px solid transparent;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.06);
+      color: #cbd5e1;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .btn-tf-toggle.opt-t:hover, .btn-tf-toggle.opt-t.selected {
+      background: rgba(16, 185, 129, 0.28);
+      border-color: #10b981;
+      color: #a7f3d0;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+    }
+    .btn-tf-toggle.opt-f:hover, .btn-tf-toggle.opt-f.selected {
+      background: rgba(239, 68, 68, 0.28);
+      border-color: #ef4444;
+      color: #fca5a5;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.35);
+    }
+
+    /* Format 3: Match Pair Rows */
+    .match-rows-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+      justify-content: center;
+    }
+    .match-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 5px 10px;
+    }
+    .match-num-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+    .match-pills {
+      display: flex;
+      gap: 6px;
+      flex: 1;
+    }
+    .btn-match-pill {
+      flex: 1;
+      padding: 8px 2px;
+      border-radius: 9px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      border: 1.5px solid rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.05);
+      color: #cbd5e1;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .btn-match-pill:hover, .btn-match-pill.selected {
+      background: rgba(56, 189, 248, 0.3);
+      border-color: #38bdf8;
+      color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+      transform: scale(1.04);
+    }
+
+    /* Format 4: Numerical & Text Fill In */
+    .fill-mode-switch {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .btn-fill-mode {
+      flex: 1;
+      padding: 6px 8px;
+      border-radius: 9px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.05);
+      color: #94a3b8;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .btn-fill-mode:hover {
+      background: rgba(255, 255, 255, 0.09);
+      color: #f8fafc;
+    }
+    .btn-fill-mode.active {
+      background: rgba(56, 189, 248, 0.22);
+      border-color: #38bdf8;
+      color: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+      font-weight: 800;
+    }
+
+    .fill-input-box-wrap {
+      background: rgba(0, 0, 0, 0.45);
+      border: 2px solid rgba(56, 189, 248, 0.45);
+      border-radius: 12px;
+      padding: 6px 12px;
+      margin-bottom: 8px;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+    .fill-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fill-text-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #38bdf8;
+      font-size: 1.25rem;
+      font-weight: 800;
+      font-family: inherit;
+      padding: 2px 0;
+      min-width: 0;
+    }
+    .fill-text-input::placeholder {
+      color: #64748b;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .btn-fill-clear-icon {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      color: #94a3b8;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+    .btn-fill-clear-icon:hover {
+      background: rgba(239, 68, 68, 0.25);
+      border-color: #ef4444;
+      color: #ef4444;
+    }
+
+    .fill-section-panel {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .fill-word-bank-wrap {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 8px 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+    .fill-word-bank-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 2px 0;
+    }
+    .btn-word-chip {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 9999px;
+      color: #f1f5f9;
+      padding: 6px 12px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .btn-word-chip:hover {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: #38bdf8;
+      color: #38bdf8;
+    }
+    .btn-word-chip.selected {
+      background: rgba(56, 189, 248, 0.32);
+      border-color: #38bdf8;
+      color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+      transform: scale(1.04);
+      font-weight: 800;
+    }
+
+    .fill-numpad-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      flex: 1;
+    }
+    .btn-numpad {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      color: #f8fafc;
+      font-size: 1.2rem;
+      font-weight: 800;
+      cursor: pointer;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.12s;
+    }
+    .btn-numpad:active {
+      background: rgba(56, 189, 248, 0.3);
+      transform: scale(0.95);
+    }
+    .btn-numpad-submit {
+      background: linear-gradient(135deg, #0284c7, #0369a1) !important;
+      border-color: #38bdf8 !important;
+      color: #ffffff !important;
+      font-size: 0.95rem !important;
+    }
+    .btn-submit-fill {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+    }
+
+    /* Submit buttons for multi-format */
+    .btn-submit-format {
+      width: 100%;
+      padding: 10px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      transition: all 0.2s;
+    }
+    .btn-submit-tf {
+      background: linear-gradient(135deg, #059669, #047857);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    }
+    .btn-submit-match {
+      background: linear-gradient(135deg, #d97706, #b45309);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
+    }
+    .btn-submit-format:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
 
     .team-picker-grid {
       display: grid;
@@ -1581,24 +1979,196 @@
         </div>
       </div>
 
-      <!-- 4 Massive Touch Options -->
-      <div class="student-options-grid" id="studentOptionsGrid">
-        <button class="btn-student-opt opt-a" id="btnStudentOpt_0" onclick="clientSubmitAnswer(0)">
-          <div class="opt-letter">A</div>
-          <div class="opt-label" id="optLabel_0">PHƯƠNG ÁN A</div>
+      <!-- Multi-Format Switcher Tabs -->
+      <div class="student-format-tabs" id="studentFormatTabs">
+        <button class="btn-fmt-tab active" id="tabBtn_mcq" onclick="setStudentFormat('mcq')">⚡ Trắc Nghiệm</button>
+        <button class="btn-fmt-tab" id="tabBtn_tf" onclick="setStudentFormat('tf')">⚖️ Đúng / Sai</button>
+        <button class="btn-fmt-tab" id="tabBtn_match" onclick="setStudentFormat('match')">🔗 Ghép Nối</button>
+        <button class="btn-fmt-tab" id="tabBtn_fill" onclick="setStudentFormat('fill')">✍️ Điền Từ / Số</button>
+      </div>
+
+      <!-- Format Pad 1: MCQ (4 Massive Touch Buttons) -->
+      <div class="student-format-pad active" id="pad_mcq">
+        <div class="student-options-grid" id="studentOptionsGrid">
+          <button class="btn-student-opt opt-a" id="btnStudentOpt_0" onclick="clientSubmitAnswer(0)">
+            <div class="opt-letter">A</div>
+            <div class="opt-label" id="optLabel_0">PHƯƠNG ÁN A</div>
+          </button>
+          <button class="btn-student-opt opt-b" id="btnStudentOpt_1" onclick="clientSubmitAnswer(1)">
+            <div class="opt-letter">B</div>
+            <div class="opt-label" id="optLabel_1">PHƯƠNG ÁN B</div>
+          </button>
+          <button class="btn-student-opt opt-c" id="btnStudentOpt_2" onclick="clientSubmitAnswer(2)">
+            <div class="opt-letter">C</div>
+            <div class="opt-label" id="optLabel_2">PHƯƠNG ÁN C</div>
+          </button>
+          <button class="btn-student-opt opt-d" id="btnStudentOpt_3" onclick="clientSubmitAnswer(3)">
+            <div class="opt-letter">D</div>
+            <div class="opt-label" id="optLabel_3">PHƯƠNG ÁN D</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Format Pad 2: True / False (4 Propositions a, b, c, d) -->
+      <div class="student-format-pad" id="pad_tf">
+        <div class="tf-rows-container">
+          <div class="tf-row" id="tfRow_a">
+            <div class="tf-row-letter">a</div>
+            <div class="tf-row-buttons">
+              <button class="btn-tf-toggle opt-t" id="btnTf_a_T" onclick="clientSelectTf('a', 'Đ')">🟢 Đúng</button>
+              <button class="btn-tf-toggle opt-f" id="btnTf_a_F" onclick="clientSelectTf('a', 'S')">🔴 Sai</button>
+            </div>
+          </div>
+          <div class="tf-row" id="tfRow_b">
+            <div class="tf-row-letter">b</div>
+            <div class="tf-row-buttons">
+              <button class="btn-tf-toggle opt-t" id="btnTf_b_T" onclick="clientSelectTf('b', 'Đ')">🟢 Đúng</button>
+              <button class="btn-tf-toggle opt-f" id="btnTf_b_F" onclick="clientSelectTf('b', 'S')">🔴 Sai</button>
+            </div>
+          </div>
+          <div class="tf-row" id="tfRow_c">
+            <div class="tf-row-letter">c</div>
+            <div class="tf-row-buttons">
+              <button class="btn-tf-toggle opt-t" id="btnTf_c_T" onclick="clientSelectTf('c', 'Đ')">🟢 Đúng</button>
+              <button class="btn-tf-toggle opt-f" id="btnTf_c_F" onclick="clientSelectTf('c', 'S')">🔴 Sai</button>
+            </div>
+          </div>
+          <div class="tf-row" id="tfRow_d">
+            <div class="tf-row-letter">d</div>
+            <div class="tf-row-buttons">
+              <button class="btn-tf-toggle opt-t" id="btnTf_d_T" onclick="clientSelectTf('d', 'Đ')">🟢 Đúng</button>
+              <button class="btn-tf-toggle opt-f" id="btnTf_d_F" onclick="clientSelectTf('d', 'S')">🔴 Sai</button>
+            </div>
+          </div>
+        </div>
+        <button class="btn-submit-format btn-submit-tf" id="btnSubmitTf" onclick="clientSubmitTfAnswer()">
+          🚀 NỘP BÀI ĐÚNG / SAI <span id="tfSelectionSummary" style="font-size: 0.85rem; opacity: 0.9;"></span>
         </button>
-        <button class="btn-student-opt opt-b" id="btnStudentOpt_1" onclick="clientSubmitAnswer(1)">
-          <div class="opt-letter">B</div>
-          <div class="opt-label" id="optLabel_1">PHƯƠNG ÁN B</div>
+      </div>
+
+      <!-- Format Pad 3: Match Pair (4 Rows 1..4 -> A..D) -->
+      <div class="student-format-pad" id="pad_match">
+        <div class="match-rows-container">
+          <div class="match-row" id="matchRow_1">
+            <div class="match-num-badge">1</div>
+            <div class="match-pills">
+              <button class="btn-match-pill" id="btnMatch_1_A" onclick="clientSelectMatch(1, 'A')">A</button>
+              <button class="btn-match-pill" id="btnMatch_1_B" onclick="clientSelectMatch(1, 'B')">B</button>
+              <button class="btn-match-pill" id="btnMatch_1_C" onclick="clientSelectMatch(1, 'C')">C</button>
+              <button class="btn-match-pill" id="btnMatch_1_D" onclick="clientSelectMatch(1, 'D')">D</button>
+            </div>
+          </div>
+          <div class="match-row" id="matchRow_2">
+            <div class="match-num-badge">2</div>
+            <div class="match-pills">
+              <button class="btn-match-pill" id="btnMatch_2_A" onclick="clientSelectMatch(2, 'A')">A</button>
+              <button class="btn-match-pill" id="btnMatch_2_B" onclick="clientSelectMatch(2, 'B')">B</button>
+              <button class="btn-match-pill" id="btnMatch_2_C" onclick="clientSelectMatch(2, 'C')">C</button>
+              <button class="btn-match-pill" id="btnMatch_2_D" onclick="clientSelectMatch(2, 'D')">D</button>
+            </div>
+          </div>
+          <div class="match-row" id="matchRow_3">
+            <div class="match-num-badge">3</div>
+            <div class="match-pills">
+              <button class="btn-match-pill" id="btnMatch_3_A" onclick="clientSelectMatch(3, 'A')">A</button>
+              <button class="btn-match-pill" id="btnMatch_3_B" onclick="clientSelectMatch(3, 'B')">B</button>
+              <button class="btn-match-pill" id="btnMatch_3_C" onclick="clientSelectMatch(3, 'C')">C</button>
+              <button class="btn-match-pill" id="btnMatch_3_D" onclick="clientSelectMatch(3, 'D')">D</button>
+            </div>
+          </div>
+          <div class="match-row" id="matchRow_4">
+            <div class="match-num-badge">4</div>
+            <div class="match-pills">
+              <button class="btn-match-pill" id="btnMatch_4_A" onclick="clientSelectMatch(4, 'A')">A</button>
+              <button class="btn-match-pill" id="btnMatch_4_B" onclick="clientSelectMatch(4, 'B')">B</button>
+              <button class="btn-match-pill" id="btnMatch_4_C" onclick="clientSelectMatch(4, 'C')">C</button>
+              <button class="btn-match-pill" id="btnMatch_4_D" onclick="clientSelectMatch(4, 'D')">D</button>
+            </div>
+          </div>
+        </div>
+        <button class="btn-submit-format btn-submit-match" id="btnSubmitMatch" onclick="clientSubmitMatchAnswer()">
+          🔗 NỘP BÀI GHÉP NỐI <span id="matchSelectionSummary" style="font-size: 0.85rem; opacity: 0.9;"></span>
         </button>
-        <button class="btn-student-opt opt-c" id="btnStudentOpt_2" onclick="clientSubmitAnswer(2)">
-          <div class="opt-letter">C</div>
-          <div class="opt-label" id="optLabel_2">PHƯƠNG ÁN C</div>
-        </button>
-        <button class="btn-student-opt opt-d" id="btnStudentOpt_3" onclick="clientSubmitAnswer(3)">
-          <div class="opt-letter">D</div>
-          <div class="opt-label" id="optLabel_3">PHƯƠNG ÁN D</div>
-        </button>
+      </div>
+
+      <!-- Format Pad 4: Numerical / Word / Cloze Fill In -->
+      <div class="student-format-pad" id="pad_fill">
+        <!-- Sub-Mode Switcher -->
+        <div class="fill-mode-switch">
+          <button type="button" class="btn-fill-mode active" id="btnFillMode_text" onclick="setFillSubMode('text')">
+            ✍️ Gõ Chữ & Từ Khóa
+          </button>
+          <button type="button" class="btn-fill-mode" id="btnFillMode_numpad" onclick="setFillSubMode('numpad')">
+            🔢 Bàn Phím Số Nhanh
+          </button>
+        </div>
+
+        <!-- Unified Input & Display Box -->
+        <div class="fill-input-box-wrap">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px;">
+            <span style="font-size: 0.72rem; color: #94a3b8; font-weight: 600;">TỪ KHÓA / ĐÁP SỐ ĐÃ NHẬP:</span>
+            <span id="fillModeHint" style="font-size: 0.7rem; color: #38bdf8; font-weight: 600;">Chạm vào ô để gõ</span>
+          </div>
+          <div class="fill-input-row">
+            <input type="text" id="fillTextInput" class="fill-text-input" 
+                   placeholder="Chạm để gõ từ hoặc số..." 
+                   autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" 
+                   oninput="clientOnFillTextInput(this.value)" 
+                   onkeydown="if(event.key==='Enter') clientSubmitFillAnswer()" />
+            <button type="button" class="btn-fill-clear-icon" onclick="clientFillClear()" title="Xóa tất cả">✕</button>
+          </div>
+        </div>
+
+        <!-- Section A: Text & Word Bank Panel -->
+        <div id="fillSectionText" class="fill-section-panel">
+          <div class="fill-word-bank-wrap">
+            <div style="font-size: 0.72rem; color: #cbd5e1; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 4px;">
+              <span>⚡</span> <span>TỪ KHÓA GỢI Ý (CHẠM 1 CHẠM ĐỂ CHỌN):</span>
+            </div>
+            <div class="fill-word-bank-chips" id="fillWordBankChips">
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('tăng')">tăng</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('giảm')">giảm</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('không đổi')">không đổi</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('cân bằng')">cân bằng</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('hút')">hút</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('đẩy')">đẩy</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('cùng chiều')">cùng chiều</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('ngược chiều')">ngược chiều</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('nhiệt lượng')">nhiệt lượng</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('nội năng')">nội năng</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('công')">công</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('nhiệt độ')">nhiệt độ</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('đẳng nhiệt')">đẳng nhiệt</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('đẳng tích')">đẳng tích</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('đẳng áp')">đẳng áp</button>
+              <button type="button" class="btn-word-chip" onclick="clientSelectWord('phân tử')">phân tử</button>
+            </div>
+          </div>
+          <button type="button" class="btn-submit-format btn-submit-fill" id="btnSubmitFillText" onclick="clientSubmitFillAnswer()">
+            🚀 NỘP BÀI ĐIỀN TỪ / SỐ
+          </button>
+        </div>
+
+        <!-- Section B: Touch Numpad Panel -->
+        <div id="fillSectionNumpad" class="fill-section-panel" style="display: none;">
+          <div class="fill-numpad-grid">
+            <button type="button" class="btn-numpad" onclick="clientFillInput('1')">1</button>
+            <button type="button" class="btn-numpad" onclick="clientFillInput('2')">2</button>
+            <button type="button" class="btn-numpad" onclick="clientFillInput('3')">3</button>
+            <button type="button" class="btn-numpad" onclick="clientFillInput('4')">4</button>
+            <button type="button" class="btn-numpad" onclick="clientFillInput('5')">5</button>
+            <button type="button" class="btn-numpad" onclick="clientFillInput('6')">6</button>
+            <button type="button" class="btn-numpad" onclick="clientFillInput('7')">7</button>
+            <button type="button" class="btn-numpad" onclick="clientFillInput('8')">8</button>
+            <button type="button" class="btn-numpad" onclick="clientFillInput('9')">9</button>
+            <button type="button" class="btn-numpad" onclick="clientFillInput('-')">±</button>
+            <button type="button" class="btn-numpad" onclick="clientFillInput('0')">0</button>
+            <button type="button" class="btn-numpad" onclick="clientFillInput('.')">.</button>
+            <button type="button" class="btn-numpad" onclick="clientFillClear()" style="color: #f87171;">C</button>
+            <button type="button" class="btn-numpad" onclick="clientFillBackspace()">⌫</button>
+            <button type="button" class="btn-numpad btn-numpad-submit" onclick="clientSubmitFillAnswer()">🚀 GỬI</button>
+          </div>
+        </div>
       </div>
 
       <!-- Status & Feedback Banner -->
@@ -2571,13 +3141,32 @@
 
       renderTeams();
 
+      const qType = detectQuestionType(q);
+
       // Broadcast to student phones
       broadcastMsg({
         action: 'START_QUESTION',
         qIdx: currentQIdx,
         totalQ: battleQuestions.length,
-        timeLimit: timeLeft
+        timeLimit: timeLeft,
+        qType: qType,
+        words: q.words || null,
+        fillAns: q.fillAns || null,
+        isNumeric: typeof q.fillAns === 'number'
       });
+    }
+
+    function detectQuestionType(q) {
+      if (!q) return 'mcq';
+      if (q.type && ['mcq', 'tf', 'match', 'fill', 'drag'].includes(q.type)) {
+        if (q.type === 'drag') return 'fill';
+        return q.type;
+      }
+      const text = ((q.q || '') + ' ' + (q.exp || '')).toLowerCase();
+      if (/đúng.*sai|mệnh đề|nhận định sau|tính đúng\/sai/.test(text)) return 'tf';
+      if (/ghép.*cặp|ghép.*cột|ghép từng|ghép đôi/.test(text)) return 'match';
+      if (/điền.*khuyết|điền.*từ|điền.*chữ|điền.*số|đáp số|chọn.*từ|từ khóa/.test(text)) return 'fill';
+      return 'mcq';
     }
 
     function selectOption(oIdx) {
@@ -2625,13 +3214,49 @@
       teams.forEach(team => {
         const sub = teamAnswers[team.id];
         if (sub) {
-          if (sub.choice === correctAns) {
-            correctTeams.push({ team, choice: sub.choice, time: sub.time });
+          let isCorrect = false;
+          if (sub.format === 'tf') {
+            if (q.tfAns) {
+              isCorrect = Object.keys(q.tfAns).every(k => sub.tfAnswers && sub.tfAnswers[k] === q.tfAns[k]);
+            } else {
+              isCorrect = (sub.choice === correctAns || sub.choiceText === prefixes[correctAns]);
+            }
+          } else if (sub.format === 'match') {
+            if (q.matchAns) {
+              isCorrect = Object.keys(q.matchAns).every(k => sub.matchAnswers && sub.matchAnswers[k] === q.matchAns[k]);
+            } else {
+              isCorrect = (sub.choice === correctAns || sub.choiceText === prefixes[correctAns]);
+            }
+          } else if (sub.format === 'fill') {
+            const cleanSub = String(sub.choice || '').trim().toLowerCase();
+            if (q.fillAns !== undefined) {
+              const expectedList = Array.isArray(q.fillAns) 
+                ? q.fillAns.map(a => String(a).trim().toLowerCase())
+                : [String(q.fillAns).trim().toLowerCase()];
+              isCorrect = expectedList.includes(cleanSub);
+              if (!isCorrect && !isNaN(cleanSub) && !isNaN(q.fillAns)) {
+                isCorrect = Math.abs(parseFloat(cleanSub) - parseFloat(q.fillAns)) < 0.01;
+              }
+            } else if (q.words && q.words.length > 0) {
+              const correctTarget = String(q.correctText || q.ans || '').trim().toLowerCase();
+              isCorrect = (cleanSub === correctTarget || (q.words && q.words.map(w => w.toLowerCase()).includes(cleanSub)));
+            } else if (q.ans !== undefined) {
+              const cleanAns = String(q.ans).trim().toLowerCase();
+              isCorrect = (cleanSub === cleanAns);
+            } else {
+              isCorrect = false;
+            }
           } else {
-            wrongTeams.push({ team, choice: sub.choice, time: sub.time });
+            isCorrect = (sub.choice === correctAns);
+          }
+
+          if (isCorrect) {
+            correctTeams.push({ team, choice: sub.choice, choiceText: sub.choiceText, format: sub.format, time: sub.time });
+          } else {
+            wrongTeams.push({ team, choice: sub.choice, choiceText: sub.choiceText, format: sub.format, time: sub.time });
           }
         } else {
-          unsubmittedTeams.push({ team, choice: null, time: null });
+          unsubmittedTeams.push({ team, choice: null, choiceText: null, format: null, time: null });
         }
       });
 
@@ -2655,6 +3280,8 @@
           name: item.team.name,
           avatar: item.team.avatar,
           choice: item.choice,
+          choiceText: item.choiceText || (item.choice !== null ? prefixes[item.choice] : ''),
+          format: item.format,
           time: item.time,
           isCorrect: true,
           rank: rank,
@@ -2671,6 +3298,8 @@
           name: item.team.name,
           avatar: item.team.avatar,
           choice: item.choice,
+          choiceText: item.choiceText || (item.choice !== null ? prefixes[item.choice] : ''),
+          format: item.format,
           time: item.time,
           isCorrect: false,
           rank: null,
@@ -2684,6 +3313,8 @@
           name: item.team.name,
           avatar: item.team.avatar,
           choice: null,
+          choiceText: null,
+          format: null,
           time: null,
           isCorrect: false,
           rank: null,
@@ -2723,13 +3354,13 @@
                 <div>
                   <div style="font-weight: 800; font-size: 0.95rem;">${item.name}</div>
                   <div style="font-size: 0.8rem; color: #94a3b8;">
-                    Đáp án <b>[ ${prefixes[item.choice]} ]</b> trong <b>${item.time}s</b>
+                    Đáp án <b>[ ${item.choiceText || (prefixes[item.choice] || '')} ]</b> trong <b>${item.time}s</b>
                   </div>
                 </div>
               </div>
               <div style="font-size: 1.1rem; font-weight: 900; color: #fbbf24;">+${item.pts}đ</div>
             `;
-          } else if (item.choice !== null) {
+          } else if (item.choice !== null || item.choiceText) {
             row.className = 'olympia-rank-row wrong-row';
             row.innerHTML = `
               <div style="display: flex; align-items: center; gap: 8px;">
@@ -2737,7 +3368,7 @@
                 <div>
                   <div style="font-weight: 800; font-size: 0.95rem;">${item.name}</div>
                   <div style="font-size: 0.8rem; color: #fca5a5;">
-                    Đã chọn [ ${prefixes[item.choice]} ] (${item.time}s) • Chưa đúng
+                    Đã chọn [ <b>${item.choiceText || (prefixes[item.choice] || '')}</b> ] (${item.time}s) • Chưa đúng
                   </div>
                 </div>
               </div>
@@ -2794,18 +3425,41 @@
       if (isQuestionAnswered || !data || !data.teamId) return;
       if (teamAnswers[data.teamId]) return; // ignore duplicate
 
+      const fmt = data.format || 'mcq';
+      const prefixes = ['A', 'B', 'C', 'D'];
+      let choiceText = data.choiceText;
+      if (!choiceText) {
+        if (typeof data.choice === 'number' && prefixes[data.choice]) {
+          choiceText = prefixes[data.choice];
+        } else {
+          choiceText = String(data.choice || 'Đã nộp');
+        }
+      }
+
       teamAnswers[data.teamId] = {
         choice: data.choice,
+        choiceText: choiceText,
+        format: fmt,
+        tfAnswers: data.tfAnswers || null,
+        matchAnswers: data.matchAnswers || null,
         time: data.time
       };
 
       const team = teams.find(t => t.id === data.teamId);
       const teamAvatar = team ? team.avatar : '⚡';
 
+      const fmtIcons = {
+        mcq: '⚡',
+        tf: '⚖️',
+        match: '🔗',
+        fill: '✍️'
+      };
+      const icon = fmtIcons[fmt] || '⚡';
+
       const chip = document.getElementById(`liveTeam_${data.teamId}`);
       if (chip) {
         chip.classList.add('submitted');
-        chip.innerHTML = `${teamAvatar} Tổ ${data.teamId}: ⚡ Đã nộp (${data.time}s)`;
+        chip.innerHTML = `${teamAvatar} Tổ ${data.teamId}: ${icon} [ <b>${choiceText}</b> ] (${data.time}s)`;
       }
 
       playTone(587, 0.12, 'triangle', 0.25);
@@ -3166,6 +3820,291 @@
       if (pickScreen) pickScreen.style.display = 'flex';
     }
 
+    let currentStudentFormat = 'mcq';
+    let clientTfSelections = { a: null, b: null, c: null, d: null };
+    let clientMatchSelections = { 1: null, 2: null, 3: null, 4: null };
+    let clientFillValue = '';
+    let fillSubMode = 'text';
+
+    const DEFAULT_PHYSICS_KEYWORDS = [
+      'tăng', 'giảm', 'không đổi', 'cân bằng', 
+      'hút', 'đẩy', 'cùng chiều', 'ngược chiều',
+      'nhiệt lượng', 'nội năng', 'công', 'nhiệt độ',
+      'đẳng nhiệt', 'đẳng tích', 'đẳng áp', 'phân tử'
+    ];
+
+    function setStudentFormat(fmt) {
+      currentStudentFormat = fmt || 'mcq';
+      ['mcq', 'tf', 'match', 'fill'].forEach(f => {
+        const btn = document.getElementById('tabBtn_' + f);
+        if (btn) btn.classList.toggle('active', f === currentStudentFormat);
+        const pad = document.getElementById('pad_' + f);
+        if (pad) pad.classList.toggle('active', f === currentStudentFormat);
+      });
+    }
+
+    function clientSelectTf(letter, val) {
+      if (clientHasAnswered) return;
+      clientTfSelections[letter] = val;
+      const btnT = document.getElementById(`btnTf_${letter}_T`);
+      const btnF = document.getElementById(`btnTf_${letter}_F`);
+      if (btnT && btnF) {
+        btnT.classList.toggle('selected', val === 'Đ');
+        btnF.classList.toggle('selected', val === 'S');
+      }
+      updateTfSummary();
+      playTone(480, 0.06, 'triangle', 0.15);
+    }
+
+    function updateTfSummary() {
+      const summaryEl = document.getElementById('tfSelectionSummary');
+      if (!summaryEl) return;
+      const parts = [];
+      ['a', 'b', 'c', 'd'].forEach(k => {
+        if (clientTfSelections[k]) parts.push(`${k}:${clientTfSelections[k]}`);
+      });
+      summaryEl.innerText = parts.length > 0 ? `[ ${parts.join(' • ')} ]` : '';
+    }
+
+    function clientSubmitTfAnswer() {
+      if (clientHasAnswered) return;
+      const answeredKeys = Object.keys(clientTfSelections).filter(k => clientTfSelections[k] !== null);
+      if (answeredKeys.length === 0) {
+        alert('Vui lòng chọn ít nhất 1 ý Đúng hoặc Sai trước khi nộp!');
+        return;
+      }
+      clientHasAnswered = true;
+      const elapsed = Math.max(0.05, (Date.now() - clientQStartTime) / 1000).toFixed(2);
+      const choiceParts = ['a', 'b', 'c', 'd'].map(k => `${k}:${clientTfSelections[k] || '-'}`);
+      const choiceText = choiceParts.join(' ');
+
+      // Disable TF buttons
+      document.querySelectorAll('#pad_tf button').forEach(b => {
+        b.disabled = true;
+        b.style.pointerEvents = 'none';
+      });
+
+      playTone(520, 0.12, 'triangle', 0.25);
+      if (navigator.vibrate) navigator.vibrate([100]);
+
+      const fb = document.getElementById('studentFeedbackBox');
+      if (fb) {
+        fb.style.borderColor = '#10b981';
+        fb.style.background = 'rgba(16, 185, 129, 0.2)';
+        fb.style.color = '#34d399';
+        fb.innerHTML = `⚖️ ĐÃ GỬI ĐÚNG/SAI [ <b>${choiceText}</b> ] (${elapsed}s)!<br><span style="font-size: 0.82rem; color: #94a3b8;">Đang chờ công bố kết quả và thứ hạng Olympia...</span>`;
+      }
+
+      broadcastMsg({
+        action: 'CLIENT_ANSWER',
+        teamId: myTeamId,
+        teamName: myTeamName,
+        format: 'tf',
+        choice: choiceText,
+        choiceText: choiceText,
+        tfAnswers: { ...clientTfSelections },
+        time: parseFloat(elapsed)
+      });
+    }
+
+    function clientSelectMatch(num, letter) {
+      if (clientHasAnswered) return;
+      clientMatchSelections[num] = letter;
+      ['A', 'B', 'C', 'D'].forEach(l => {
+        const pill = document.getElementById(`btnMatch_${num}_${l}`);
+        if (pill) pill.classList.toggle('selected', l === letter);
+      });
+      updateMatchSummary();
+      playTone(520, 0.06, 'triangle', 0.15);
+    }
+
+    function updateMatchSummary() {
+      const summaryEl = document.getElementById('matchSelectionSummary');
+      if (!summaryEl) return;
+      const parts = [];
+      [1, 2, 3, 4].forEach(k => {
+        if (clientMatchSelections[k]) parts.push(`${k}-${clientMatchSelections[k]}`);
+      });
+      summaryEl.innerText = parts.length > 0 ? `[ ${parts.join(' • ')} ]` : '';
+    }
+
+    function clientSubmitMatchAnswer() {
+      if (clientHasAnswered) return;
+      const answeredKeys = Object.keys(clientMatchSelections).filter(k => clientMatchSelections[k] !== null);
+      if (answeredKeys.length === 0) {
+        alert('Vui lòng chọn ít nhất 1 cặp ghép nối trước khi nộp!');
+        return;
+      }
+      clientHasAnswered = true;
+      const elapsed = Math.max(0.05, (Date.now() - clientQStartTime) / 1000).toFixed(2);
+      const parts = [1, 2, 3, 4].map(k => `${k}${clientMatchSelections[k] || '?'}`);
+      const choiceText = parts.join('-');
+
+      // Disable Match buttons
+      document.querySelectorAll('#pad_match button').forEach(b => {
+        b.disabled = true;
+        b.style.pointerEvents = 'none';
+      });
+
+      playTone(520, 0.12, 'triangle', 0.25);
+      if (navigator.vibrate) navigator.vibrate([100]);
+
+      const fb = document.getElementById('studentFeedbackBox');
+      if (fb) {
+        fb.style.borderColor = '#f59e0b';
+        fb.style.background = 'rgba(245, 158, 11, 0.15)';
+        fb.style.color = '#fbbf24';
+        fb.innerHTML = `🔗 ĐÃ GỬI GHÉP NỐI [ <b>${choiceText}</b> ] (${elapsed}s)!<br><span style="font-size: 0.82rem; color: #94a3b8;">Đang chờ công bố kết quả và thứ hạng Olympia...</span>`;
+      }
+
+      broadcastMsg({
+        action: 'CLIENT_ANSWER',
+        teamId: myTeamId,
+        teamName: myTeamName,
+        format: 'match',
+        choice: choiceText,
+        choiceText: choiceText,
+        matchAnswers: { ...clientMatchSelections },
+        time: parseFloat(elapsed)
+      });
+    }
+
+    function setFillSubMode(mode) {
+      fillSubMode = mode;
+      const btnText = document.getElementById('btnFillMode_text');
+      const btnNum = document.getElementById('btnFillMode_numpad');
+      const secText = document.getElementById('fillSectionText');
+      const secNum = document.getElementById('fillSectionNumpad');
+      const hint = document.getElementById('fillModeHint');
+
+      if (mode === 'text') {
+        if (btnText) btnText.classList.add('active');
+        if (btnNum) btnNum.classList.remove('active');
+        if (secText) secText.style.display = 'flex';
+        if (secNum) secNum.style.display = 'none';
+        if (hint) hint.innerText = 'Chạm vào ô để gõ';
+      } else {
+        if (btnText) btnText.classList.remove('active');
+        if (btnNum) btnNum.classList.add('active');
+        if (secText) secText.style.display = 'none';
+        if (secNum) secNum.style.display = 'flex';
+        if (hint) hint.innerText = 'Bấm phím số cảm ứng';
+      }
+      playTone(550, 0.04, 'sine', 0.1);
+    }
+
+    function clientOnFillTextInput(val) {
+      if (clientHasAnswered) return;
+      clientFillValue = val;
+      const trimmedLower = val.trim().toLowerCase();
+      document.querySelectorAll('#fillWordBankChips .btn-word-chip').forEach(c => {
+        c.classList.toggle('selected', c.innerText.trim().toLowerCase() === trimmedLower);
+      });
+    }
+
+    function clientSelectWord(word) {
+      if (clientHasAnswered) return;
+      clientFillValue = word;
+      const input = document.getElementById('fillTextInput');
+      if (input) input.value = word;
+      document.querySelectorAll('#fillWordBankChips .btn-word-chip').forEach(c => {
+        c.classList.toggle('selected', c.innerText.trim().toLowerCase() === word.trim().toLowerCase());
+      });
+      playTone(600, 0.06, 'triangle', 0.15);
+    }
+
+    function clientFillInput(char) {
+      if (clientHasAnswered) return;
+      if (char === '-') {
+        if (clientFillValue.startsWith('-')) clientFillValue = clientFillValue.substring(1);
+        else clientFillValue = '-' + clientFillValue;
+      } else if (char === '.') {
+        if (!clientFillValue.includes('.')) clientFillValue += (clientFillValue === '' ? '0.' : '.');
+      } else {
+        if (clientFillValue === '0') clientFillValue = char;
+        else if (clientFillValue.length < 25) clientFillValue += char;
+      }
+      const input = document.getElementById('fillTextInput');
+      if (input) input.value = clientFillValue;
+      playTone(500, 0.04, 'sine', 0.1);
+    }
+
+    function clientFillBackspace() {
+      if (clientHasAnswered) return;
+      clientFillValue = clientFillValue.slice(0, -1);
+      const input = document.getElementById('fillTextInput');
+      if (input) input.value = clientFillValue;
+      const trimmedLower = clientFillValue.trim().toLowerCase();
+      document.querySelectorAll('#fillWordBankChips .btn-word-chip').forEach(c => {
+        c.classList.toggle('selected', c.innerText.trim().toLowerCase() === trimmedLower);
+      });
+      playTone(400, 0.04, 'sine', 0.1);
+    }
+
+    function clientFillClear() {
+      if (clientHasAnswered) return;
+      clientFillValue = '';
+      const input = document.getElementById('fillTextInput');
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+      document.querySelectorAll('#fillWordBankChips .btn-word-chip').forEach(c => c.classList.remove('selected'));
+      playTone(350, 0.05, 'sine', 0.1);
+    }
+
+    function renderWordBankChips(words) {
+      const container = document.getElementById('fillWordBankChips');
+      if (!container) return;
+      container.innerHTML = '';
+      const list = (words && words.length > 0) ? words : DEFAULT_PHYSICS_KEYWORDS;
+      list.forEach(w => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn-word-chip';
+        btn.innerText = w;
+        btn.onclick = () => clientSelectWord(w);
+        container.appendChild(btn);
+      });
+    }
+
+    function clientSubmitFillAnswer() {
+      if (clientHasAnswered) return;
+      if (!clientFillValue.trim()) {
+        alert('Vui lòng nhập từ khóa hoặc đáp số trước khi nộp!');
+        return;
+      }
+      clientHasAnswered = true;
+      const elapsed = Math.max(0.05, (Date.now() - clientQStartTime) / 1000).toFixed(2);
+      const choiceText = clientFillValue.trim();
+
+      document.querySelectorAll('#pad_fill button, #pad_fill input').forEach(b => {
+        b.disabled = true;
+        b.style.pointerEvents = 'none';
+      });
+
+      playTone(520, 0.12, 'triangle', 0.25);
+      if (navigator.vibrate) navigator.vibrate([100]);
+
+      const fb = document.getElementById('studentFeedbackBox');
+      if (fb) {
+        fb.style.borderColor = '#38bdf8';
+        fb.style.background = 'rgba(56, 189, 248, 0.15)';
+        fb.style.color = '#38bdf8';
+        fb.innerHTML = `✍️ ĐÃ GỬI [ <b>${choiceText}</b> ] (${elapsed}s)!<br><span style="font-size: 0.82rem; color: #94a3b8;">Đang chờ công bố kết quả và thứ hạng Olympia...</span>`;
+      }
+
+      broadcastMsg({
+        action: 'CLIENT_ANSWER',
+        teamId: myTeamId,
+        teamName: myTeamName,
+        format: 'fill',
+        choice: choiceText,
+        choiceText: choiceText,
+        time: parseFloat(elapsed)
+      });
+    }
+
     function clientOnStartQuestion(data) {
       clientHasAnswered = false;
       clientQStartTime = Date.now();
@@ -3184,7 +4123,11 @@
         }
       }, 1000);
 
-      // Unlock 4 options
+      // Auto-switch format tab based on Host qType
+      const targetFmt = data.qType || 'mcq';
+      setStudentFormat(targetFmt);
+
+      // Reset MCQ buttons
       for (let i = 0; i < 4; i++) {
         const btn = document.getElementById(`btnStudentOpt_${i}`);
         if (btn) {
@@ -3192,6 +4135,56 @@
           btn.disabled = false;
           btn.style.pointerEvents = 'auto';
           btn.style.opacity = '1';
+        }
+      }
+
+      // Reset TF buttons
+      clientTfSelections = { a: null, b: null, c: null, d: null };
+      ['a', 'b', 'c', 'd'].forEach(k => {
+        const bT = document.getElementById(`btnTf_${k}_T`);
+        const bF = document.getElementById(`btnTf_${k}_F`);
+        if (bT) { bT.classList.remove('selected'); bT.disabled = false; bT.style.pointerEvents = 'auto'; }
+        if (bF) { bF.classList.remove('selected'); bF.disabled = false; bF.style.pointerEvents = 'auto'; }
+      });
+      const btnSubmitTf = document.getElementById('btnSubmitTf');
+      if (btnSubmitTf) { btnSubmitTf.disabled = false; btnSubmitTf.style.pointerEvents = 'auto'; }
+      updateTfSummary();
+
+      // Reset Match buttons
+      clientMatchSelections = { 1: null, 2: null, 3: null, 4: null };
+      [1, 2, 3, 4].forEach(k => {
+        ['A', 'B', 'C', 'D'].forEach(l => {
+          const pill = document.getElementById(`btnMatch_${k}_${l}`);
+          if (pill) { pill.classList.remove('selected'); pill.disabled = false; pill.style.pointerEvents = 'auto'; }
+        });
+      });
+      const btnSubmitMatch = document.getElementById('btnSubmitMatch');
+      if (btnSubmitMatch) { btnSubmitMatch.disabled = false; btnSubmitMatch.style.pointerEvents = 'auto'; }
+      updateMatchSummary();
+
+      // Reset Fill / Words / Numpad
+      clientFillValue = '';
+      const fillInput = document.getElementById('fillTextInput');
+      if (fillInput) {
+        fillInput.value = '';
+        fillInput.disabled = false;
+        fillInput.style.pointerEvents = 'auto';
+      }
+      document.querySelectorAll('#pad_fill button, #pad_fill input').forEach(b => {
+        b.disabled = false;
+        b.style.pointerEvents = 'auto';
+      });
+      document.querySelectorAll('#fillWordBankChips .btn-word-chip').forEach(c => c.classList.remove('selected'));
+
+      if (data.words && Array.isArray(data.words) && data.words.length > 0) {
+        renderWordBankChips(data.words);
+        setFillSubMode('text');
+      } else {
+        renderWordBankChips(DEFAULT_PHYSICS_KEYWORDS);
+        if (data.isNumeric) {
+          setFillSubMode('numpad');
+        } else {
+          setFillSubMode('text');
         }
       }
 
@@ -3253,7 +4246,9 @@
         action: 'CLIENT_ANSWER',
         teamId: myTeamId,
         teamName: myTeamName,
+        format: 'mcq',
         choice: oIdx,
+        choiceText: prefixes[oIdx],
         time: parseFloat(elapsed)
       });
     }
@@ -3292,11 +4287,12 @@
           playVictoryFanfare5s();
           triggerConfetti(45);
           if (navigator.vibrate) navigator.vibrate([100, 50, 150]);
-        } else if (myRes && myRes.choice !== null) {
+        } else if (myRes && (myRes.choice !== null || myRes.choiceText)) {
           fb.style.borderColor = '#ef4444';
           fb.style.background = 'rgba(239, 68, 68, 0.18)';
           fb.style.color = '#fca5a5';
-          fb.innerHTML = `❌ CHƯA CHÍNH XÁC! Bạn đã chọn [ <b>${prefixes[myRes.choice]}</b> ] (${myRes.time}s)<br>Đáp án đúng là [ <b>${prefixes[correctAns]}</b> ] (+0đ)`;
+          const submittedText = myRes.choiceText || (myRes.choice !== null ? prefixes[myRes.choice] : '');
+          fb.innerHTML = `❌ CHƯA CHÍNH XÁC! Bạn đã chọn [ <b>${submittedText}</b> ] (${myRes.time}s)<br>Đáp án đúng là [ <b>${prefixes[correctAns]}</b> ] (+0đ)`;
           soundWrong();
         } else {
           fb.style.borderColor = '#94a3b8';
@@ -3367,30 +4363,70 @@
       if (isClientBuzzer) {
         initClient();
         const clientState = urlParams.get('client_state');
-        if (clientState === 'ready') {
+        if (clientState === 'ready' || clientState === 'mcq') {
           setTimeout(() => {
             clientJoinTeam(1, 'TỔ 1 (EINSTEIN)', '⚛️', '#38bdf8');
-            clientOnStartQuestion({ qIdx: 0, totalQ: 10, timeLimit: 20 });
+            clientOnStartQuestion({ qIdx: 0, totalQ: 10, timeLimit: 20, qType: 'mcq' });
+          }, 150);
+        } else if (clientState === 'tf') {
+          setTimeout(() => {
+            clientJoinTeam(2, 'TỔ 2 (NEWTON)', '🍎', '#f59e0b');
+            clientOnStartQuestion({ qIdx: 1, totalQ: 10, timeLimit: 20, qType: 'tf' });
+            clientSelectTf('a', 'Đ');
+            clientSelectTf('b', 'S');
+            clientSelectTf('c', 'Đ');
+          }, 150);
+        } else if (clientState === 'match') {
+          setTimeout(() => {
+            clientJoinTeam(3, 'TỔ 3 (MAXWELL)', '⚡', '#10b981');
+            clientOnStartQuestion({ qIdx: 2, totalQ: 10, timeLimit: 20, qType: 'match' });
+            clientSelectMatch(1, 'B');
+            clientSelectMatch(2, 'A');
+            clientSelectMatch(3, 'D');
+          }, 150);
+        } else if (clientState === 'fill' || clientState === 'fill_word') {
+          setTimeout(() => {
+            clientJoinTeam(4, 'TỔ 4 (CURIE)', '🧪', '#ec4899');
+            clientOnStartQuestion({ qIdx: 3, totalQ: 10, timeLimit: 20, qType: 'fill' });
+            clientSelectWord('cân bằng');
+          }, 150);
+        } else if (clientState === 'fill_numpad') {
+          setTimeout(() => {
+            clientJoinTeam(4, 'TỔ 4 (CURIE)', '🧪', '#ec4899');
+            clientOnStartQuestion({ qIdx: 3, totalQ: 10, timeLimit: 20, qType: 'fill', isNumeric: true });
+            clientFillInput('4');
+            clientFillInput('2');
+            clientFillInput('0');
+          }, 150);
+        } else if (clientState === 'tf_submitted') {
+          setTimeout(() => {
+            clientJoinTeam(2, 'TỔ 2 (NEWTON)', '🍎', '#f59e0b');
+            clientOnStartQuestion({ qIdx: 1, totalQ: 10, timeLimit: 20, qType: 'tf' });
+            clientSelectTf('a', 'Đ');
+            clientSelectTf('b', 'S');
+            clientSelectTf('c', 'Đ');
+            clientSelectTf('d', 'Đ');
+            setTimeout(() => clientSubmitTfAnswer(), 200);
           }, 150);
         } else if (clientState === 'submitted') {
           setTimeout(() => {
             clientJoinTeam(1, 'TỔ 1 (EINSTEIN)', '⚛️', '#38bdf8');
-            clientOnStartQuestion({ qIdx: 0, totalQ: 10, timeLimit: 20 });
+            clientOnStartQuestion({ qIdx: 0, totalQ: 10, timeLimit: 20, qType: 'mcq' });
             setTimeout(() => clientSubmitAnswer(1), 200);
           }, 150);
         } else if (clientState === 'result') {
           setTimeout(() => {
             clientJoinTeam(1, 'TỔ 1 (EINSTEIN)', '⚛️', '#38bdf8');
-            clientOnStartQuestion({ qIdx: 0, totalQ: 10, timeLimit: 20 });
+            clientOnStartQuestion({ qIdx: 0, totalQ: 10, timeLimit: 20, qType: 'mcq' });
             clientSubmitAnswer(1);
             setTimeout(() => {
               clientOnQuestionResult({
                 correctAns: 1,
                 rankings: [
-                  { teamId: 1, name: 'TỔ 1 (EINSTEIN)', avatar: '⚛️', choice: 1, time: 2.15, isCorrect: true, rank: 1, pts: 40 },
-                  { teamId: 2, name: 'TỔ 2 (NEWTON)', avatar: '🍎', choice: 1, time: 3.40, isCorrect: true, rank: 2, pts: 30 },
-                  { teamId: 3, name: 'TỔ 3 (MAXWELL)', avatar: '⚡', choice: 0, time: 4.10, isCorrect: false, rank: null, pts: 0 },
-                  { teamId: 4, name: 'TỔ 4 (CURIE)', avatar: '🧪', choice: null, time: null, isCorrect: false, rank: null, pts: 0 }
+                  { teamId: 1, name: 'TỔ 1 (EINSTEIN)', avatar: '⚛️', choice: 1, choiceText: 'B', time: 2.15, isCorrect: true, rank: 1, pts: 40 },
+                  { teamId: 2, name: 'TỔ 2 (NEWTON)', avatar: '🍎', choice: 1, choiceText: 'B', time: 3.40, isCorrect: true, rank: 2, pts: 30 },
+                  { teamId: 3, name: 'TỔ 3 (MAXWELL)', avatar: '⚡', choice: 0, choiceText: 'A', time: 4.10, isCorrect: false, rank: null, pts: 0 },
+                  { teamId: 4, name: 'TỔ 4 (CURIE)', avatar: '🧪', choice: null, choiceText: null, time: null, isCorrect: false, rank: null, pts: 0 }
                 ]
               });
             }, 300);
@@ -3408,22 +4444,25 @@
           }, 200);
         } else if (autoState === 'battle') {
           setTimeout(() => launchBattleFromSetup(), 100);
-        } else if (autoState === 'submitted') {
+        } else if (autoState === 'submitted' || autoState === 'multi_submitted') {
           setTimeout(() => {
             launchBattleFromSetup();
             setTimeout(() => {
-              hostOnClientAnswer({ teamId: 1, choice: 0, time: 2.15 });
-              hostOnClientAnswer({ teamId: 2, choice: 0, time: 3.42 });
+              hostOnClientAnswer({ teamId: 1, format: 'mcq', choice: 0, choiceText: 'A', time: 2.15 });
+              hostOnClientAnswer({ teamId: 2, format: 'tf', choice: 'a:Đ b:S c:Đ d:Đ', choiceText: 'Đ-S-Đ-Đ', time: 3.42 });
+              hostOnClientAnswer({ teamId: 3, format: 'match', choice: '1B-2A-3D-4C', choiceText: '1B-2A-3D-4C', time: 4.10 });
+              hostOnClientAnswer({ teamId: 4, format: 'fill', choice: 'cân bằng', choiceText: 'cân bằng', time: 2.85 });
             }, 250);
           }, 150);
-        } else if (autoState === 'revealed') {
+        } else if (autoState === 'revealed' || autoState === 'multi_revealed') {
           setTimeout(() => {
             launchBattleFromSetup();
             setTimeout(() => {
               const q = battleQuestions[currentQIdx];
-              hostOnClientAnswer({ teamId: 1, choice: q.ans, time: 1.85 });
-              hostOnClientAnswer({ teamId: 2, choice: q.ans, time: 3.20 });
-              hostOnClientAnswer({ teamId: 3, choice: (q.ans + 1) % 4, time: 2.50 });
+              hostOnClientAnswer({ teamId: 1, format: 'mcq', choice: q.ans, choiceText: ['A','B','C','D'][q.ans], time: 1.85 });
+              hostOnClientAnswer({ teamId: 2, format: 'tf', choice: q.ans, choiceText: 'Đ-S-Đ-Đ', time: 3.20 });
+              hostOnClientAnswer({ teamId: 3, format: 'match', choice: (q.ans + 1) % 4, choiceText: '1B-2A-3D-4C', time: 4.50 });
+              hostOnClientAnswer({ teamId: 4, format: 'fill', choice: 'cân bằng', choiceText: 'cân bằng', time: 2.65 });
               setTimeout(() => revealAnswer(), 250);
             }, 200);
           }, 150);
