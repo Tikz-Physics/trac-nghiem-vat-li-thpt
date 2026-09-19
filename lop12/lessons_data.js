@@ -1,4 +1,4 @@
-const lessonsData = {
+window.ALL_LESSONS_DATA = {
   "1": [
     {
       "type": "mcq",
@@ -93,7 +93,8 @@ const lessonsData = {
         "tuần hoàn",
         "lớn",
         "nhỏ",
-        "hút"
+        "hút",
+        "đẩy"
       ],
       "ans": [
         0,
@@ -102,7 +103,7 @@ const lessonsData = {
         6
       ],
       "correctText": "1: phân tử | 2: hỗn loạn | 3: lớn | 4: hút",
-      "exp": "<b>Nội dung thuyết động học phân tử:</b><br>1. Các chất cấu tạo từ các hạt riêng biệt gọi là phân tử.<br>2. Các phân tử chuyển động hỗn loạn không ngừng; nhiệt độ càng cao chuyển động càng nhanh.<br>3. Giữa các phân tử đồng thời có lực tương tác gồm cả lực hút và lực đẩy."
+      "exp": "<b>Mô hình động học phân tử chất:</b><br>1. Các chất được cấu tạo từ các hạt riêng biệt gọi là phân tử.<br>2. Các phân tử chuyển động hỗn loạn không ngừng; nhiệt độ càng cao thì tốc độ chuyển động nhiệt của các phân tử càng lớn.<br>3. Giữa các phân tử đồng thời tồn tại lực tương tác gồm cả lực hút và lực đẩy."
     },
     {
       "type": "mcq",
@@ -4047,4 +4048,3 @@ const lessonsData = {
     }
   ]
 };
-if (typeof module !== "undefined") module.exports = lessonsData;

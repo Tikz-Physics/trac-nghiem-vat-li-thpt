@@ -24,13 +24,15 @@ function getBaseCSS() {
       --color-2: #eab308;
       --color-3: #14b8a6;
       --font-scale: 1.0;
+      --font-family: 'Plus Jakarta Sans', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
     }
 
     sub, sup { font-size: 0.74em; line-height: 0; position: relative; vertical-align: baseline; color: inherit; }
     sup { top: -0.42em; }
     sub { bottom: -0.22em; }
+    sub, .math-sym sub, .formula-box sub { font-style: normal !important; font-family: var(--font-family) !important; font-weight: 600; white-space: nowrap; }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
+    *, button, input, select, textarea { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-family); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-tap-highlight-color: transparent; }
 
     /* FONT SCALE CONTROLS */
     .font-scale-group {
@@ -423,25 +425,90 @@ function getBaseCSS() {
       flex-shrink: 0;
     }
 
-    /* CSS Formula Engine */
+    /* CSS Formula & Notation Engine */
     .math-sym { font-family: 'Cambria Math', 'Times New Roman', serif; font-style: italic; color: inherit; font-weight: 600; }
-    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 3px; font-size: 0.92em; line-height: 1.1; margin: 0 2px; color: inherit; }
-    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; }
-    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; }
+    .fraction { display: inline-flex; flex-direction: column; vertical-align: middle; text-align: center; padding: 0 0.2em; font-size: 0.95em; line-height: 1.1; margin: 0 2px; color: inherit; }
+    .numerator { border-bottom: 1.6px solid currentColor; padding-bottom: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+    .denominator { padding-top: 1px; color: inherit; display: block; font-weight: 700; line-height: 1.1; }
+
+    /* Pure Inline SVG Vector Engine (preserveAspectRatio="none") */
+    .vec {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      position: relative;
+      padding-top: 0.38em;
+      margin: 0 0.12em;
+      line-height: 1;
+      color: inherit;
+    }
+    .vec-arr {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0.42em;
+      overflow: visible;
+      color: inherit;
+    }
+    .vec-sym {
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1;
+      color: inherit;
+    }
+
+    /* Square Root Engine with Vinculum */
+    .sqrt {
+      display: inline-flex;
+      align-items: flex-end;
+      vertical-align: middle;
+      margin: 0 0.15em;
+      line-height: 1;
+      color: inherit;
+    }
+    .rad {
+      font-size: 1.15em;
+      margin-right: 1px;
+      font-family: 'Cambria Math', 'Times New Roman', serif;
+      line-height: 1;
+      color: inherit;
+    }
+    .radicand {
+      border-top: 1.6px solid currentColor;
+      padding-top: 1px;
+      padding-left: 2px;
+      padding-right: 2px;
+      line-height: 1.2;
+      color: inherit;
+    }
+
+    /* Pedagogical Formula Box */
     .formula-box {
-      background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(6, 182, 212, 0.3);
-      border-radius: 10px; padding: 6px 14px; margin: 6px 0; display: inline-flex;
-      align-items: center; gap: 8px; font-size: 1.05rem; font-weight: 700; color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 8px 14px;
+      margin: 6px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #38bdf8;
     }
-    .nuclide {
+
+    /* Nuclear & Isotope Notations */
+    .nuclide, .isotope {
       display: inline-flex; align-items: center; vertical-align: middle;
-      font-style: normal; font-weight: 700; margin: 0 3px;
+      font-style: normal; font-weight: 700; margin: 0 3px; color: inherit;
     }
-    .nuclide .scripts {
+    .nuclide .scripts, .isotope .scripts {
       display: inline-flex; flex-direction: column; font-size: 0.72em; line-height: 1.05;
       text-align: right; margin-right: 2px; font-weight: 800; color: currentColor;
     }
-    .nuclide .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
+    .nuclide .sym, .isotope .sym { font-size: 1.05em; font-weight: 800; color: inherit; }
 
     /* Graph container */
     /* Graph container: dynamic expansion based on available empty space */
@@ -492,7 +559,7 @@ function getBaseCSS() {
       padding: 12px 16px;
       border-radius: 12px;
       text-align: left;
-      font-size: calc(0.94rem * var(--font-scale));
+      font-size: calc(0.95rem * var(--font-scale));
       font-weight: 500;
       cursor: pointer;
       display: flex;
@@ -515,7 +582,7 @@ function getBaseCSS() {
       justify-content: center;
       font-weight: 800;
       color: #38bdf8;
-      font-size: 0.84rem;
+      font-size: calc(0.86rem * var(--font-scale));
       flex-shrink: 0;
     }
 
@@ -529,10 +596,10 @@ function getBaseCSS() {
       .tf-row { flex-direction: row; align-items: center; justify-content: space-between; }
       .tf-stmt-text { flex: 1; padding-right: 10px; }
     }
-    .tf-stmt-text { font-size: calc(0.88rem * var(--font-scale)); line-height: 1.45; }
+    .tf-stmt-text { font-size: calc(0.92rem * var(--font-scale)); line-height: 1.48; }
     .tf-btns { display: flex; gap: 6px; flex-shrink: 0; }
     .tf-btn { 
-      padding: 5px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; cursor: pointer; 
+      padding: 6px 14px; border-radius: 6px; font-size: calc(0.85rem * var(--font-scale)); font-weight: 700; cursor: pointer; 
       border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: #cbd5e1; transition: 0.15s; 
     }
     .tf-btn:hover:not(.disabled) { background: rgba(255,255,255,0.12); color: #fff; }
@@ -546,19 +613,24 @@ function getBaseCSS() {
     .match-col { display: flex; flex-direction: column; gap: 8px; }
     .match-card {
       background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.12); border-radius: 10px;
-      padding: 8px 12px; font-size: 0.86rem; cursor: pointer; transition: 0.15s; line-height: 1.4;
+      padding: 10px 14px; font-size: calc(0.90rem * var(--font-scale)); cursor: pointer; transition: 0.15s; line-height: 1.45;
     }
     .match-card:hover:not(.disabled) { background: rgba(255,255,255,0.08); border-color: var(--secondary); }
     .match-card.active-select { border-color: #38bdf8; background: rgba(56, 189, 248, 0.2); box-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
 
     /* Drag & Drop Word Bank */
-    .fill-sentence { font-size: 0.92rem; line-height: 2.1; margin-bottom: 12px; background: rgba(0,0,0,0.3); padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); }
-    .blank-slot { display: inline-block; min-width: 100px; height: 30px; padding: 0 10px; margin: 0 3px; border-bottom: 2px dashed #06b6d4; background: rgba(6,182,212,0.16); text-align: center; font-weight: 800; color: #a5f3fc; cursor: pointer; vertical-align: middle; border-radius: 6px 6px 0 0; transition: 0.15s; }
-    .blank-slot.active { background: rgba(6,182,212,0.35); border-bottom: 2px solid #fff; }
+    .fill-sentence { font-size: calc(0.96rem * var(--font-scale)); line-height: 2.3; margin-bottom: 12px; background: rgba(0,0,0,0.3); padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); }
+    .blank-slot { display: inline-flex; align-items: center; justify-content: center; min-width: 84px; height: 32px; padding: 0 12px; margin: 2px 4px; border: 1.5px dashed #06b6d4; background: rgba(6,182,212,0.14); text-align: center; font-weight: 800; color: #a5f3fc; font-size: calc(0.92rem * var(--font-scale)); cursor: pointer; vertical-align: middle; border-radius: 8px; transition: all 0.2s ease; user-select: none; }
+    .blank-slot:hover:not(.locked) { background: rgba(6,182,212,0.25); border-color: #38bdf8; transform: translateY(-1px); }
+    .blank-slot.active { background: rgba(14,165,233,0.28); border: 1.5px solid #38bdf8; color: #ffffff; box-shadow: 0 0 10px rgba(56,189,248,0.35); }
+    .blank-slot.correct-slot { background: rgba(16,185,129,0.25) !important; border: 1.5px solid #10b981 !important; color: #a7f3d0 !important; box-shadow: 0 0 10px rgba(16,185,129,0.4) !important; }
+    .blank-slot.wrong-slot { background: rgba(239,68,68,0.25) !important; border: 1.5px solid #ef4444 !important; color: #fecaca !important; box-shadow: 0 0 10px rgba(239,68,68,0.4) !important; }
+    .blank-slot.locked { pointer-events: none; cursor: default; }
     .word-bank { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px; background: rgba(0,0,0,0.35); border-radius: 12px; }
-    .word-chip { background: #4f46e5; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 0.84rem; cursor: pointer; border: none; color: #fff; transition: 0.15s; }
+    .word-chip { background: #4f46e5; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: calc(0.86rem * var(--font-scale)); cursor: pointer; border: none; color: #fff; transition: all 0.15s ease; }
     .word-chip.active-chip { outline: 2.5px solid #fff; transform: scale(1.05); }
     .word-chip.used { opacity: 0.25; pointer-events: none; }
+    .word-chip.locked { pointer-events: none; cursor: default; }
 
     /* Actions */
     .quiz-actions {
@@ -614,12 +686,14 @@ function getBaseCSS() {
       flex-wrap: wrap;
       background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 182, 212, 0.25));
       border: 1.5px solid var(--success);
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 8px;
-      font-size: 0.92rem;
+      font-size: calc(0.95rem * var(--font-scale) * var(--exp-font-scale, 1));
       font-weight: 800;
       color: #a7f3d0;
       margin-bottom: 8px;
+      line-height: 1.4;
+      transition: font-size 0.15s ease;
     }
     .answer-badge-card.partial { border-color: #f59e0b; color: #fde68a; background: rgba(245, 158, 11, 0.2); }
     .answer-badge-card.wrong { border-color: var(--error); color: #fecaca; background: rgba(239, 68, 68, 0.2); }
@@ -629,11 +703,12 @@ function getBaseCSS() {
       align-items: center;
       gap: 6px;
       color: #38bdf8;
-      font-size: 0.92rem;
+      font-size: calc(0.92rem * var(--font-scale) * var(--exp-font-scale, 1));
       font-weight: 800;
       margin-bottom: 6px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       padding-bottom: 4px;
+      transition: font-size 0.15s ease;
     }
     /* Explanation zoom controls */
     .exp-zoom-controls {
@@ -1605,6 +1680,7 @@ function getQuestionRenderersJS() {
         if (slot) {
           slot.textContent = dragFilled[i] ? dragFilled[i] : '(' + (i + 1) + ')';
           slot.classList.toggle('active', !!dragFilled[i]);
+          slot.classList.remove('correct-slot', 'wrong-slot', 'locked');
         }
       }
       q.words.forEach((w, i) => {
@@ -1612,6 +1688,7 @@ function getQuestionRenderersJS() {
         if (chip) {
           const isUsed = dragFilled.includes(w);
           chip.classList.toggle('used', isUsed);
+          chip.classList.remove('locked');
           if (isUsed && dragActiveWord === w) dragActiveWord = null;
         }
       });
@@ -1743,8 +1820,16 @@ function getQuestionRenderersJS() {
         let correctSlots = 0;
         q.ans.forEach((ansTarget, aIdx) => {
           const expectedWord = (typeof ansTarget === 'number' && q.words) ? q.words[ansTarget] : ansTarget;
-          if (dragFilled[aIdx] === expectedWord) correctSlots++;
+          const slot = document.getElementById('slot' + aIdx);
+          if (dragFilled[aIdx] === expectedWord) {
+            correctSlots++;
+            if (slot) slot.classList.add('correct-slot');
+          } else {
+            if (slot) slot.classList.add('wrong-slot');
+          }
+          if (slot) slot.classList.add('locked');
         });
+        document.querySelectorAll('.word-chip').forEach(c => c.classList.add('locked'));
         earned = (correctSlots / q.ans.length) * 1.0;
         isFullyCorrect = (correctSlots === q.ans.length);
       }
@@ -1771,6 +1856,19 @@ function getQuestionRenderersJS() {
 
     function restorePracticeExplanation(idx, record) {
       const q = questions[idx];
+      if (q.type === 'drag' && record && record.val) {
+        q.ans.forEach((ansTarget, aIdx) => {
+          const expectedWord = (typeof ansTarget === 'number' && q.words) ? q.words[ansTarget] : ansTarget;
+          const slot = document.getElementById('slot' + aIdx);
+          if (record.val[aIdx] === expectedWord) {
+            if (slot) slot.classList.add('correct-slot');
+          } else {
+            if (slot) slot.classList.add('wrong-slot');
+          }
+          if (slot) slot.classList.add('locked');
+        });
+        document.querySelectorAll('.word-chip').forEach(c => c.classList.add('locked'));
+      }
       let badgeClass = record.isFullyCorrect ? '' : (record.score > 0 ? 'partial' : 'wrong');
       let statusIcon = record.isFullyCorrect ? '🎉 Chính xác (+1.0 điểm)' : (record.score > 0 ? '⚠️ Đúng một phần (+' + record.score.toFixed(2) + ' điểm)' : '❌ Chưa chính xác (+0.0 điểm)');
 
@@ -1887,15 +1985,15 @@ function getQuestionRenderersJS() {
         const revContainer = document.getElementById('examReviewContainer');
         if (revContainer && revContainer.style.display === 'block') return;
 
-        // ArrowUp or ArrowLeft: Previous question
-        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        // ArrowLeft: Lùi về câu trước (prevQuestion)
+        if (e.key === 'ArrowLeft') {
           e.preventDefault();
           if (currentQ > 0) {
             prevQuestion();
           }
         }
-        // ArrowDown or ArrowRight: Next question
-        else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        // ArrowRight: Tiến tới câu sau (nextQuestion)
+        else if (e.key === 'ArrowRight') {
           e.preventDefault();
           if (currentQ < questions.length - 1) {
             nextQuestion();
@@ -1906,7 +2004,53 @@ function getQuestionRenderersJS() {
             }
           }
         }
+        // ArrowUp: Lùi về bài trước (prevLesson)
+        else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          prevLesson();
+        }
+        // ArrowDown: Tiến tới bài sau (nextLesson)
+        else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          nextLesson();
+        }
       });
+    }
+
+    function prevLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển về bài học trước không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex > 0) {
+        select.selectedIndex--;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.PREV_LESSON_URL) {
+        window.location.href = window.PREV_LESSON_URL;
+      }
+    }
+
+    function nextLesson() {
+      if (quizMode === 'exam') {
+        const answered = Object.keys(examUserAnswers).length;
+        if (answered > 0 && !confirm('Em đang làm bài thi thử dở dang. Em có chắc chắn muốn chuyển sang bài học tiếp theo không?')) {
+          return;
+        }
+      }
+      const select = document.getElementById('lessonDropdown');
+      if (select && select.selectedIndex < select.options.length - 1) {
+        select.selectedIndex++;
+        if (typeof changeLesson === 'function') {
+          changeLesson(select.value);
+        }
+      } else if (window.NEXT_LESSON_URL) {
+        window.location.href = window.NEXT_LESSON_URL;
+      }
     }
 
     function confirmSubmitExam() {
@@ -2486,7 +2630,7 @@ function buildMasterHub() {
 }
 
 // 2. GENERATE STANDALONE FILE
-function buildStandaloneFile(filename, lessonId, lessonTitle, questions) {
+function buildStandaloneFile(filename, lessonId, lessonTitle, questions, prevFilename = null, nextFilename = null) {
   const html = `<!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -2580,6 +2724,10 @@ function buildStandaloneFile(filename, lessonId, lessonTitle, questions) {
   <script>
     const LESSON_ID = ${lessonId};
     const RAW_QUESTIONS = ${JSON.stringify(questions, null, 2)};
+    const PREV_LESSON_URL = ${prevFilename ? JSON.stringify('./' + prevFilename) : 'null'};
+    const NEXT_LESSON_URL = ${nextFilename ? JSON.stringify('./' + nextFilename) : 'null'};
+    window.PREV_LESSON_URL = PREV_LESSON_URL;
+    window.NEXT_LESSON_URL = NEXT_LESSON_URL;
 
     ${getBaseJS()}
     ${getQuestionRenderersJS()}
@@ -2870,9 +3018,11 @@ console.log('1. Building Master Hub...');
 buildMasterHub();
 
 console.log('2. Building 25 Standalone files...');
-lessonsInfo.forEach(item => {
+lessonsInfo.forEach((item, idx) => {
   const qs = lessonsData[String(item.id)];
-  buildStandaloneFile(item.filename, item.id, item.title, qs);
+  const prevFilename = idx > 0 ? lessonsInfo[idx - 1].filename : null;
+  const nextFilename = idx < lessonsInfo.length - 1 ? lessonsInfo[idx + 1].filename : null;
+  buildStandaloneFile(item.filename, item.id, item.title, qs, prevFilename, nextFilename);
 });
 
 console.log('=== BUILD COMPLETED SUCCESSFULLY! ===');
